@@ -214,7 +214,7 @@
       "id": "story-f905",
       "title": "CRUD functionaliteit voor stories in dashboard",
       "description": "Enrico wil zelf stories kunnen aanmaken, wijzigen en verwijderen via het dashboard UI. Momenteel kan alleen de AI stories beheren via de API. Er moet een gebruiksvriendelijke interface komen met formulieren voor create/edit/delete.",
-      "status": "in_progress",
+      "status": "done",
       "priority": "high",
       "story_type": "feature",
       "project": "AI DevOps Dashboard",
@@ -222,8 +222,8 @@
       "impact": "Enrico krijgt volledige controle over het board zonder afhankelijk te zijn van de AI-assistent. Essentieel voor dagelijks gebruik.",
       "ai_review": "Marcus ð¯: EssentiÃ«le feature voor adoptie. Zonder dit is het board eenrichtingsverkeer. Prioriteit hoog â dit moet er snel in.",
       "created": "2025-08-29T12:00:00Z",
-      "updated": "2026-02-12T17:08:30.332Z"
+      "updated": "2026-02-12T17:10:39.061Z"
     }
   ],
-  "updated": "2026-02-12T17:10:27.476Z"
+  "updated": "2026-02-12T17:10:39.061Z"
 }
