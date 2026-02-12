@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI DevOps Team</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #161b22 0%, #1a2332 100%);
+            border-bottom: 1px solid #30363d;
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header h1 span { color: #58a6ff; }
+
+        .back-btn {
+            background: #21262d;
+            color: #58a6ff;
+            border: 1px solid #30363d;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #30363d;
+            border-color: #58a6ff;
+        }
+
+        .team-intro {
+            max-width: 900px;
+            margin: 32px auto 16px;
+            padding: 0 32px;
+            text-align: center;
+        }
+
+        .team-intro p {
+            color: #8b949e;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .team-grid {
+            max-width: 1200px;
+            margin: 32px auto;
+            padding: 0 32px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+        }
+
+        .team-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .team-card:hover {
+            border-color: #58a6ff;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(88, 166, 255, 0.15);
+        }
+
+        .card-accent {
+            height: 4px;
+            width: 100%;
+        }
+
+        .card-accent.nina { background: linear-gradient(90deg, #f0883e, #f7c948); }
+        .card-accent.marcus { background: linear-gradient(90deg, #58a6ff, #79c0ff); }
+        .card-accent.yuki { background: linear-gradient(90deg, #3fb950, #56d364); }
+        .card-accent.sofia { background: linear-gradient(90deg, #f85149, #ff7b72); }
+        .card-accent.janwillem { background: linear-gradient(90deg, #bc8cff, #d2a8ff); }
+
+        .card-header {
+            padding: 24px 24px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .avatar.nina { background: linear-gradient(135deg, #3d2800, #5a3d00); border: 2px solid #f0883e; }
+        .avatar.marcus { background: linear-gradient(135deg, #0d2744, #163356); border: 2px solid #58a6ff; }
+        .avatar.yuki { background: linear-gradient(135deg, #0d2d14, #163d1e); border: 2px solid #3fb950; }
+        .avatar.sofia { background: linear-gradient(135deg, #3d0d0d, #561414); border: 2px solid #f85149; }
+        .avatar.janwillem { background: linear-gradient(135deg, #2a1447, #3d1d66); border: 2px solid #bc8cff; }
+
+        .card-name h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .card-name .role {
+            font-size: 13px;
+            color: #8b949e;
+            font-weight: 500;
+        }
+
+        .card-name .title-badge {
+            display: inline-block;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .title-badge.nina { background: rgba(240, 136, 62, 0.15); color: #f0883e; }
+        .title-badge.marcus { background: rgba(88, 166, 255, 0.15); color: #58a6ff; }
+        .title-badge.yuki { background: rgba(63, 185, 80, 0.15); color: #3fb950; }
+        .title-badge.sofia { background: rgba(248, 81, 73, 0.15); color: #f85149; }
+        .title-badge.janwillem { background: rgba(188, 140, 255, 0.15); color: #bc8cff; }
+
+        .card-body {
+            padding: 0 24px 24px;
+        }
+
+        .personality {
+            font-size: 13px;
+            color: #8b949e;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            font-style: italic;
+            border-left: 3px solid #30363d;
+            padding-left: 12px;
+        }
+
+        .motto {
+            font-size: 12px;
+            color: #58a6ff;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 0.3px;
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #8b949e;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .skill-tag {
+            font-size: 11px;
+            padding: 3px 10px;
+            border-radius: 12px;
+            background: #21262d;
+            color: #e6edf3;
+            border: 1px solid #30363d;
+        }
+
+        .focus-text {
+            font-size: 13px;
+            color: #c9d1d9;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .review-style {
+            font-size: 12px;
+            color: #8b949e;
+            background: #0d1117;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #21262d;
+            line-height: 1.5;
+        }
+
+        .review-style strong {
+            color: #c9d1d9;
+        }
+
+        /* Team Dynamics Section */
+        .dynamics-section {
+            max-width: 900px;
+            margin: 48px auto;
+            padding: 0 32px;
+        }
+
+        .dynamics-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .dynamics-card h2 {
+            font-size: 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dynamics-card h2 span { color: #58a6ff; }
+
+        .dynamics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .dynamics-item h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #e6edf3;
+        }
+
+        .dynamics-item p, .dynamics-item li {
+            font-size: 13px;
+            color: #8b949e;
+            line-height: 1.6;
+        }
+
+        .dynamics-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .dynamics-item ul li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .dynamics-item ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #58a6ff;
+        }
+
+        .org-chart {
+            margin-top: 32px;
+            text-align: center;
+            padding: 24px;
+            background: #0d1117;
+            border-radius: 8px;
+            border: 1px solid #21262d;
+        }
+
+        .org-lead {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(88, 166, 255, 0.1);
+            border: 1px solid #58a6ff;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .org-line {
+            width: 2px;
+            height: 24px;
+            background: #30363d;
+            margin: 0 auto;
+        }
+
+        .org-members {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .org-member {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .team-grid { grid-template-columns: 1fr; }
+            .dynamics-grid { grid-template-columns: 1fr; }
+            .header { flex-direction: column; gap: 12px; }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 32px;
+            color: #484f58;
+            font-size: 12px;
+            border-top: 1px solid #21262d;
+            margin-top: 48px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>👥 <span>AI DevOps Team</span></h1>
+    <a href="index.html" class="back-btn">← Terug naar Board</a>
+</div>
+
+<div class="team-intro">
+    <p>Vijf AI-specialisten die samenwerken als een echt DevOps team. Elke story wordt door meerdere teamleden beoordeeld vanuit hun eigen expertise — van code quality tot security, van containers tot architectuur.</p>
+</div>
+
+<div class="team-grid">
+
+    <!-- Nina van den Berg -->
+    <div class="team-card">
+        <div class="card-accent nina"></div>
+        <div class="card-header">
+            <div class="avatar nina">🔍</div>
+            <div class="card-name">
+                <h2>Nina van den Berg</h2>
+                <div class="role">Code Review Engineer</div>
+                <span class="title-badge nina">Senior Code Review Engineer</span>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="personality">"Code is poetry, maar dit couplet rijmt niet." — Perfectionistisch maar constructief. Scherp oog voor code smells, anti-patterns en technische schuld.</div>
+            <div class="section-title">Expertise</div>
+            <div class="skills">
+                <span class="skill-tag">Clean Code</span>
+                <span class="skill-tag">Design Patterns</span>
+                <span class="skill-tag">Performance</span>
+                <span class="skill-tag">Refactoring</span>
+                <span class="skill-tag">Unit Testing</span>
+                <span class="skill-tag">SOLID</span>
+                <span class="skill-tag">Complexity Analyse</span>
+            </div>
+            <div class="section-title">Focus</div>
+            <div class="focus-text">Reviewed alle code changes, stelt verbeteringen voor, bewaakt code kwaliteit standaarden, en zorgt dat technische schuld niet opbouwt.</div>
+            <div class="review-style"><strong>Review stijl:</strong> Streng maar eerlijk. Geeft sterren-rating (1-5) en altijd minimaal 1 positief punt en 1 verbeterpunt.</div>
+        </div>
+    </div>
+
+    <!-- Marcus de Groot -->
+    <div class="team-card">
+        <div class="card-accent marcus"></div>
+        <div class="card-header">
+            <div class="avatar marcus">🎯</div>
+            <div class="card-name">
+                <h2>Marcus de Groot</h2>
+                <div class="role">Lead DevOps Engineer</div>
+                <span class="title-badge marcus">Team Lead · 15 jaar ervaring</span>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="personality">"Automate everything, trust nothing." — Pragmatisch, overzichtelijk, en altijd gefocust op de bigger picture. Heeft alles al een keer zien misgaan.</div>
+            <div class="section-title">Expertise</div>
+            <div class="skills">
+                <span class="skill-tag">CI/CD Pipelines</span>
+                <span class="skill-tag">GitHub Actions</span>
+                <span class="skill-tag">Terraform</span>
+                <span class="skill-tag">Ansible</span>
+                <span class="skill-tag">Monitoring</span>
+                <span class="skill-tag">Grafana</span>
+                <span class="skill-tag">GitOps</span>
+                <span class="skill-tag">Incident Mgmt</span>
+            </div>
+            <div class="section-title">Focus</div>
+            <div class="focus-text">Coördineert het team, bepaalt prioriteiten, ontwerpt CI/CD pipelines, en zorgt voor een soepel development-to-production proces.</div>
+            <div class="review-style"><strong>Review stijl:</strong> Vogelperspectief. Past dit in de roadmap? Is dit de juiste investering? Wat is de ROI?</div>
+        </div>
+    </div>
+
+    <!-- Yuki Tanaka -->
+    <div class="team-card">
+        <div class="card-accent yuki"></div>
+        <div class="card-header">
+            <div class="avatar yuki">🐳</div>
+            <div class="card-name">
+                <h2>Yuki Tanaka</h2>
+                <div class="role">Container & Orchestration Specialist</div>
+                <span class="title-badge yuki">Senior Container Platform Engineer</span>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="personality">"If it runs on my machine, it runs in a container." — Rustig, methodisch, en diep technisch. Fluistert tegen zijn containers alsof het huisdieren zijn.</div>
+            <div class="section-title">Expertise</div>
+            <div class="skills">
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">Kubernetes</span>
+                <span class="skill-tag">OpenShift</span>
+                <span class="skill-tag">Helm</span>
+                <span class="skill-tag">Kustomize</span>
+                <span class="skill-tag">Istio</span>
+                <span class="skill-tag">Auto-scaling</span>
+                <span class="skill-tag">Docker Compose</span>
+            </div>
+            <div class="section-title">Focus</div>
+            <div class="focus-text">Optimaliseert containers, beheert orchestration, zorgt voor efficiënte resource-allocatie en container security.</div>
+            <div class="review-style"><strong>Review stijl:</strong> Checkt Dockerfiles op best practices, kijkt naar image sizes, multi-stage builds, en resource limits.</div>
+        </div>
+    </div>
+
+    <!-- Sofia Bakker -->
+    <div class="team-card">
+        <div class="card-accent sofia"></div>
+        <div class="card-header">
+            <div class="avatar sofia">🛡️</div>
+            <div class="card-name">
+                <h2>Sofia Bakker</h2>
+                <div class="role">Security Specialist</div>
+                <span class="title-badge sofia">DevSecOps Engineer</span>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="personality">"Security is not a feature, it's a mindset." — Alert, sceptisch, en altijd een stap vooruit. Haar favoriete vraag: 'Maar wat als iemand kwaadwillend is?'</div>
+            <div class="section-title">Expertise</div>
+            <div class="skills">
+                <span class="skill-tag">OWASP Top 10</span>
+                <span class="skill-tag">Secret Management</span>
+                <span class="skill-tag">Zero Trust</span>
+                <span class="skill-tag">SOC2 / ISO27001</span>
+                <span class="skill-tag">AVG/GDPR</span>
+                <span class="skill-tag">SBOM</span>
+                <span class="skill-tag">OAuth / RBAC</span>
+                <span class="skill-tag">Hardening</span>
+            </div>
+            <div class="section-title">Focus</div>
+            <div class="focus-text">Scant code en infra op kwetsbaarheden, implementeert security best practices, zorgt voor compliance en veilige secrets management.</div>
+            <div class="review-style"><strong>Review stijl:</strong> Zoekt actief naar hardcoded secrets, SQL injection, XSS, onveilige configuraties, te brede permissions.</div>
+        </div>
+    </div>
+
+    <!-- Jan-Willem Hofstra -->
+    <div class="team-card">
+        <div class="card-accent janwillem"></div>
+        <div class="card-header">
+            <div class="avatar janwillem">🏗️</div>
+            <div class="card-name">
+                <h2>Jan-Willem Hofstra</h2>
+                <div class="role">Infrastructure Architect</div>
+                <span class="title-badge janwillem">Senior Infrastructure Architect</span>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="personality">"If you can't draw it, you can't build it." — De denker van het team. Tekent altijd eerst een architectuurdiagram. Heeft een obsessie met schaalbaarheid.</div>
+            <div class="section-title">Expertise</div>
+            <div class="skills">
+                <span class="skill-tag">Cloud (AWS/Azure/GCP)</span>
+                <span class="skill-tag">Load Balancing</span>
+                <span class="skill-tag">HA & DR</span>
+                <span class="skill-tag">Database Scaling</span>
+                <span class="skill-tag">Microservices</span>
+                <span class="skill-tag">FinOps</span>
+                <span class="skill-tag">Capacity Planning</span>
+                <span class="skill-tag">System Design</span>
+            </div>
+            <div class="section-title">Focus</div>
+            <div class="focus-text">Ontwerpt de overall architectuur, maakt schaalbare en betrouwbare infrastructuur beslissingen, en zorgt voor kostenefficiëntie.</div>
+            <div class="review-style"><strong>Review stijl:</strong> Is het schaalbaar? Is er een single point of failure? Hoe ziet disaster recovery eruit?</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Team Dynamics -->
+<div class="dynamics-section">
+    <div class="dynamics-card">
+        <h2>⚙️ <span>Team Dynamics</span></h2>
+        
+        <div class="org-chart">
+            <div class="org-lead">🎯 Marcus de Groot — Team Lead</div>
+            <div class="org-line"></div>
+            <div class="org-members">
+                <div class="org-member">🔍 Nina</div>
+                <div class="org-member">🐳 Yuki</div>
+                <div class="org-member">🛡️ Sofia</div>
+                <div class="org-member">🏗️ Jan-Willem</div>
+            </div>
+        </div>
+
+        <div class="dynamics-grid" style="margin-top: 24px;">
+            <div class="dynamics-item">
+                <h3>📋 Review Proces</h3>
+                <p>Bij elke story/change reviewen relevante teamleden vanuit hun expertise. Minimaal 2 teamleden reviewen elke significante change.</p>
+            </div>
+            <div class="dynamics-item">
+                <h3>⚖️ Conflict Resolution</h3>
+                <p>Marcus (Lead) heeft het laatste woord bij onenigheid, maar luistert altijd naar Sofia's security concerns — security trumps convenience.</p>
+            </div>
+            <div class="dynamics-item">
+                <h3>🎯 Prioriteitsregels</h3>
+                <ul>
+                    <li>Security issues (Sofia) hebben altijd voorrang</li>
+                    <li>Architecture changes (Jan-Willem) vereisen team-brede review</li>
+                    <li>Code quality (Nina) is een gate voor elke merge</li>
+                    <li>Container changes (Yuki) worden altijd in staging getest</li>
+                </ul>
+            </div>
+            <div class="dynamics-item">
+                <h3>🔄 Workflow</h3>
+                <ul>
+                    <li>Story aangemaakt → Review door team</li>
+                    <li>Nina reviewed code, Sofia checkt security</li>
+                    <li>Yuki optimaliseert containers</li>
+                    <li>Jan-Willem valideert architectuur</li>
+                    <li>Marcus geeft go/no-go</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    AI DevOps Team · Powered by Claude · Built for Enrico Goossen
+</div>
+
+</body>
+</html>
