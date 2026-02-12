@@ -41,7 +41,7 @@
       "description": "Wanneer de AI-assistent een nieuwe story aanmaakt, krijgt Enrico automatisch een Telegram alert. Zo hoeft hij niet steeds het board te checken.",
       "type": "feature",
       "priority": "high",
-      "status": "review",
+      "status": "done",
       "project": "AI Assistent",
       "author": "Jan-Willem Hofstra",
       "impact": "Enrico wordt proactief geinformeerd. Cruciaal voor de 'AI als DevOps team'-visie - het team rapporteert aan de teamlead (Enrico).",
@@ -65,7 +65,7 @@
         }
       ],
       "created": "2025-06-21T10:05:00Z",
-      "updated": "2026-02-12T16:27:30Z",
+      "updated": "2026-02-12T20:00:39Z",
       "reviewed_by": "Marcus de Groot",
       "reviewer_role": "Lead DevOps Engineer",
       "review_comment": "Architecturaal solide, Jan-Willem. Mijn advies: implementeer een message queue pattern met een 60-seconden buffer zodat meerdere snelle wijzigingen in een samenvatting worden verzonden. Fire-and-forget voor de Telegram call zelf - het board mag nooit blokkeren op een notificatie."
@@ -257,5 +257,5 @@
       "updated": "2026-02-12T19:48:30Z"
     }
   ],
-  "updated": "2026-02-12T17:10:39.061Z"
+  "updated": "2026-02-12T20:00:39Z"
 }
