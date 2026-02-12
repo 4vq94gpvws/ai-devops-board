@@ -230,12 +230,12 @@
       "description": "Graag zou Enrico zien dat de kwaliteit van de zoekopdrachten verbeterd wordt. Hij zou wel meer willen zien dat dit de kwaliteit en de manier van hoe informatie wordt gezocht zoals Perplexity werkt.",
       "type": "improvement",
       "priority": "high",
-      "status": "in_progress",
+      "status": "done",
       "project": "AI Assistent",
       "author": "Enrico (handmatig)",
       "impact": "",
-      "approach": "Deep search tool bouwen in 4 stappen: 1) Query Decomposition - vraag opsplitsen in 2-3 sub-queries via LLM. 2) Multi-source search - elke sub-query parallel uitvoeren via zoek_internet. 3) Source reading - top-3 bronnen per query lezen via open_page/get_page_text. 4) Synthese - alle informatie samenvoegen tot een coherent antwoord met bronvermelding, Perplexity-stijl.",
-      "ai_review": "Team review afgerond. Complexiteit: Medium, geschatte effort: 3-5 dagen. Het team heeft hun input gegeven en de approach is geaccordeerd.",
+      "approach": "Geimplementeerd als 2 custom MCP tools + agent orchestratie: 1) deep_search_decompose - splitst vraag in 2-4 sub-queries via LLM. 2) zoek_internet per sub-query (bestaande MCP tool). 3) open_page + get_page_text voor top bronnen (bestaande MCP tools). 4) deep_search_synthesize - combineert alles tot coherent antwoord met bronvermelding. Agent workflow opgeslagen in facts voor consistente toepassing.",
+      "ai_review": "Geimplementeerd: Deep Search workflow met 2 custom tools (deep_search_decompose en deep_search_synthesize) die GPT-4.1-mini gebruiken via GitHub Models API. De agent volgt nu een 5-staps workflow bij complexe zoekvragen: query decomposition, multi-source search, source reading, LLM synthese, en presentatie met bronvermelding in Perplexity-stijl.",
       "team_discussion": [
         {
           "from": "Marcus de Groot",
@@ -254,8 +254,8 @@
       "complexity": "Medium",
       "estimated_effort": "3-5 dagen",
       "created": "2026-02-12T19:08:52Z",
-      "updated": "2026-02-12T20:08:58Z"
+      "updated": "2026-02-12T20:27:28Z"
     }
   ],
-  "updated": "2026-02-12T20:08:58Z"
+  "updated": "2026-02-12T20:27:28Z"
 }
