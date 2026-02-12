@@ -220,9 +220,9 @@
       "project": "AI DevOps Dashboard",
       "approach": "1. Add Story knop met modal/formulier (titel, beschrijving, prioriteit, status, project, type). 2. Edit knop per story card met zelfde formulier. 3. Delete knop met bevestigingsdialoog. 4. Alle acties via GitHub API (JSON in repo). 5. Responsive, past bij bestaande styling.",
       "impact": "Enrico krijgt volledige controle over het board zonder afhankelijk te zijn van de AI-assistent. Essentieel voor dagelijks gebruik.",
-      "ai_review": "Marcus Ã°ÂÂÂ¯: \"Netjes geÃÂ¯mplementeerd. Volledige CRUD: create, edit, delete met bevestigingsdialog. Past in de bestaande UI.\"",
+      "ai_review": "Marcus: \"Netjes geimplementeerd. Volledige CRUD: create, edit, delete met bevestigingsdialog. Past in de bestaande UI.\"",
       "created": "2025-08-29T12:00:00Z",
-      "updated": "2026-02-12T17:10:39.061Z"
+      "updated": "2026-02-12T19:48:21Z"
     },
     {
       "title": "Zoekopdrachten verbeteren",
@@ -258,5 +258,5 @@
       "estimated_effort": "3-5 dagen"
     }
   ],
-  "updated": "2026-02-12T19:38:19Z"
+  "updated": "2026-02-12T19:48:21Z"
 }
