@@ -220,10 +220,25 @@
       "project": "AI DevOps Dashboard",
       "approach": "1. Add Story knop met modal/formulier (titel, beschrijving, prioriteit, status, project, type). 2. Edit knop per story card met zelfde formulier. 3. Delete knop met bevestigingsdialoog. 4. Alle acties via GitHub API (JSON in repo). 5. Responsive, past bij bestaande styling.",
       "impact": "Enrico krijgt volledige controle over het board zonder afhankelijk te zijn van de AI-assistent. Essentieel voor dagelijks gebruik.",
-      "ai_review": "Marcus ð¯: \"Netjes geÃ¯mplementeerd. Volledige CRUD: create, edit, delete met bevestigingsdialog. Past in de bestaande UI.\"",
+      "ai_review": "Marcus Ã°ÂÂÂ¯: \"Netjes geÃÂ¯mplementeerd. Volledige CRUD: create, edit, delete met bevestigingsdialog. Past in de bestaande UI.\"",
       "created": "2025-08-29T12:00:00Z",
       "updated": "2026-02-12T17:10:39.061Z"
+    },
+    {
+      "title": "Zoekopdrachten verbeteren",
+      "description": "Graag zou Enrico zien dat de kwaliteit van de zoekopdrachten verbeterd wordt. Hij zou wel meer willen zien dat dit de kwaliteit en de manier van hoe informatie wordt gezocht zoals Perplexity werkt.",
+      "type": "improvement",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Assistent",
+      "impact": "",
+      "approach": "",
+      "updated": "2026-02-12T19:08:52.754Z",
+      "id": "story-x7cy",
+      "created": "2026-02-12T19:08:52.755Z",
+      "author": "👤 Enrico (handmatig)",
+      "review_requested": true
     }
   ],
-  "updated": "2026-02-12T18:57:43Z"
+  "updated": "2026-02-12T19:08:59.428Z"
 }
