@@ -10,7 +10,7 @@
       "project": "AI DevOps Board",
       "author": "Marcus de Groot",
       "impact": "Snellere workflow voor Enrico. Minder clicks, meer flow. Vooral bij grotere boards met 10+ stories wordt dit cruciaal.",
-      "approach": "HTML5 Drag and Drop API met dragstart/dragover/drop events. Visuele feedback met CSS transitions. Touch events voor mobiel via pointer events API.",
+      "approach": "HTML5 Drag and Drop API met dragstart/dragover/drop events. Visuele feedback met CSS transitions. Touch events voor mobiel via pointer events API. Inclusief ARIA live regions voor accessibility zodat screen readers statuswijzigingen meekrijgen (feedback Nina). Server-side validatie van statusovergangen om onbedoelde state mutations te voorkomen - bijv. geen skip van 'review' naar 'done' (feedback Sofia). Optimistic UI updates met rollback bij API-fouten voor responsieve ervaring (feedback Jan-Willem). Fallback bouwen voor browsers zonder volledige pointer events support. Unit tests voor state transitions schrijven voordat de UI wordt gebouwd (feedback Nina, review).",
       "team_discussion": [
         {
           "from": "Nina van den Berg",
@@ -30,7 +30,7 @@
         }
       ],
       "created": "2025-06-21T10:00:00Z",
-      "updated": "2026-02-12T16:13:52Z",
+      "updated": "2026-02-12T16:27:30Z",
       "reviewed_by": "Nina van den Berg",
       "reviewer_role": "Code Review Engineer",
       "review_comment": "Sterk voorstel. De HTML5 Drag and Drop API is de juiste keuze, maar vergeet niet een fallback te bouwen voor browsers zonder volledige pointer events support. Mijn voorstel: schrijf eerst unit tests voor de state transitions voordat je aan de UI begint  -  zo vang je edge cases vroeg op."
@@ -45,7 +45,7 @@
       "project": "AI Assistent",
       "author": "Jan-Willem Hofstra",
       "impact": "Enrico wordt proactief geinformeerd. Cruciaal voor de 'AI als DevOps team'-visie  -  het team rapporteert aan de teamlead (Enrico).",
-      "approach": "Na elke devops_board_add_story() call automatisch send_message() triggeren met titel, type, prioriteit en een directe link naar het board.",
+      "approach": "Na elke devops_board_add_story() call automatisch send_message() triggeren met titel, type, prioriteit en een directe link naar het board. Message queue pattern met 60-seconden buffer zodat meerdere snelle wijzigingen in een samenvatting worden verzonden in plaats van losse berichten (feedback Marcus). Consistent bericht-template: emoji + type + titel + 1-liner impact (feedback Nina). Geen gevoelige code-snippets in Telegram berichten, alleen metadata (feedback Sofia). Retry logic met exponential backoff bij Telegram API timeouts. Fire-and-forget patroon: story-flow nooit blokkeren als Telegram niet bereikbaar is (feedback Yuki).",
       "team_discussion": [
         {
           "from": "Marcus de Groot",
@@ -65,7 +65,7 @@
         }
       ],
       "created": "2025-06-21T10:05:00Z",
-      "updated": "2026-02-12T16:13:52Z",
+      "updated": "2026-02-12T16:27:30Z",
       "reviewed_by": "Marcus de Groot",
       "reviewer_role": "Lead DevOps Engineer",
       "review_comment": "Architecturaal solide, Jan-Willem. Mijn advies: implementeer een message queue pattern met een 60-seconden buffer zodat meerdere snelle wijzigingen in een samenvatting worden verzonden. Fire-and-forget voor de Telegram call zelf  -  het board mag nooit blokkeren op een notificatie."
@@ -80,7 +80,7 @@
       "project": "OfferteRadar",
       "author": "Nina van den Berg",
       "impact": "Betere previews op social media -> hogere CTR vanuit TikTok/Instagram traffic. Direct effect op conversie.",
-      "approach": "Toevoegen: og:title, og:description, og:image, og:url, twitter:card, twitter:title, twitter:description, twitter:image. Plus canonical URL en structured data (JSON-LD).",
+      "approach": "Toevoegen: og:title, og:description, og:image, og:url, twitter:card, twitter:title, twitter:description, twitter:image. Plus canonical URL en structured data (JSON-LD). Dedicated social preview image van 1200x630px, geoptimaliseerd (max 300KB) (feedback Jan-Willem). Sitemap.xml en robots.txt toevoegen - build-time generated (feedback Marcus, Jan-Willem). Content-Security-Policy header overwegen, check dat geen gevoelige info in meta description lekt (feedback Sofia). Cache-busting via query parameters of hashed filenames voor CSS/JS assets (feedback Yuki).",
       "team_discussion": [
         {
           "from": "Marcus de Groot",
@@ -100,7 +100,7 @@
         }
       ],
       "created": "2025-06-21T10:10:00Z",
-      "updated": "2026-02-12T16:13:52Z",
+      "updated": "2026-02-12T16:27:30Z",
       "reviewed_by": "Jan-Willem Hofstra",
       "reviewer_role": "Infrastructure Architect",
       "review_comment": "Quick win met grote impact. Maar denk ook aan performance: de og:image moet geoptimaliseerd zijn (max 300KB) en via een CDN geserved worden. Overweeg een build-time generated sitemap.xml in plaats van runtime  -  scheelt een server-side component."
@@ -115,7 +115,7 @@
       "project": "AI Assistent",
       "author": "Marcus de Groot",
       "impact": "Dit is de kern-feature van het AI DevOps Team concept. Maakt de assistent proactief in plaats van reactief.",
-      "approach": "1. Scan projectenmap (wanneer toegang gegeven). 2. Elk bestand door Claude analyseren vanuit alle 5 perspectieven. 3. Bevindingen bundelen per categorie (security, performance, architecture, code quality, containers). 4. Stories genereren met team-discussie. 5. GPT-4.1 als second opinion.",
+      "approach": "1. Scan projectenmap (wanneer toegang gegeven). 2. Elk bestand door Claude analyseren vanuit alle 5 perspectieven. 3. Bevindingen bundelen per categorie (security, performance, architecture, code quality, containers). 4. Automatisch stories aanmaken op het board. Prioriteitsmatrix: eerst security issues, dan architectuur, dan code quality (feedback Nina). Dockerfiles en docker-compose checken op best practices: multi-stage builds, non-root users, health checks, minimal base images (feedback Yuki). Scan op hardcoded secrets (API keys, passwords), OWASP Top 10 patronen, en dependency vulnerabilities (feedback Sofia). Architectuur-analyse: separation of concerns, single points of failure, schaalbaarheid (feedback Jan-Willem). Scanner moet sandboxed draaien. Fase 1 = secrets-detectie + dependency vulnerability scan (feedback Sofia, review).",
       "team_discussion": [
         {
           "from": "Nina van den Berg",
@@ -135,7 +135,7 @@
         }
       ],
       "created": "2025-06-21T10:15:00Z",
-      "updated": "2026-02-12T16:13:52Z",
+      "updated": "2026-02-12T16:27:30Z",
       "reviewed_by": "Sofia Bakker",
       "reviewer_role": "DevSecOps Engineer",
       "review_comment": "Dit is het kroonjuweel, maar de security-implicaties zijn groot. Een automatische scanner die code leest en wijzigingen voorstelt moet sandboxed draaien. Fase 1 moet secrets-detectie en dependency vulnerability scanning zijn  -  pas daarna feature suggestions. Security first, altijd."
@@ -150,7 +150,7 @@
       "project": "AI DevOps Board",
       "author": "Marcus de Groot",
       "impact": "Vangt fouten vroegtijdig op. Voorkomt dat een kapotte stories.json het hele dashboard breekt.",
-      "approach": "GitHub Actions workflow met 3 stappen: 1) JSON schema validatie, 2) HTML/CSS lint, 3) Lighthouse performance audit. Resultaten als comment op de commit.",
+      "approach": "GitHub Actions workflow met 3 stappen: 1) JSON schema validatie, 2) HTML/CSS lint, 3) Lighthouse performance audit. Resultaten als comment op de commit. Extra check: elk story-ID moet uniek zijn, verplichte velden (title, type, status) aanwezig (feedback Nina). Tests draaien in een container (node:alpine) voor reproduceerbare resultaten (feedback Yuki). SAST scan toevoegen - minimaal eslint-plugin-security, en een secrets-scanner zoals gitleaks (feedback Sofia). Workflow moet < 2 minuten duren. Paralleliseer de 3 checks zodat ze tegelijk draaien (feedback Jan-Willem).",
       "team_discussion": [
         {
           "from": "Nina van den Berg",
@@ -170,7 +170,7 @@
         }
       ],
       "created": "2026-02-12T16:07:03Z",
-      "updated": "2026-02-12T16:13:52Z",
+      "updated": "2026-02-12T16:27:30Z",
       "reviewed_by": "Nina van den Berg",
       "reviewer_role": "Code Review Engineer",
       "review_comment": "Goed initiatief van Marcus. Mijn prioriteit: begin met JSON schema validatie als eerste stap  -  dat is de meest impactvolle check voor de laagste effort. XSS-scanning (Sofia's punt) als tweede. Lighthouse audit is nice-to-have maar niet blokkerend. Houd de pipeline onder 2 minuten."
@@ -185,7 +185,7 @@
       "project": "AI DevOps Board",
       "author": "Sofia Bakker",
       "impact": "Zonder sanitization kan een kwaadaardige story-title of description JavaScript injecteren. Urgente fix nodig.",
-      "approach": "1. DOMPurify library toevoegen voor HTML sanitization. 2. CSP meta tag: script-src 'self'; style-src 'self' 'unsafe-inline'. 3. Alle innerHTML vervangen door textContent waar mogelijk. 4. Story velden escapen voor ze gerenderd worden.",
+      "approach": "1. Audit van alle innerHTML/DOM manipulatie in het dashboard. 2. Implementeer DOMPurify voor user-generated content. 3. Content-Security-Policy headers instellen (script-src 'self'). 4. SRI (Subresource Integrity) hashes voor externe scripts. Begin met een threat model: wat zijn de aanvalsvectoren specifiek voor een GitHub Pages + JSON backend setup? (feedback Sofia). Alle input sanitizen, ook story-titels en beschrijvingen die via API binnenkomen (feedback Nina). CSP headers moeten via meta tag in de HTML, want GitHub Pages ondersteunt geen custom HTTP headers. Overweeg ook rate limiting op de GitHub API calls vanuit de frontend (feedback Jan-Willem). Test met OWASP ZAP scan na implementatie om te verifieren dat XSS niet meer mogelijk is (feedback Marcus).",
       "team_discussion": [
         {
           "from": "Marcus de Groot",
@@ -205,7 +205,7 @@
         }
       ],
       "created": "2026-02-12T16:07:03Z",
-      "updated": "2026-02-12T16:13:52Z",
+      "updated": "2026-02-12T16:27:30Z",
       "reviewed_by": "Marcus de Groot",
       "reviewer_role": "Lead DevOps Engineer",
       "review_comment": "Sofia heeft volledig gelijk  -  dit is de hoogste prioriteit. De combinatie van AI-gegenereerde content en innerHTML is een tikkende tijdbom. Ik stel voor dit als eerste story naar 'approved' te verplaatsen. DOMPurify + CSP headers + textContent waar mogelijk. Moet voor alle andere features gefixt zijn."
