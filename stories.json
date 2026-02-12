@@ -233,12 +233,30 @@
       "project": "AI Assistent",
       "impact": "",
       "approach": "",
-      "updated": "2026-02-12T19:08:52.754Z",
+      "updated": "2026-02-12T19:09:00.619Z",
       "id": "story-x7cy",
       "created": "2026-02-12T19:08:52.755Z",
       "author": "👤 Enrico (handmatig)",
-      "review_requested": true
+      "review_requested": true,
+      "team_discussion": [
+        {
+          "from": "Marcus de Groot 🎯",
+          "role": "Lead DevOps Engineer",
+          "comment": "Goed voorstel. Complexiteit inschatting: <strong>Medium</strong>. Ik plan dit in voor <strong>3-5 dagen</strong>. Gezien de prioriteit zet ik dit bovenaan de backlog. <em>Tip: voeg een technische aanpak toe zodat het team sneller kan starten.</em>"
+        },
+        {
+          "from": "Nina van den Berg 🔍",
+          "role": "Code Review Engineer",
+          "comment": "Zorg voor goede test coverage en heldere code documentatie. Ik plan een review in zodra de PR klaarstaat."
+        }
+      ],
+      "review_comment": "Team review afgerond. Complexiteit: Medium, geschatte effort: 3-5 dagen. Het team heeft hun input gegeven — klaar voor beoordeling door de Product Owner.",
+      "reviewed_by": "Marcus de Groot 🎯",
+      "reviewer_role": "Lead DevOps Engineer",
+      "ai_review": "Team review compleet. Complexiteit: Medium. Geschatte effort: 3-5 dagen. 2 teamleden hebben gereviewd.",
+      "complexity": "Medium",
+      "estimated_effort": "3-5 dagen"
     }
   ],
-  "updated": "2026-02-12T19:08:59.428Z"
+  "updated": "2026-02-12T19:09:00.619Z"
 }
