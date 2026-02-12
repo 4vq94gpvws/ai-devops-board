@@ -8,24 +8,24 @@
       "priority": "medium",
       "status": "review",
       "project": "AI DevOps Board",
-      "author": "Marcus de Groot 🎯",
+      "author": "Marcus de Groot",
       "impact": "Snellere workflow voor Enrico. Minder clicks, meer flow. Vooral bij grotere boards met 10+ stories wordt dit cruciaal.",
       "approach": "HTML5 Drag and Drop API met dragstart/dragover/drop events. Visuele feedback met CSS transitions. Touch events voor mobiel via pointer events API.",
       "team_discussion": [
         {
-          "from": "Nina van den Berg 🔍",
+          "from": "Nina van den Berg",
           "comment": "Zorg voor goede accessibility — screen readers moeten de status-wijziging ook meekrijgen. Voeg ARIA live regions toe."
         },
         {
-          "from": "Yuki Tanaka 🐳",
+          "from": "Yuki Tanaka",
           "comment": "Geen infra impact. Puur frontend. 👍"
         },
         {
-          "from": "Sofia Bakker 🛡️",
+          "from": "Sofia Bakker",
           "comment": "Let op dat drag & drop events geen onbedoelde state mutations triggeren. Valideer server-side dat de statusovergang geldig is (bijv. geen skip van 'review' naar 'done')."
         },
         {
-          "from": "Jan-Willem Hofstra 🏗️",
+          "from": "Jan-Willem Hofstra",
           "comment": "Overweeg een optimistic UI update met rollback bij API fout. Houdt het responsive."
         }
       ],
@@ -41,24 +41,24 @@
       "priority": "high",
       "status": "review",
       "project": "AI Assistent",
-      "author": "Jan-Willem Hofstra 🏗️",
+      "author": "Jan-Willem Hofstra",
       "impact": "Enrico wordt proactief geïnformeerd. Cruciaal voor de 'AI als DevOps team'-visie — het team rapporteert aan de teamlead (Enrico).",
       "approach": "Na elke devops_board_add_story() call automatisch send_message() triggeren met titel, type, prioriteit en een directe link naar het board.",
       "team_discussion": [
         {
-          "from": "Marcus de Groot 🎯",
+          "from": "Marcus de Groot",
           "comment": "Goed idee, maar bouw throttling in. Als ik 5 stories tegelijk genereer wil je niet 5 losse berichten. Bundel ze in 1 digest als ze binnen 60 seconden vallen."
         },
         {
-          "from": "Nina van den Berg 🔍",
+          "from": "Nina van den Berg",
           "comment": "Het bericht-format moet consistent zijn. Maak een template: emoji + type + titel + 1-liner impact."
         },
         {
-          "from": "Sofia Bakker 🛡️",
+          "from": "Sofia Bakker",
           "comment": "Geen security risico zolang we geen gevoelige code-snippets in het Telegram bericht stoppen. Alleen metadata."
         },
         {
-          "from": "Yuki Tanaka 🐳",
+          "from": "Yuki Tanaka",
           "comment": "Telegram API is extern — zorg voor retry logic bij timeouts. Niet de hele story-flow blokkeren als Telegram even niet bereikbaar is."
         }
       ],
@@ -74,24 +74,24 @@
       "priority": "high",
       "status": "review",
       "project": "OfferteRadar",
-      "author": "Nina van den Berg 🔍",
+      "author": "Nina van den Berg",
       "impact": "Betere previews op social media → hogere CTR vanuit TikTok/Instagram traffic. Direct effect op conversie.",
       "approach": "Toevoegen: og:title, og:description, og:image, og:url, twitter:card, twitter:title, twitter:description, twitter:image. Plus canonical URL en structured data (JSON-LD).",
       "team_discussion": [
         {
-          "from": "Marcus de Groot 🎯",
+          "from": "Marcus de Groot",
           "comment": "Voeg ook een sitemap.xml en robots.txt toe als die er nog niet zijn. Kost 5 minuten extra en is gratis SEO."
         },
         {
-          "from": "Jan-Willem Hofstra 🏗️",
+          "from": "Jan-Willem Hofstra",
           "comment": "Voor de og:image: gebruik een dedicated social preview image (1200x630px). Niet de favicon of een random screenshot."
         },
         {
-          "from": "Sofia Bakker 🛡️",
+          "from": "Sofia Bakker",
           "comment": "Check of er geen gevoelige info in de meta description lekt. En voeg een Content-Security-Policy header toe als dat nog niet gedaan is."
         },
         {
-          "from": "Yuki Tanaka 🐳",
+          "from": "Yuki Tanaka",
           "comment": "GitHub Pages serveert automatisch met de juiste content-type headers. Geen infra actie nodig. Wel caching: GitHub Pages cached agressief — na deploy even purgen."
         }
       ],
@@ -107,24 +107,24 @@
       "priority": "high",
       "status": "review",
       "project": "AI Assistent",
-      "author": "Marcus de Groot 🎯",
+      "author": "Marcus de Groot",
       "impact": "Dit is de kern-feature van het AI DevOps Team concept. Maakt de assistent proactief in plaats van reactief.",
       "approach": "1. Scan projectenmap (wanneer toegang gegeven). 2. Elk bestand door Claude analyseren vanuit alle 5 perspectieven. 3. Bevindingen bundelen per categorie (security, performance, architecture, code quality, containers). 4. Stories genereren met team-discussie. 5. GPT-4.1 als second opinion.",
       "team_discussion": [
         {
-          "from": "Nina van den Berg 🔍",
+          "from": "Nina van den Berg",
           "comment": "Begin met een prioriteitsmatrix: eerst security issues, dan architectuur, dan code quality. Niet alles tegelijk dumpen op het board."
         },
         {
-          "from": "Yuki Tanaka 🐳",
+          "from": "Yuki Tanaka",
           "comment": "Check Dockerfiles en docker-compose bestanden op best practices: multi-stage builds, non-root users, .dockerignore, health checks."
         },
         {
-          "from": "Sofia Bakker 🛡️",
+          "from": "Sofia Bakker",
           "comment": "Scan op hardcoded secrets (API keys, passwords), OWASP Top 10 patronen, en dependency vulnerabilities. Dit heeft de hoogste prioriteit."
         },
         {
-          "from": "Jan-Willem Hofstra 🏗️",
+          "from": "Jan-Willem Hofstra",
           "comment": "Analyseer de architectuur-structuur: is er separation of concerns? Zijn er single points of failure? Hoe zit het met schaalbaarheid?"
         }
       ],
@@ -140,24 +140,24 @@
       "priority": "medium",
       "status": "review",
       "project": "AI DevOps Board",
-      "author": "Marcus de Groot 🎯",
+      "author": "Marcus de Groot",
       "impact": "Vangt fouten vroegtijdig op. Voorkomt dat een kapotte stories.json het hele dashboard breekt.",
       "approach": "GitHub Actions workflow met 3 stappen: 1) JSON schema validatie, 2) HTML/CSS lint, 3) Lighthouse performance audit. Resultaten als comment op de commit.",
       "team_discussion": [
         {
-          "from": "Nina van den Berg 🔍",
+          "from": "Nina van den Berg",
           "comment": "Voeg ook een check toe dat elke story een uniek ID heeft en dat verplichte velden (title, type, status) aanwezig zijn."
         },
         {
-          "from": "Yuki Tanaka 🐳",
+          "from": "Yuki Tanaka",
           "comment": "Run de tests in een container voor reproduceerbare results. Een simpele node:alpine image is voldoende."
         },
         {
-          "from": "Sofia Bakker 🛡️",
+          "from": "Sofia Bakker",
           "comment": "Scan de HTML op XSS-kwetsbaarheden — stories bevatten user-generated content die in innerHTML terechtkomt."
         },
         {
-          "from": "Jan-Willem Hofstra 🏗️",
+          "from": "Jan-Willem Hofstra",
           "comment": "Houd de pipeline snel — onder de 2 minuten. Anders wordt het een bottleneck. Parallel runnen waar mogelijk."
         }
       ],
@@ -173,24 +173,24 @@
       "priority": "urgent",
       "status": "review",
       "project": "AI DevOps Board",
-      "author": "Sofia Bakker 🛡️",
+      "author": "Sofia Bakker",
       "impact": "Zonder sanitization kan een kwaadaardige story-title of description JavaScript injecteren. Urgente fix nodig.",
       "approach": "1. DOMPurify library toevoegen voor HTML sanitization. 2. CSP meta tag: script-src 'self'; style-src 'self' 'unsafe-inline'. 3. Alle innerHTML vervangen door textContent waar mogelijk. 4. Story velden escapen voor ze gerenderd worden.",
       "team_discussion": [
         {
-          "from": "Marcus de Groot 🎯",
+          "from": "Marcus de Groot",
           "comment": "Eens, urgente prioriteit. Dit moet voor alle andere features gefixt worden. Security first."
         },
         {
-          "from": "Nina van den Berg 🔍",
+          "from": "Nina van den Berg",
           "comment": "Gebruik textContent in plaats van innerHTML voor alle tekstvelden. innerHTML alleen voor bewust gemarkeerde rich-text velden met DOMPurify."
         },
         {
-          "from": "Yuki Tanaka 🐳",
+          "from": "Yuki Tanaka",
           "comment": "GitHub Pages stuurt standaard geen custom headers mee, dus CSP moet via <meta> tag. Dat is minder sterk dan een echte header maar beter dan niets."
         },
         {
-          "from": "Jan-Willem Hofstra 🏗️",
+          "from": "Jan-Willem Hofstra",
           "comment": "Op termijn migreren naar een framework met built-in escaping (React, Vue). Voor nu is DOMPurify de pragmatische keuze."
         }
       ],
