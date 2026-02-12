@@ -230,7 +230,7 @@
       "description": "Graag zou Enrico zien dat de kwaliteit van de zoekopdrachten verbeterd wordt. Hij zou wel meer willen zien dat dit de kwaliteit en de manier van hoe informatie wordt gezocht zoals Perplexity werkt.",
       "type": "improvement",
       "priority": "high",
-      "status": "approved",
+      "status": "in_progress",
       "project": "AI Assistent",
       "author": "Enrico (handmatig)",
       "impact": "",
@@ -254,8 +254,8 @@
       "complexity": "Medium",
       "estimated_effort": "3-5 dagen",
       "created": "2026-02-12T19:08:52Z",
-      "updated": "2026-02-12T20:07:49.420Z"
+      "updated": "2026-02-12T20:08:58Z"
     }
   ],
-  "updated": "2026-02-12T20:07:55.539Z"
+  "updated": "2026-02-12T20:08:58Z"
 }
