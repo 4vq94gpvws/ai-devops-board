@@ -1,0 +1,47 @@
+{
+  "stories": [
+    {
+      "id": "story-001",
+      "title": "DevOps Board: Drag & drop support toevoegen",
+      "description": "Stories moeten met drag & drop tussen kolommen verplaatst kunnen worden, naast de huidige button-flow.",
+      "type": "feature",
+      "priority": "medium",
+      "status": "review",
+      "project": "AI DevOps Board",
+      "impact": "Verbetert de UX aanzienlijk - snellere workflow voor Enrico bij het reviewen van stories.",
+      "approach": "HTML5 Drag and Drop API gebruiken. dragstart/dragover/drop events op cards en columns.",
+      "ai_review": "Goed idee voor UX. Overweeg ook touch support voor mobiel (touch events of een library als SortableJS).",
+      "created": "2025-06-21T10:00:00Z",
+      "updated": "2025-06-21T10:00:00Z"
+    },
+    {
+      "id": "story-002",
+      "title": "Telegram notificatie bij nieuwe story",
+      "description": "Als de AI-assistent een nieuwe story aanmaakt op het board, krijgt Enrico automatisch een Telegram alert met titel en korte beschrijving.",
+      "type": "feature",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Assistent",
+      "impact": "Enrico hoeft niet steeds het board te checken - wordt proactief ge\u00efnformeerd over nieuwe voorstellen.",
+      "approach": "Na devops_board_add_story() automatisch send_message() aanroepen vanuit de AI-assistent flow.",
+      "ai_review": "Logische next step. Houd de notificatie kort: titel + type + link naar board. Niet elk detail in het bericht.",
+      "created": "2025-06-21T10:05:00Z",
+      "updated": "2025-06-21T10:05:00Z"
+    },
+    {
+      "id": "story-003",
+      "title": "OfferteRadar: SEO meta tags toevoegen",
+      "description": "De OfferteRadar website mist Open Graph en Twitter Card meta tags. Dit is essentieel voor social media sharing (TikTok bio link, Instagram bio).",
+      "type": "improvement",
+      "priority": "high",
+      "status": "review",
+      "project": "OfferteRadar",
+      "impact": "Betere previews bij het delen op social media \u2192 meer clicks vanuit TikTok/Instagram traffic.",
+      "approach": "og:title, og:description, og:image, twitter:card meta tags toevoegen aan de HTML head.",
+      "ai_review": "Essentieel voor een content-project dat traffic van social media moet trekken. Voeg ook een canonical URL toe.",
+      "created": "2025-06-21T10:10:00Z",
+      "updated": "2025-06-21T10:10:00Z"
+    }
+  ],
+  "updated": "2025-06-21T10:10:00Z"
+}
