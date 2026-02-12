@@ -496,13 +496,14 @@
         }
         
         .team-section.open {
-            max-height: 500px;
+            max-height: 80vh;
             padding: 20px 24px;
+            overflow-y: auto;
         }
         
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 16px;
         }
         
@@ -512,11 +513,13 @@
             }
         }
         
-        @media (max-width: 500px) {
+        @media (max-width: 600px) {
             .team-grid {
                 grid-template-columns: 1fr;
             }
         }
+        
+        
         
         .team-card {
             background: var(--bg-tertiary);
