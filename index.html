@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI DevOps Board</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --border: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-orange: #d29922;
+            --accent-red: #f85149;
+            --accent-purple: #bc8cff;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .header .logo {
+            font-size: 24px;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .stat {
+            background: var(--bg-tertiary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .stat strong {
+            color: var(--text-primary);
+        }
+        
+        /* Filters */
+        .filters {
+            padding: 12px 24px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--accent-blue);
+            color: var(--text-primary);
+        }
+        
+        .filter-btn.active {
+            background: var(--accent-blue);
+            color: #fff;
+            border-color: var(--accent-blue);
+        }
+        
+        /* Kanban Board */
+        .board {
+            display: flex;
+            gap: 16px;
+            padding: 20px 24px;
+            overflow-x: auto;
+            min-height: calc(100vh - 120px);
+        }
+        
+        .column {
+            min-width: 280px;
+            max-width: 320px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .column-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+        }
+        
+        .column-header h2 {
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .column-count {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+        
+        .column-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .column-dot.backlog { background: var(--text-secondary); }
+        .column-dot.review { background: var(--accent-orange); }
+        .column-dot.approved { background: var(--accent-blue); }
+        .column-dot.in-progress { background: var(--accent-purple); }
+        .column-dot.done { background: var(--accent-green); }
+        
+        .cards {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-1px);
+        }
+        
+        .card-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+        
+        .tag.feature { background: #1f3d2a; color: var(--accent-green); }
+        .tag.bugfix { background: #3d1f1f; color: var(--accent-red); }
+        .tag.improvement { background: #1f2d3d; color: var(--accent-blue); }
+        .tag.idea { background: #2d1f3d; color: var(--accent-purple); }
+        .tag.security { background: #3d2d1f; color: var(--accent-orange); }
+        
+        .tag.priority-high { background: #3d1f1f; color: var(--accent-red); }
+        .tag.priority-medium { background: #3d2d1f; color: var(--accent-orange); }
+        .tag.priority-low { background: #1f2d3d; color: var(--accent-blue); }
+        .tag.priority-critical { background: #5c0d0d; color: #ff6b6b; }
+        
+        .card-project {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 60px;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 640px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 24px;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            flex: 1;
+            padding-right: 16px;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 4px;
+        }
+        
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+        
+        .modal-section {
+            margin-bottom: 16px;
+        }
+        
+        .modal-section h3 {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .modal-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+        
+        .modal-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        
+        .btn-approve {
+            background: #238636;
+            border-color: #2ea043;
+            color: #fff;
+        }
+        
+        .btn-approve:hover {
+            background: #2ea043;
+        }
+        
+        .btn-reject {
+            background: var(--bg-tertiary);
+            color: var(--accent-red);
+            border-color: var(--accent-red);
+        }
+        
+        .btn-reject:hover {
+            background: #3d1f1f;
+        }
+        
+        .btn-move {
+            background: var(--bg-tertiary);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+        
+        .btn-move:hover {
+            background: #1f2d3d;
+        }
+        
+        .ai-review-box {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 8px;
+        }
+        
+        .ai-review-box .ai-label {
+            font-size: 11px;
+            color: var(--accent-purple);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        /* Empty state */
+        .empty-state {
+            color: var(--text-secondary);
+            font-size: 13px;
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .board { padding: 12px; gap: 12px; }
+            .column { min-width: 260px; }
+            .header { flex-direction: column; gap: 12px; }
+            .stats { flex-wrap: wrap; }
+        }
+
+        /* Refresh animation */
+        .refreshing { opacity: 0.5; pointer-events: none; }
+        
+        .btn-refresh {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-refresh:hover {
+            border-color: var(--accent-blue);
+            color: var(--text-primary);
+        }
+        
+        .spin { animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <span class="logo">🤖</span>
+            <h1>AI DevOps Board</h1>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="stats" id="stats"></div>
+            <button class="btn-refresh" onclick="loadStories()" title="Ververs">
+                <span id="refresh-icon">🔄</span> Refresh
+            </button>
+        </div>
+    </div>
+    
+    <div class="filters" id="filters">
+        <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">Alles</button>
+        <button class="filter-btn" data-filter="feature" onclick="setFilter('feature', this)">🚀 Feature</button>
+        <button class="filter-btn" data-filter="bugfix" onclick="setFilter('bugfix', this)">🐛 Bugfix</button>
+        <button class="filter-btn" data-filter="improvement" onclick="setFilter('improvement', this)">⚡ Improvement</button>
+        <button class="filter-btn" data-filter="idea" onclick="setFilter('idea', this)">💡 Idea</button>
+        <button class="filter-btn" data-filter="security" onclick="setFilter('security', this)">🔒 Security</button>
+    </div>
+
+    <div class="board" id="board">
+        <div class="column">
+            <div class="column-header">
+                <h2><span class="column-dot backlog"></span> Backlog</h2>
+                <span class="column-count" data-col="backlog">0</span>
+            </div>
+            <div class="cards" id="col-backlog"></div>
+        </div>
+        <div class="column">
+            <div class="column-header">
+                <h2><span class="column-dot review"></span> Review</h2>
+                <span class="column-count" data-col="review">0</span>
+            </div>
+            <div class="cards" id="col-review"></div>
+        </div>
+        <div class="column">
+            <div class="column-header">
+                <h2><span class="column-dot approved"></span> Approved</h2>
+                <span class="column-count" data-col="approved">0</span>
+            </div>
+            <div class="cards" id="col-approved"></div>
+        </div>
+        <div class="column">
+            <div class="column-header">
+                <h2><span class="column-dot in-progress"></span> In Progress</h2>
+                <span class="column-count" data-col="in_progress">0</span>
+            </div>
+            <div class="cards" id="col-in_progress"></div>
+        </div>
+        <div class="column">
+            <div class="column-header">
+                <h2><span class="column-dot done"></span> Done</h2>
+                <span class="column-count" data-col="done">0</span>
+            </div>
+            <div class="cards" id="col-done"></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+        <div class="modal" id="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <span class="modal-title" id="modal-title"></span>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-tags" id="modal-tags"></div>
+            <div id="modal-body"></div>
+            <div class="modal-actions" id="modal-actions"></div>
+        </div>
+    </div>
+
+    <script>
+        // Config - GitHub API
+        const GITHUB_API = 'https://api.github.com';
+        const OWNER = '4vq94gpvws';
+        const REPO = 'ai-devops-board';
+        const DATA_PATH = 'data/stories.json';
+        
+        let allStories = [];
+        let currentFilter = 'all';
+        let currentStory = null;
+        
+        // Token opslaan (wordt gevraagd bij eerste gebruik)
+        function getToken() {
+            let token = localStorage.getItem('github_token');
+            if (!token) {
+                token = prompt('GitHub Personal Access Token invoeren (voor write access):');
+                if (token) localStorage.setItem('github_token', token);
+            }
+            return token;
+        }
+
+        // Stories laden vanuit GitHub
+        async function loadStories() {
+            const icon = document.getElementById('refresh-icon');
+            icon.classList.add('spin');
+            
+            try {
+                const response = await fetch(
+                    `${GITHUB_API}/repos/${OWNER}/${REPO}/contents/${DATA_PATH}`,
+                    { headers: { 'Accept': 'application/vnd.github.v3+json' } }
+                );
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const content = atob(data.content);
+                    const parsed = JSON.parse(content);
+                    allStories = parsed.stories || [];
+                    window._fileSha = data.sha;
+                } else if (response.status === 404) {
+                    allStories = [];
+                } else {
+                    throw new Error(`GitHub API error: ${response.status}`);
+                }
+            } catch (err) {
+                console.error('Load error:', err);
+                allStories = [];
+            }
+            
+            renderBoard();
+            icon.classList.remove('spin');
+        }
+
+        // Stories opslaan naar GitHub
+        async function saveStories() {
+            const token = getToken();
+            if (!token) return;
+
+            const content = JSON.stringify({ stories: allStories, updated: new Date().toISOString() }, null, 2);
+            const encoded = btoa(unescape(encodeURIComponent(content)));
+            
+            const body = {
+                message: `Update stories via DevOps Board`,
+                content: encoded,
+            };
+            
+            if (window._fileSha) {
+                body.sha = window._fileSha;
+            }
+
+            const response = await fetch(
+                `${GITHUB_API}/repos/${OWNER}/${REPO}/contents/${DATA_PATH}`,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github.v3+json'
+                    },
+                    body: JSON.stringify(body)
+                }
+            );
+            
+            if (response.ok) {
+                const data = await response.json();
+                window._fileSha = data.content.sha;
+            } else {
+                const err = await response.json();
+                alert(`Opslaan mislukt: ${err.message}`);
+            }
+        }
+
+        // Board renderen
+        function renderBoard() {
+            const columns = ['backlog', 'review', 'approved', 'in_progress', 'done'];
+            
+            columns.forEach(col => {
+                const container = document.getElementById(`col-${col}`);
+                const stories = allStories.filter(s => {
+                    const statusMatch = s.status === col;
+                    const filterMatch = currentFilter === 'all' || s.type === currentFilter;
+                    return statusMatch && filterMatch;
+                });
+                
+                // Update count
+                document.querySelector(`[data-col="${col}"]`).textContent = stories.length;
+                
+                if (stories.length === 0) {
+                    container.innerHTML = '<div class="empty-state">Geen stories</div>';
+                    return;
+                }
+                
+                container.innerHTML = stories.map(story => `
+                    <div class="card" onclick="openStory('${story.id}')">
+                        <div class="card-title">${story.title}</div>
+                        <div class="card-meta">
+                            <span class="tag ${story.type}">${getTypeEmoji(story.type)} ${story.type}</span>
+                            <span class="tag priority-${story.priority}">${story.priority}</span>
+                            <span class="card-project">${story.project || ''}</span>
+                        </div>
+                    </div>
+                `).join('');
+            });
+            
+            // Update stats
+            document.getElementById('stats').innerHTML = `
+                <div class="stat"><strong>${allStories.length}</strong> totaal</div>
+                <div class="stat"><strong>${allStories.filter(s=>s.status==='review').length}</strong> te reviewen</div>
+                <div class="stat"><strong>${allStories.filter(s=>s.status==='in_progress').length}</strong> in progress</div>
+            `;
+        }
+        
+        function getTypeEmoji(type) {
+            const emojis = { feature: '🚀', bugfix: '🐛', improvement: '⚡', idea: '💡', security: '🔒' };
+            return emojis[type] || '📋';
+        }
+
+        // Filter
+        function setFilter(filter, btn) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderBoard();
+        }
+
+        // Story detail modal
+        function openStory(id) {
+            currentStory = allStories.find(s => s.id === id);
+            if (!currentStory) return;
+            
+            document.getElementById('modal-title').textContent = currentStory.title;
+            
+            // Tags
+            document.getElementById('modal-tags').innerHTML = `
+                <span class="tag ${currentStory.type}">${getTypeEmoji(currentStory.type)} ${currentStory.type}</span>
+                <span class="tag priority-${currentStory.priority}">${currentStory.priority} priority</span>
+                <span class="tag" style="background:var(--bg-tertiary);color:var(--text-secondary)">${currentStory.project || 'Geen project'}</span>
+            `;
+            
+            // Body
+            let bodyHTML = '';
+            
+            if (currentStory.description) {
+                bodyHTML += `<div class="modal-section"><h3>Beschrijving</h3><p>${currentStory.description}</p></div>`;
+            }
+            
+            if (currentStory.impact) {
+                bodyHTML += `<div class="modal-section"><h3>Impact</h3><p>${currentStory.impact}</p></div>`;
+            }
+            
+            if (currentStory.approach) {
+                bodyHTML += `<div class="modal-section"><h3>Aanpak</h3><p>${currentStory.approach}</p></div>`;
+            }
+            
+            if (currentStory.ai_review) {
+                bodyHTML += `
+                    <div class="modal-section">
+                        <h3>AI Review</h3>
+                        <div class="ai-review-box">
+                            <div class="ai-label">🤖 AI Second Opinion</div>
+                            <p>${currentStory.ai_review}</p>
+                        </div>
+                    </div>`;
+            }
+            
+            bodyHTML += `
+                <div class="modal-section">
+                    <h3>Details</h3>
+                    <p style="color:var(--text-secondary); font-size:12px;">
+                        ID: ${currentStory.id}<br>
+                        Aangemaakt: ${new Date(currentStory.created).toLocaleString('nl-NL')}<br>
+                        Status: ${currentStory.status}
+                    </p>
+                </div>`;
+            
+            document.getElementById('modal-body').innerHTML = bodyHTML;
+            
+            // Actions based on status
+            let actionsHTML = '';
+            if (currentStory.status === 'review') {
+                actionsHTML = `
+                    <button class="btn btn-approve" onclick="moveStory('approved')">✅ Goedkeuren</button>
+                    <button class="btn btn-reject" onclick="moveStory('rejected')">❌ Afwijzen</button>
+                `;
+            } else if (currentStory.status === 'approved') {
+                actionsHTML = `<button class="btn btn-move" onclick="moveStory('in_progress')">▶️ Start</button>`;
+            } else if (currentStory.status === 'in_progress') {
+                actionsHTML = `<button class="btn btn-approve" onclick="moveStory('done')">✅ Done</button>`;
+            } else if (currentStory.status === 'backlog') {
+                actionsHTML = `<button class="btn btn-move" onclick="moveStory('review')">📋 Naar Review</button>`;
+            }
+            
+            document.getElementById('modal-actions').innerHTML = actionsHTML;
+            document.getElementById('modal-overlay').classList.add('active');
+        }
+        
+        function closeModal(event) {
+            if (event && event.target !== document.getElementById('modal-overlay')) return;
+            document.getElementById('modal-overlay').classList.remove('active');
+            currentStory = null;
+        }
+        
+        async function moveStory(newStatus) {
+            if (!currentStory) return;
+            currentStory.status = newStatus;
+            currentStory.updated = new Date().toISOString();
+            await saveStories();
+            closeModal();
+            renderBoard();
+        }
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+        
+        // Init
+        loadStories();
+    </script>
+</body>
+</html>
