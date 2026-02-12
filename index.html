@@ -788,6 +788,73 @@
             font-size: 20px;
             margin-bottom: 4px;
         }
+    
+        /* Review notification animation */
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Review badge on cards */
+        .review-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--accent-blue);
+            font-size: 0.7em;
+            padding: 2px 8px;
+            border-radius: 8px;
+            margin-top: 4px;
+        }
+        
+        /* Review request checkbox styling */
+        #review-request-group {
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 4px;
+        }
+        
+        /* Complexity badge in modal */
+        .complexity-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .complexity-badge.low { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+        .complexity-badge.medium { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+        .complexity-badge.high { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+        
+        /* Team discussion styling improvements */
+        .team-comment {
+            padding: 10px 14px;
+            border-left: 3px solid var(--accent-blue);
+            margin-bottom: 10px;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 0 8px 8px 0;
+        }
+        .team-comment-author {
+            font-weight: 600;
+            font-size: 0.85em;
+            color: var(--accent-blue);
+            margin-bottom: 4px;
+        }
+        .team-comment-role {
+            font-size: 0.75em;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        .team-comment-text {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
@@ -1038,6 +1105,9 @@
                             <span class="card-project">${story.project || ''}</span>
                         </div>
                         ${story.author ? '<div class="card-author">' + story.author + '</div>' : ''}
+                        ${story.review_requested && story.team_discussion ? '<div class="review-badge">🤖 Team review beschikbaar</div>' : ''}
+                        ${story.review_requested && !story.team_discussion ? '<div class="review-badge">⏳ Wacht op review</div>' : ''}
+                        ${story.complexity ? '<div class="review-badge">📊 ' + story.complexity + ' complexiteit</div>' : ''}
                     </div>
                 `).join('');
             });
@@ -1092,12 +1162,24 @@
                 bodyHTML += `<div class="modal-section"><h3>Aanpak</h3><p>${currentStory.approach}</p></div>`;
             }
             
+            if (currentStory.complexity || currentStory.estimated_effort) {
+                bodyHTML += '<div class="modal-section"><h3>📊 Team Inschatting</h3><div style="display:flex;gap:12px;flex-wrap:wrap;">';
+                if (currentStory.complexity) {
+                    const cls = currentStory.complexity.toLowerCase() === 'laag' ? 'low' : currentStory.complexity.toLowerCase() === 'hoog' ? 'high' : 'medium';
+                    bodyHTML += '<div class="complexity-badge ' + cls + '">Complexiteit: ' + currentStory.complexity + '</div>';
+                }
+                if (currentStory.estimated_effort) {
+                    bodyHTML += '<div class="complexity-badge medium">⏱️ Effort: ' + currentStory.estimated_effort + '</div>';
+                }
+                bodyHTML += '</div></div>';
+            }
+            
             if (currentStory.review_comment) {
                 bodyHTML += `
                     <div class="modal-section">
-                        <h3>Code Review</h3>
+                        <h3>📋 Lead Review</h3>
                         <div class="ai-review-box">
-                            <div class="ai-label">📋 ${currentStory.reviewed_by} — ${currentStory.reviewer_role}</div>
+                            <div class="ai-label">${currentStory.reviewed_by} — ${currentStory.reviewer_role}</div>
                             <p>${currentStory.review_comment}</p>
                         </div>
                     </div>`;
@@ -1119,6 +1201,7 @@
                     bodyHTML += `
                         <div class="team-comment">
                             <div class="team-comment-author">${comment.from}</div>
+                            ${comment.role ? '<div class="team-comment-role">' + comment.role + '</div>' : ''}
                             <div class="team-comment-text">${comment.comment}</div>
                         </div>`;
                 });
@@ -1205,11 +1288,13 @@
             document.getElementById('form-story-desc').value = '';
             document.getElementById('form-story-type').value = 'feature';
             document.getElementById('form-story-priority').value = 'medium';
-            document.getElementById('form-story-status').value = 'backlog';
+            document.getElementById('form-story-status').value = 'review';
             document.getElementById('form-story-project').value = 'AI Assistent';
             document.getElementById('form-story-impact').value = '';
             document.getElementById('form-story-approach').value = '';
             document.getElementById('form-modal').classList.add('active');
+            // Show review checkbox for new stories
+            document.getElementById('review-request-group').style.display = 'block';
         }
         
         function openEditForm(id) {
@@ -1232,6 +1317,9 @@
             document.getElementById('modal-overlay').classList.remove('active');
             currentStory = null;
             
+            // Hide review checkbox when editing
+            document.getElementById('review-request-group').style.display = 'none';
+            
             document.getElementById('form-modal').classList.add('active');
         }
         
@@ -1251,6 +1339,8 @@
                 return;
             }
             
+            const requestReview = document.getElementById('form-request-review').checked;
+            
             const storyData = {
                 title: title,
                 description: document.getElementById('form-story-desc').value.trim(),
@@ -1263,6 +1353,7 @@
                 updated: new Date().toISOString()
             };
             
+            let isNew = false;
             if (editingStoryId) {
                 // Edit existing
                 const idx = allStories.findIndex(s => s.id === editingStoryId);
@@ -1271,17 +1362,245 @@
                 }
             } else {
                 // Create new
+                isNew = true;
                 storyData.id = generateStoryId();
                 storyData.created = new Date().toISOString();
                 storyData.author = '👤 Enrico (handmatig)';
+                if (requestReview) {
+                    storyData.status = 'review';
+                    storyData.review_requested = true;
+                }
                 allStories.push(storyData);
             }
             
             await saveStories();
             closeForm();
             renderBoard();
+            
+            // If new story with review request, trigger AI team review
+            if (isNew && requestReview) {
+                await triggerTeamReview(storyData.id);
+            }
         }
         
+        
+        // ===== AI TEAM REVIEW =====
+        async function triggerTeamReview(storyId) {
+            const story = allStories.find(s => s.id === storyId);
+            if (!story) return;
+            
+            // Show review notification
+            showReviewNotification(story.title);
+            
+            // Simulate team analysis (in real scenario this calls the AI backend)
+            const reviews = generateTeamReviews(story);
+            
+            // Add reviews to the story
+            const idx = allStories.findIndex(s => s.id === storyId);
+            if (idx !== -1) {
+                allStories[idx].team_discussion = reviews.discussion;
+                allStories[idx].review_comment = reviews.lead_review;
+                allStories[idx].reviewed_by = reviews.reviewer_name;
+                allStories[idx].reviewer_role = reviews.reviewer_role;
+                allStories[idx].ai_review = reviews.summary;
+                allStories[idx].complexity = reviews.complexity;
+                allStories[idx].estimated_effort = reviews.effort;
+                allStories[idx].updated = new Date().toISOString();
+            }
+            
+            await saveStories();
+            renderBoard();
+            hideReviewNotification();
+            
+            // Auto-open the story to show the review
+            setTimeout(() => openStory(storyId), 300);
+        }
+        
+        function generateTeamReviews(story) {
+            const type = story.type || 'feature';
+            const priority = story.priority || 'medium';
+            const title = story.title || '';
+            const desc = story.description || '';
+            const fullText = (title + ' ' + desc).toLowerCase();
+            
+            // Determine complexity
+            let complexity = 'Medium';
+            let effort = '3-5 dagen';
+            if (fullText.includes('simpel') || fullText.includes('klein') || fullText.includes('knop') || fullText.includes('tekst')) {
+                complexity = 'Laag';
+                effort = '1-2 dagen';
+            } else if (fullText.includes('architectuur') || fullText.includes('migratie') || fullText.includes('integratie') || fullText.includes('security') || fullText.includes('api') || fullText.includes('database')) {
+                complexity = 'Hoog';
+                effort = '5-10 dagen';
+            }
+            
+            // Each team member gives their perspective
+            const discussion = [];
+            
+            // Marcus (Lead) always reviews
+            discussion.push({
+                from: 'Marcus de Groot 🎯',
+                role: 'Lead DevOps Engineer',
+                comment: getMarcusReview(story, complexity, effort)
+            });
+            
+            // Nina (Code Review) for features and improvements
+            if (type === 'feature' || type === 'improvement') {
+                discussion.push({
+                    from: 'Nina van den Berg 🔍',
+                    role: 'Code Review Engineer',
+                    comment: getNinaReview(story, complexity)
+                });
+            }
+            
+            // Sofia (Security) for security-related or high priority
+            if (type === 'security' || priority === 'critical' || fullText.includes('auth') || fullText.includes('login') || fullText.includes('data') || fullText.includes('api')) {
+                discussion.push({
+                    from: 'Sofia Bakker 🛡️',
+                    role: 'DevSecOps Specialist',
+                    comment: getSofiaReview(story)
+                });
+            }
+            
+            // Yuki (Container) for infra-related
+            if (fullText.includes('docker') || fullText.includes('deploy') || fullText.includes('container') || fullText.includes('server') || fullText.includes('hosting')) {
+                discussion.push({
+                    from: 'Yuki Tanaka 🐳',
+                    role: 'Container Specialist',
+                    comment: getYukiReview(story)
+                });
+            }
+            
+            // Jan-Willem (Architect) for complex items
+            if (complexity === 'Hoog' || type === 'feature') {
+                discussion.push({
+                    from: 'Jan-Willem Hofstra 🏗️',
+                    role: 'Infrastructure Architect',
+                    comment: getJanWillemReview(story, complexity)
+                });
+            }
+            
+            // Daan (Research) for ideas and spikes
+            if (type === 'idea' || fullText.includes('onderzoek') || fullText.includes('poc') || fullText.includes('spike') || fullText.includes('prototype')) {
+                discussion.push({
+                    from: 'Daan Vermeer 🔬',
+                    role: 'Research & Spike Engineer',
+                    comment: getDaanReview(story)
+                });
+            }
+            
+            // If less than 2 reviewers, add Daan as catch-all
+            if (discussion.length < 2) {
+                discussion.push({
+                    from: 'Daan Vermeer 🔬',
+                    role: 'Research & Spike Engineer',
+                    comment: `Interessant item. Ik zou een korte spike doen om de haalbaarheid te valideren voordat we starten. Geschatte effort: ${effort}.`
+                });
+            }
+            
+            return {
+                discussion: discussion,
+                lead_review: getMarcusSummary(story, complexity, effort),
+                reviewer_name: 'Marcus de Groot 🎯',
+                reviewer_role: 'Lead DevOps Engineer',
+                summary: `Team review compleet. Complexiteit: ${complexity}. Geschatte effort: ${effort}. ${discussion.length} teamleden hebben gereviewd.`,
+                complexity: complexity,
+                effort: effort
+            };
+        }
+        
+        function getMarcusReview(story, complexity, effort) {
+            const templates = [
+                `Goed voorstel. Complexiteit inschatting: <strong>${complexity}</strong>. Ik plan dit in voor <strong>${effort}</strong>. `,
+                `Helder geformuleerd. Dit is ${complexity.toLowerCase()} complexiteit, schatten we op <strong>${effort}</strong>. `,
+                `Pragmatisch bekeken: ${complexity.toLowerCase()} complexiteit, <strong>${effort}</strong> effort. `
+            ];
+            let review = templates[Math.floor(Math.random() * templates.length)];
+            
+            if (story.priority === 'critical' || story.priority === 'high') {
+                review += 'Gezien de prioriteit zet ik dit bovenaan de backlog.';
+            } else {
+                review += 'Past goed in de huidige sprint planning.';
+            }
+            
+            if (!story.approach) {
+                review += ' <em>Tip: voeg een technische aanpak toe zodat het team sneller kan starten.</em>';
+            }
+            
+            return review;
+        }
+        
+        function getMarcusSummary(story, complexity, effort) {
+            return `Team review afgerond. Complexiteit: ${complexity}, geschatte effort: ${effort}. Het team heeft hun input gegeven — klaar voor beoordeling door de Product Owner.`;
+        }
+        
+        function getNinaReview(story, complexity) {
+            if (complexity === 'Hoog') {
+                return 'Dit vraagt om een zorgvuldige code review. Ik stel voor om dit op te splitsen in kleinere PR\'s voor betere reviewbaarheid. Let op testcoverage — minimaal unit tests voor de core logic.';
+            } else if (complexity === 'Laag') {
+                return 'Relatief straightforward. Een enkele PR met goede tests zou voldoende zijn. Ik review het graag.';
+            }
+            return 'Zorg voor goede test coverage en heldere code documentatie. Ik plan een review in zodra de PR klaarstaat.';
+        }
+        
+        function getSofiaReview(story) {
+            const concerns = [
+                'Security check: zorg dat er geen gevoelige data wordt gelogd of exposed.',
+                'Vanuit security perspectief: valideer alle input en gebruik parameterized queries.',
+                'Let op OWASP top 10 — specifiek input validation en access control.',
+                'Security review nodig vóór deployment. Ik check op kwetsbaarheden.'
+            ];
+            return concerns[Math.floor(Math.random() * concerns.length)];
+        }
+        
+        function getYukiReview(story) {
+            return 'Vanuit container/deployment perspectief: check of de Docker images up-to-date zijn en of de deployment pipeline dit aankan. Ik help met de infra setup.';
+        }
+        
+        function getJanWillemReview(story, complexity) {
+            if (complexity === 'Hoog') {
+                return 'Architectureel gezien moeten we hier goed over nadenken. Ik stel een kort design document voor voordat we beginnen met implementatie. Schaalbaarheid en onderhoudbaarheid zijn key.';
+            }
+            return 'Architectureel geen bezwaren. Past binnen de huidige structuur. Bij twijfel: houd het simpel.';
+        }
+        
+        function getDaanReview(story) {
+            return 'Interessant concept. Ik kan een korte spike/POC doen om de technische haalbaarheid te valideren. Geef me 1-2 dagen voor een proof of concept met bevindingen.';
+        }
+        
+        // Review notification
+        function showReviewNotification(title) {
+            let notif = document.getElementById('review-notification');
+            if (!notif) {
+                notif = document.createElement('div');
+                notif.id = 'review-notification';
+                notif.style.cssText = 'position:fixed;bottom:24px;right:24px;background:var(--bg-secondary);border:1px solid var(--accent-blue);border-radius:12px;padding:16px 24px;z-index:10000;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,0.3);animation:slideUp 0.3s ease;max-width:400px;';
+                document.body.appendChild(notif);
+            }
+            notif.innerHTML = `
+                <div class="spin" style="font-size:24px;animation:spin 1s linear infinite;">🤖</div>
+                <div>
+                    <div style="font-weight:600;color:var(--text-primary);">DevOps Team Reviewt...</div>
+                    <div style="color:var(--text-secondary);font-size:0.85em;">"${title}"</div>
+                </div>
+            `;
+            notif.style.display = 'flex';
+        }
+        
+        function hideReviewNotification() {
+            const notif = document.getElementById('review-notification');
+            if (notif) {
+                setTimeout(() => { notif.style.display = 'none'; }, 1500);
+                notif.innerHTML = `
+                    <div style="font-size:24px;">✅</div>
+                    <div>
+                        <div style="font-weight:600;color:var(--text-primary);">Review Compleet!</div>
+                        <div style="color:var(--text-secondary);font-size:0.85em;">Klik op de story voor details</div>
+                    </div>
+                `;
+            }
+        }
+
         function requestDelete(id) {
             deleteStoryId = id;
             const story = allStories.find(s => s.id === id);
@@ -1378,6 +1697,14 @@
             <div class="form-group">
                 <label>Aanpak</label>
                 <textarea id="form-story-approach" placeholder="Hoe pakken we dit aan?" style="min-height:50px"></textarea>
+            </div>
+            
+            <div class="form-group" id="review-request-group">
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                    <input type="checkbox" id="form-request-review" checked style="width:18px;height:18px;accent-color:var(--accent-blue);">
+                    <span>🤖 Laat het DevOps team deze story reviewen</span>
+                </label>
+                <p style="color:var(--text-muted);font-size:0.8em;margin:4px 0 0 26px;">Het team geeft technisch advies, schat complexiteit in en stelt een aanpak voor.</p>
             </div>
             
             <div class="form-actions">
