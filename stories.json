@@ -29,9 +29,11 @@
           "comment": "Overweeg een optimistic UI update met rollback bij API fout. Houdt het responsive."
         }
       ],
-      "ai_review": "Team unaniem positief. Nina's punt over accessibility is belangrijk — toevoegen aan acceptance criteria. Sofia's validatie-punt is terecht: bouw een state machine voor geldige overgangen.",
       "created": "2025-06-21T10:00:00Z",
-      "updated": "2026-02-12T16:07:03Z"
+      "updated": "2026-02-12T16:13:52Z",
+      "reviewed_by": "Nina van den Berg",
+      "reviewer_role": "Code Review Engineer",
+      "review_comment": "Sterk voorstel. De HTML5 Drag and Drop API is de juiste keuze, maar vergeet niet een fallback te bouwen voor browsers zonder volledige pointer events support. Mijn voorstel: schrijf eerst unit tests voor de state transitions voordat je aan de UI begint — zo vang je edge cases vroeg op."
     },
     {
       "id": "story-002",
@@ -62,9 +64,11 @@
           "comment": "Telegram API is extern — zorg voor retry logic bij timeouts. Niet de hele story-flow blokkeren als Telegram even niet bereikbaar is."
         }
       ],
-      "ai_review": "Marcus' throttling-idee is slim. Implementeer een 60-seconden buffer: verzamel stories, stuur dan 1 samenvatting. Yuki's punt over error handling is essentieel — fire-and-forget pattern gebruiken.",
       "created": "2025-06-21T10:05:00Z",
-      "updated": "2026-02-12T16:07:03Z"
+      "updated": "2026-02-12T16:13:52Z",
+      "reviewed_by": "Marcus de Groot",
+      "reviewer_role": "Lead DevOps Engineer",
+      "review_comment": "Architecturaal solide, Jan-Willem. Mijn advies: implementeer een message queue pattern met een 60-seconden buffer zodat meerdere snelle wijzigingen in een samenvatting worden verzonden. Fire-and-forget voor de Telegram call zelf — het board mag nooit blokkeren op een notificatie."
     },
     {
       "id": "story-003",
@@ -95,9 +99,11 @@
           "comment": "GitHub Pages serveert automatisch met de juiste content-type headers. Geen infra actie nodig. Wel caching: GitHub Pages cached agressief — na deploy even purgen."
         }
       ],
-      "ai_review": "Quick win met hoge impact. Marcus' sitemap-suggestie meenemen. Jan-Willem's punt over de og:image is cruciaal — een 1200x630 branded image genereren met ComfyUI zou mooi zijn.",
       "created": "2025-06-21T10:10:00Z",
-      "updated": "2026-02-12T16:07:03Z"
+      "updated": "2026-02-12T16:13:52Z",
+      "reviewed_by": "Jan-Willem Hofstra",
+      "reviewer_role": "Infrastructure Architect",
+      "review_comment": "Quick win met grote impact. Maar denk ook aan performance: de og:image moet geoptimaliseerd zijn (max 300KB) en via een CDN geserved worden. Overweeg een build-time generated sitemap.xml in plaats van runtime — scheelt een server-side component."
     },
     {
       "id": "story-004",
@@ -128,9 +134,11 @@
           "comment": "Analyseer de architectuur-structuur: is er separation of concerns? Zijn er single points of failure? Hoe zit het met schaalbaarheid?"
         }
       ],
-      "ai_review": "Dit is het flagship feature. Sofia's security-first aanpak is juist — begin met een secrets-scan en vulnerability check. Dan Nina's prioriteitsmatrix volgen. Faseer de implementatie: Phase 1 = security scan, Phase 2 = code quality, Phase 3 = architectuur.",
       "created": "2025-06-21T10:15:00Z",
-      "updated": "2026-02-12T16:07:03Z"
+      "updated": "2026-02-12T16:13:52Z",
+      "reviewed_by": "Sofia Bakker",
+      "reviewer_role": "DevSecOps Engineer",
+      "review_comment": "Dit is het kroonjuweel, maar de security-implicaties zijn groot. Een automatische scanner die code leest en wijzigingen voorstelt moet sandboxed draaien. Fase 1 moet secrets-detectie en dependency vulnerability scanning zijn — pas daarna feature suggestions. Security first, altijd."
     },
     {
       "id": "story-005",
@@ -161,9 +169,11 @@
           "comment": "Houd de pipeline snel — onder de 2 minuten. Anders wordt het een bottleneck. Parallel runnen waar mogelijk."
         }
       ],
-      "ai_review": "Goed voorstel van Marcus. Sofia's XSS-punt is kritiek — de stories worden door AI gegenereerd maar escaping is alsnog noodzakelijk. Nina's schema validatie is de eerste prioriteit: vang structurele fouten op voor deployment.",
       "created": "2026-02-12T16:07:03Z",
-      "updated": "2026-02-12T16:07:03Z"
+      "updated": "2026-02-12T16:13:52Z",
+      "reviewed_by": "Nina van den Berg",
+      "reviewer_role": "Code Review Engineer",
+      "review_comment": "Goed initiatief van Marcus. Mijn prioriteit: begin met JSON schema validatie als eerste stap — dat is de meest impactvolle check voor de laagste effort. XSS-scanning (Sofia's punt) als tweede. Lighthouse audit is nice-to-have maar niet blokkerend. Houd de pipeline onder 2 minuten."
     },
     {
       "id": "story-006",
@@ -194,9 +204,11 @@
           "comment": "Op termijn migreren naar een framework met built-in escaping (React, Vue). Voor nu is DOMPurify de pragmatische keuze."
         }
       ],
-      "ai_review": "Sofia heeft gelijk — dit is urgent. De combinatie van AI-gegenereerde content + innerHTML is een risico. Fix: 1) textContent overal, 2) DOMPurify voor rich velden, 3) CSP meta tag. Moet vóór nieuwe features geïmplementeerd worden.",
       "created": "2026-02-12T16:07:03Z",
-      "updated": "2026-02-12T16:07:03Z"
+      "updated": "2026-02-12T16:13:52Z",
+      "reviewed_by": "Marcus de Groot",
+      "reviewer_role": "Lead DevOps Engineer",
+      "review_comment": "Sofia heeft volledig gelijk — dit is de hoogste prioriteit. De combinatie van AI-gegenereerde content en innerHTML is een tikkende tijdbom. Ik stel voor dit als eerste story naar 'approved' te verplaatsen. DOMPurify + CSP headers + textContent waar mogelijk. Moet voor alle andere features gefixt zijn."
     }
   ]
 }

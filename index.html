@@ -702,13 +702,13 @@
                 bodyHTML += `<div class="modal-section"><h3>Aanpak</h3><p>${currentStory.approach}</p></div>`;
             }
             
-            if (currentStory.ai_review) {
+            if (currentStory.review_comment) {
                 bodyHTML += `
                     <div class="modal-section">
-                        <h3>AI Review</h3>
+                        <h3>Code Review</h3>
                         <div class="ai-review-box">
-                            <div class="ai-label">🤖 AI Second Opinion</div>
-                            <p>${currentStory.ai_review}</p>
+                            <div class="ai-label">📋 ${currentStory.reviewed_by} — ${currentStory.reviewer_role}</div>
+                            <p>${currentStory.review_comment}</p>
                         </div>
                     </div>`;
             }
