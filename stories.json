@@ -14,11 +14,11 @@
       "team_discussion": [
         {
           "from": "Nina van den Berg",
-          "comment": "Zorg voor goede accessibility  -  screen readers moeten de status-wijziging ook meekrijgen. Voeg ARIA live regions toe."
+          "comment": "Zorg voor goede accessibility - screen readers moeten de status-wijziging ook meekrijgen. Voeg ARIA live regions toe."
         },
         {
           "from": "Yuki Tanaka",
-          "comment": "Geen infra impact. Puur frontend. "
+          "comment": "Geen infra impact. Puur frontend."
         },
         {
           "from": "Sofia Bakker",
@@ -33,7 +33,7 @@
       "updated": "2026-02-12T16:27:30Z",
       "reviewed_by": "Nina van den Berg",
       "reviewer_role": "Code Review Engineer",
-      "review_comment": "Sterk voorstel. De HTML5 Drag and Drop API is de juiste keuze, maar vergeet niet een fallback te bouwen voor browsers zonder volledige pointer events support. Mijn voorstel: schrijf eerst unit tests voor de state transitions voordat je aan de UI begint  -  zo vang je edge cases vroeg op."
+      "review_comment": "Sterk voorstel. De HTML5 Drag and Drop API is de juiste keuze, maar vergeet niet een fallback te bouwen voor browsers zonder volledige pointer events support. Mijn voorstel: schrijf eerst unit tests voor de state transitions voordat je aan de UI begint - zo vang je edge cases vroeg op."
     },
     {
       "id": "story-002",
@@ -41,10 +41,10 @@
       "description": "Wanneer de AI-assistent een nieuwe story aanmaakt, krijgt Enrico automatisch een Telegram alert. Zo hoeft hij niet steeds het board te checken.",
       "type": "feature",
       "priority": "high",
-      "status": "done",
+      "status": "review",
       "project": "AI Assistent",
       "author": "Jan-Willem Hofstra",
-      "impact": "Enrico wordt proactief geinformeerd. Cruciaal voor de 'AI als DevOps team'-visie  -  het team rapporteert aan de teamlead (Enrico).",
+      "impact": "Enrico wordt proactief geinformeerd. Cruciaal voor de 'AI als DevOps team'-visie - het team rapporteert aan de teamlead (Enrico).",
       "approach": "Na elke devops_board_add_story() call automatisch send_message() triggeren met titel, type, prioriteit en een directe link naar het board. Message queue pattern met 60-seconden buffer zodat meerdere snelle wijzigingen in een samenvatting worden verzonden in plaats van losse berichten (feedback Marcus). Consistent bericht-template: emoji + type + titel + 1-liner impact (feedback Nina). Geen gevoelige code-snippets in Telegram berichten, alleen metadata (feedback Sofia). Retry logic met exponential backoff bij Telegram API timeouts. Fire-and-forget patroon: story-flow nooit blokkeren als Telegram niet bereikbaar is (feedback Yuki).",
       "team_discussion": [
         {
@@ -61,14 +61,14 @@
         },
         {
           "from": "Yuki Tanaka",
-          "comment": "Telegram API is extern  -  zorg voor retry logic bij timeouts. Niet de hele story-flow blokkeren als Telegram even niet bereikbaar is."
+          "comment": "Telegram API is extern - zorg voor retry logic bij timeouts. Niet de hele story-flow blokkeren als Telegram even niet bereikbaar is."
         }
       ],
       "created": "2025-06-21T10:05:00Z",
-      "updated": "2026-02-12T18:57:43Z",
+      "updated": "2026-02-12T16:27:30Z",
       "reviewed_by": "Marcus de Groot",
       "reviewer_role": "Lead DevOps Engineer",
-      "review_comment": "Architecturaal solide, Jan-Willem. Mijn advies: implementeer een message queue pattern met een 60-seconden buffer zodat meerdere snelle wijzigingen in een samenvatting worden verzonden. Fire-and-forget voor de Telegram call zelf  -  het board mag nooit blokkeren op een notificatie."
+      "review_comment": "Architecturaal solide, Jan-Willem. Mijn advies: implementeer een message queue pattern met een 60-seconden buffer zodat meerdere snelle wijzigingen in een samenvatting worden verzonden. Fire-and-forget voor de Telegram call zelf - het board mag nooit blokkeren op een notificatie."
     },
     {
       "id": "story-003",
@@ -96,14 +96,14 @@
         },
         {
           "from": "Yuki Tanaka",
-          "comment": "GitHub Pages serveert automatisch met de juiste content-type headers. Geen infra actie nodig. Wel caching: GitHub Pages cached agressief  -  na deploy even purgen."
+          "comment": "GitHub Pages serveert automatisch met de juiste content-type headers. Geen infra actie nodig. Wel caching: GitHub Pages cached agressief - na deploy even purgen."
         }
       ],
       "created": "2025-06-21T10:10:00Z",
       "updated": "2026-02-12T16:27:30Z",
       "reviewed_by": "Jan-Willem Hofstra",
       "reviewer_role": "Infrastructure Architect",
-      "review_comment": "Quick win met grote impact. Maar denk ook aan performance: de og:image moet geoptimaliseerd zijn (max 300KB) en via een CDN geserved worden. Overweeg een build-time generated sitemap.xml in plaats van runtime  -  scheelt een server-side component."
+      "review_comment": "Quick win met grote impact. Maar denk ook aan performance: de og:image moet geoptimaliseerd zijn (max 300KB) en via een CDN geserved worden. Overweeg een build-time generated sitemap.xml in plaats van runtime - scheelt een server-side component."
     },
     {
       "id": "story-004",
@@ -138,7 +138,7 @@
       "updated": "2026-02-12T16:27:30Z",
       "reviewed_by": "Sofia Bakker",
       "reviewer_role": "DevSecOps Engineer",
-      "review_comment": "Dit is het kroonjuweel, maar de security-implicaties zijn groot. Een automatische scanner die code leest en wijzigingen voorstelt moet sandboxed draaien. Fase 1 moet secrets-detectie en dependency vulnerability scanning zijn  -  pas daarna feature suggestions. Security first, altijd."
+      "review_comment": "Dit is het kroonjuweel, maar de security-implicaties zijn groot. Een automatische scanner die code leest en wijzigingen voorstelt moet sandboxed draaien. Fase 1 moet secrets-detectie en dependency vulnerability scanning zijn - pas daarna feature suggestions. Security first, altijd."
     },
     {
       "id": "story-005",
@@ -162,18 +162,18 @@
         },
         {
           "from": "Sofia Bakker",
-          "comment": "Scan de HTML op XSS-kwetsbaarheden  -  stories bevatten user-generated content die in innerHTML terechtkomt."
+          "comment": "Scan de HTML op XSS-kwetsbaarheden - stories bevatten user-generated content die in innerHTML terechtkomt."
         },
         {
           "from": "Jan-Willem Hofstra",
-          "comment": "Houd de pipeline snel  -  onder de 2 minuten. Anders wordt het een bottleneck. Parallel runnen waar mogelijk."
+          "comment": "Houd de pipeline snel - onder de 2 minuten. Anders wordt het een bottleneck. Parallel runnen waar mogelijk."
         }
       ],
       "created": "2026-02-12T16:07:03Z",
       "updated": "2026-02-12T16:27:30Z",
       "reviewed_by": "Nina van den Berg",
       "reviewer_role": "Code Review Engineer",
-      "review_comment": "Goed initiatief van Marcus. Mijn prioriteit: begin met JSON schema validatie als eerste stap  -  dat is de meest impactvolle check voor de laagste effort. XSS-scanning (Sofia's punt) als tweede. Lighthouse audit is nice-to-have maar niet blokkerend. Houd de pipeline onder 2 minuten."
+      "review_comment": "Goed initiatief van Marcus. Mijn prioriteit: begin met JSON schema validatie als eerste stap - dat is de meest impactvolle check voor de laagste effort. XSS-scanning (Sofia's punt) als tweede. Lighthouse audit is nice-to-have maar niet blokkerend. Houd de pipeline onder 2 minuten."
     },
     {
       "id": "story-006",
@@ -197,7 +197,7 @@
         },
         {
           "from": "Yuki Tanaka",
-          "comment": "GitHub Pages stuurt standaard geen custom headers mee, dus CSP moet via <meta> tag. Dat is minder sterk dan een echte header maar beter dan niets."
+          "comment": "GitHub Pages stuurt standaard geen custom headers mee, dus CSP moet via tag. Dat is minder sterk dan een echte header maar beter dan niets."
         },
         {
           "from": "Jan-Willem Hofstra",
@@ -208,7 +208,7 @@
       "updated": "2026-02-12T16:27:30Z",
       "reviewed_by": "Marcus de Groot",
       "reviewer_role": "Lead DevOps Engineer",
-      "review_comment": "Sofia heeft volledig gelijk  -  dit is de hoogste prioriteit. De combinatie van AI-gegenereerde content en innerHTML is een tikkende tijdbom. Ik stel voor dit als eerste story naar 'approved' te verplaatsen. DOMPurify + CSP headers + textContent waar mogelijk. Moet voor alle andere features gefixt zijn."
+      "review_comment": "Sofia heeft volledig gelijk - dit is de hoogste prioriteit. De combinatie van AI-gegenereerde content en innerHTML is een tikkende tijdbom. Ik stel voor dit als eerste story naar 'approved' te verplaatsen. DOMPurify + CSP headers + textContent waar mogelijk. Moet voor alle andere features gefixt zijn."
     },
     {
       "id": "story-f905",
@@ -220,43 +220,42 @@
       "project": "AI DevOps Dashboard",
       "approach": "1. Add Story knop met modal/formulier (titel, beschrijving, prioriteit, status, project, type). 2. Edit knop per story card met zelfde formulier. 3. Delete knop met bevestigingsdialoog. 4. Alle acties via GitHub API (JSON in repo). 5. Responsive, past bij bestaande styling.",
       "impact": "Enrico krijgt volledige controle over het board zonder afhankelijk te zijn van de AI-assistent. Essentieel voor dagelijks gebruik.",
-      "ai_review": "Marcus: \"Netjes geimplementeerd. Volledige CRUD: create, edit, delete met bevestigingsdialog. Past in de bestaande UI.\"",
+      "ai_review": "Marcus : \"Netjes geimplementeerd. Volledige CRUD: create, edit, delete met bevestigingsdialog. Past in de bestaande UI.\"",
       "created": "2025-08-29T12:00:00Z",
-      "updated": "2026-02-12T19:48:21Z"
+      "updated": "2026-02-12T17:10:39.061Z"
     },
     {
+      "id": "story-x7cy",
       "title": "Zoekopdrachten verbeteren",
       "description": "Graag zou Enrico zien dat de kwaliteit van de zoekopdrachten verbeterd wordt. Hij zou wel meer willen zien dat dit de kwaliteit en de manier van hoe informatie wordt gezocht zoals Perplexity werkt.",
       "type": "improvement",
       "priority": "high",
       "status": "review",
       "project": "AI Assistent",
+      "author": "Enrico (handmatig)",
       "impact": "",
       "approach": "Deep search tool bouwen in 4 stappen: 1) Query Decomposition - vraag opsplitsen in 2-3 sub-queries via LLM. 2) Multi-source search - elke sub-query parallel uitvoeren via zoek_internet. 3) Source reading - top-3 bronnen per query lezen via open_page/get_page_text. 4) Synthese - alle informatie samenvoegen tot een coherent antwoord met bronvermelding, Perplexity-stijl.",
-      "updated": "2026-02-12T19:48:30Z",
-      "id": "story-x7cy",
-      "created": "2026-02-12T19:08:52.755Z",
-      "author": "👤 Enrico (handmatig)",
-      "review_requested": true,
+      "ai_review": "Team review afgerond. Complexiteit: Medium, geschatte effort: 3-5 dagen. Het team heeft hun input gegeven en de approach is geaccordeerd.",
       "team_discussion": [
         {
-          "from": "Marcus de Groot 🎯",
+          "from": "Marcus de Groot",
           "role": "Lead DevOps Engineer",
-          "comment": "Goed voorstel. Complexiteit inschatting: <strong>Medium</strong>. Ik plan dit in voor <strong>3-5 dagen</strong>. Gezien de prioriteit zet ik dit bovenaan de backlog. <em>Tip: voeg een technische aanpak toe zodat het team sneller kan starten.</em>"
+          "comment": "Goed voorstel. Complexiteit inschatting: Medium. Ik plan dit in voor 3-5 dagen. Gezien de prioriteit zet ik dit bovenaan de backlog. Tip: voeg een technische aanpak toe zodat het team sneller kan starten."
         },
         {
-          "from": "Nina van den Berg 🔍",
+          "from": "Nina van den Berg",
           "role": "Code Review Engineer",
           "comment": "Zorg voor goede test coverage en heldere code documentatie. Ik plan een review in zodra de PR klaarstaat."
         }
       ],
-      "review_comment": "Team review afgerond. Complexiteit: Medium, geschatte effort: 3-5 dagen. Het team heeft hun input gegeven — klaar voor beoordeling door de Product Owner.",
-      "reviewed_by": "Marcus de Groot 🎯",
+      "review_comment": "Team review afgerond. Complexiteit: Medium, geschatte effort: 3-5 dagen. Het team heeft hun input gegeven - klaar voor beoordeling door de Product Owner.",
+      "reviewed_by": "Marcus de Groot",
       "reviewer_role": "Lead DevOps Engineer",
-      "ai_review": "Team review afgerond. Complexiteit: Medium, geschatte effort: 3-5 dagen. Het team heeft hun input gegeven en de approach is geaccordeerd.",
       "complexity": "Medium",
-      "estimated_effort": "3-5 dagen"
+      "estimated_effort": "3-5 dagen",
+      "created": "2026-02-12T19:08:52Z",
+      "updated": "2026-02-12T19:48:30Z"
     }
   ],
-  "updated": "2026-02-12T19:48:30Z"
+  "updated": "2026-02-12T17:10:39.061Z"
 }
