@@ -14,11 +14,11 @@
       "team_discussion": [
         {
           "from": "Nina van den Berg",
-          "comment": "Zorg voor goede accessibility — screen readers moeten de status-wijziging ook meekrijgen. Voeg ARIA live regions toe."
+          "comment": "Zorg voor goede accessibility  -  screen readers moeten de status-wijziging ook meekrijgen. Voeg ARIA live regions toe."
         },
         {
           "from": "Yuki Tanaka",
-          "comment": "Geen infra impact. Puur frontend. 👍"
+          "comment": "Geen infra impact. Puur frontend. "
         },
         {
           "from": "Sofia Bakker",
@@ -33,7 +33,7 @@
       "updated": "2026-02-12T16:13:52Z",
       "reviewed_by": "Nina van den Berg",
       "reviewer_role": "Code Review Engineer",
-      "review_comment": "Sterk voorstel. De HTML5 Drag and Drop API is de juiste keuze, maar vergeet niet een fallback te bouwen voor browsers zonder volledige pointer events support. Mijn voorstel: schrijf eerst unit tests voor de state transitions voordat je aan de UI begint — zo vang je edge cases vroeg op."
+      "review_comment": "Sterk voorstel. De HTML5 Drag and Drop API is de juiste keuze, maar vergeet niet een fallback te bouwen voor browsers zonder volledige pointer events support. Mijn voorstel: schrijf eerst unit tests voor de state transitions voordat je aan de UI begint  -  zo vang je edge cases vroeg op."
     },
     {
       "id": "story-002",
@@ -44,7 +44,7 @@
       "status": "review",
       "project": "AI Assistent",
       "author": "Jan-Willem Hofstra",
-      "impact": "Enrico wordt proactief geïnformeerd. Cruciaal voor de 'AI als DevOps team'-visie — het team rapporteert aan de teamlead (Enrico).",
+      "impact": "Enrico wordt proactief geinformeerd. Cruciaal voor de 'AI als DevOps team'-visie  -  het team rapporteert aan de teamlead (Enrico).",
       "approach": "Na elke devops_board_add_story() call automatisch send_message() triggeren met titel, type, prioriteit en een directe link naar het board.",
       "team_discussion": [
         {
@@ -61,14 +61,14 @@
         },
         {
           "from": "Yuki Tanaka",
-          "comment": "Telegram API is extern — zorg voor retry logic bij timeouts. Niet de hele story-flow blokkeren als Telegram even niet bereikbaar is."
+          "comment": "Telegram API is extern  -  zorg voor retry logic bij timeouts. Niet de hele story-flow blokkeren als Telegram even niet bereikbaar is."
         }
       ],
       "created": "2025-06-21T10:05:00Z",
       "updated": "2026-02-12T16:13:52Z",
       "reviewed_by": "Marcus de Groot",
       "reviewer_role": "Lead DevOps Engineer",
-      "review_comment": "Architecturaal solide, Jan-Willem. Mijn advies: implementeer een message queue pattern met een 60-seconden buffer zodat meerdere snelle wijzigingen in een samenvatting worden verzonden. Fire-and-forget voor de Telegram call zelf — het board mag nooit blokkeren op een notificatie."
+      "review_comment": "Architecturaal solide, Jan-Willem. Mijn advies: implementeer een message queue pattern met een 60-seconden buffer zodat meerdere snelle wijzigingen in een samenvatting worden verzonden. Fire-and-forget voor de Telegram call zelf  -  het board mag nooit blokkeren op een notificatie."
     },
     {
       "id": "story-003",
@@ -79,7 +79,7 @@
       "status": "review",
       "project": "OfferteRadar",
       "author": "Nina van den Berg",
-      "impact": "Betere previews op social media → hogere CTR vanuit TikTok/Instagram traffic. Direct effect op conversie.",
+      "impact": "Betere previews op social media -> hogere CTR vanuit TikTok/Instagram traffic. Direct effect op conversie.",
       "approach": "Toevoegen: og:title, og:description, og:image, og:url, twitter:card, twitter:title, twitter:description, twitter:image. Plus canonical URL en structured data (JSON-LD).",
       "team_discussion": [
         {
@@ -96,14 +96,14 @@
         },
         {
           "from": "Yuki Tanaka",
-          "comment": "GitHub Pages serveert automatisch met de juiste content-type headers. Geen infra actie nodig. Wel caching: GitHub Pages cached agressief — na deploy even purgen."
+          "comment": "GitHub Pages serveert automatisch met de juiste content-type headers. Geen infra actie nodig. Wel caching: GitHub Pages cached agressief  -  na deploy even purgen."
         }
       ],
       "created": "2025-06-21T10:10:00Z",
       "updated": "2026-02-12T16:13:52Z",
       "reviewed_by": "Jan-Willem Hofstra",
       "reviewer_role": "Infrastructure Architect",
-      "review_comment": "Quick win met grote impact. Maar denk ook aan performance: de og:image moet geoptimaliseerd zijn (max 300KB) en via een CDN geserved worden. Overweeg een build-time generated sitemap.xml in plaats van runtime — scheelt een server-side component."
+      "review_comment": "Quick win met grote impact. Maar denk ook aan performance: de og:image moet geoptimaliseerd zijn (max 300KB) en via een CDN geserved worden. Overweeg een build-time generated sitemap.xml in plaats van runtime  -  scheelt een server-side component."
     },
     {
       "id": "story-004",
@@ -138,7 +138,7 @@
       "updated": "2026-02-12T16:13:52Z",
       "reviewed_by": "Sofia Bakker",
       "reviewer_role": "DevSecOps Engineer",
-      "review_comment": "Dit is het kroonjuweel, maar de security-implicaties zijn groot. Een automatische scanner die code leest en wijzigingen voorstelt moet sandboxed draaien. Fase 1 moet secrets-detectie en dependency vulnerability scanning zijn — pas daarna feature suggestions. Security first, altijd."
+      "review_comment": "Dit is het kroonjuweel, maar de security-implicaties zijn groot. Een automatische scanner die code leest en wijzigingen voorstelt moet sandboxed draaien. Fase 1 moet secrets-detectie en dependency vulnerability scanning zijn  -  pas daarna feature suggestions. Security first, altijd."
     },
     {
       "id": "story-005",
@@ -162,18 +162,18 @@
         },
         {
           "from": "Sofia Bakker",
-          "comment": "Scan de HTML op XSS-kwetsbaarheden — stories bevatten user-generated content die in innerHTML terechtkomt."
+          "comment": "Scan de HTML op XSS-kwetsbaarheden  -  stories bevatten user-generated content die in innerHTML terechtkomt."
         },
         {
           "from": "Jan-Willem Hofstra",
-          "comment": "Houd de pipeline snel — onder de 2 minuten. Anders wordt het een bottleneck. Parallel runnen waar mogelijk."
+          "comment": "Houd de pipeline snel  -  onder de 2 minuten. Anders wordt het een bottleneck. Parallel runnen waar mogelijk."
         }
       ],
       "created": "2026-02-12T16:07:03Z",
       "updated": "2026-02-12T16:13:52Z",
       "reviewed_by": "Nina van den Berg",
       "reviewer_role": "Code Review Engineer",
-      "review_comment": "Goed initiatief van Marcus. Mijn prioriteit: begin met JSON schema validatie als eerste stap — dat is de meest impactvolle check voor de laagste effort. XSS-scanning (Sofia's punt) als tweede. Lighthouse audit is nice-to-have maar niet blokkerend. Houd de pipeline onder 2 minuten."
+      "review_comment": "Goed initiatief van Marcus. Mijn prioriteit: begin met JSON schema validatie als eerste stap  -  dat is de meest impactvolle check voor de laagste effort. XSS-scanning (Sofia's punt) als tweede. Lighthouse audit is nice-to-have maar niet blokkerend. Houd de pipeline onder 2 minuten."
     },
     {
       "id": "story-006",
@@ -208,7 +208,7 @@
       "updated": "2026-02-12T16:13:52Z",
       "reviewed_by": "Marcus de Groot",
       "reviewer_role": "Lead DevOps Engineer",
-      "review_comment": "Sofia heeft volledig gelijk — dit is de hoogste prioriteit. De combinatie van AI-gegenereerde content en innerHTML is een tikkende tijdbom. Ik stel voor dit als eerste story naar 'approved' te verplaatsen. DOMPurify + CSP headers + textContent waar mogelijk. Moet voor alle andere features gefixt zijn."
+      "review_comment": "Sofia heeft volledig gelijk  -  dit is de hoogste prioriteit. De combinatie van AI-gegenereerde content en innerHTML is een tikkende tijdbom. Ik stel voor dit als eerste story naar 'approved' te verplaatsen. DOMPurify + CSP headers + textContent waar mogelijk. Moet voor alle andere features gefixt zijn."
     }
   ]
 }
