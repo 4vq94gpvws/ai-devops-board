@@ -41,7 +41,21 @@
       "ai_review": "Essentieel voor een content-project dat traffic van social media moet trekken. Voeg ook een canonical URL toe.",
       "created": "2025-06-21T10:10:00Z",
       "updated": "2025-06-21T10:10:00Z"
+    },
+    {
+      "id": "story-8e147b8a",
+      "title": "AI Assistent: Projectenmap scanning voor automatische verbetervoorstellen",
+      "description": "Wanneer Enrico toegang geeft tot zijn projectenmap, moet de AI-assistent zelfstandig door de code kunnen lopen, zwaktes identificeren, en verbetervoorstellen als stories op het DevOps Board zetten.",
+      "type": "feature",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Assistent",
+      "impact": "Maakt de AI-assistent echt autonoom als DevOps team - pro-actief verbeteringen voorstellen zonder dat Enrico het hoeft te vragen.",
+      "approach": "1. Scan project directory recursief. 2. Analyseer code kwaliteit, security, performance. 3. Genereer stories met AI review via github_models_chat. 4. Push stories naar DevOps Board.",
+      "ai_review": "Cruciaal voor de DevOps-team ambitie. Start met basis checks (dependencies, security headers, SEO) en breid later uit met diepere code analyse.",
+      "created": "2026-02-12T15:47:00.912089Z",
+      "updated": "2026-02-12T15:47:00.912094Z"
     }
   ],
-  "updated": "2025-06-21T10:10:00Z"
+  "updated": "2026-02-12T15:47:00.912159Z"
 }
