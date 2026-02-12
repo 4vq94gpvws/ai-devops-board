@@ -209,6 +209,19 @@
       "reviewed_by": "Marcus de Groot",
       "reviewer_role": "Lead DevOps Engineer",
       "review_comment": "Sofia heeft volledig gelijk  -  dit is de hoogste prioriteit. De combinatie van AI-gegenereerde content en innerHTML is een tikkende tijdbom. Ik stel voor dit als eerste story naar 'approved' te verplaatsen. DOMPurify + CSP headers + textContent waar mogelijk. Moet voor alle andere features gefixt zijn."
+    },
+    {
+      "id": "story-f905",
+      "title": "CRUD functionaliteit voor stories in dashboard",
+      "description": "Enrico wil zelf stories kunnen aanmaken, wijzigen en verwijderen via het dashboard UI. Momenteel kan alleen de AI stories beheren via de API. Er moet een gebruiksvriendelijke interface komen met formulieren voor create/edit/delete.",
+      "status": "approved",
+      "priority": "high",
+      "story_type": "feature",
+      "project": "AI DevOps Dashboard",
+      "approach": "1. Add Story knop met modal/formulier (titel, beschrijving, prioriteit, status, project, type). 2. Edit knop per story card met zelfde formulier. 3. Delete knop met bevestigingsdialoog. 4. Alle acties via GitHub API (JSON in repo). 5. Responsive, past bij bestaande styling.",
+      "impact": "Enrico krijgt volledige controle over het board zonder afhankelijk te zijn van de AI-assistent. Essentieel voor dagelijks gebruik.",
+      "ai_review": "Marcus 🎯: Essentiële feature voor adoptie. Zonder dit is het board eenrichtingsverkeer. Prioriteit hoog — dit moet er snel in.",
+      "created": "2025-08-29T12:00:00Z"
     }
   ]
 }
