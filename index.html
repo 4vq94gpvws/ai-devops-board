@@ -869,6 +869,9 @@
             <button class="btn-refresh" onclick="loadStories()" title="Ververs">
                 <span id="refresh-icon">🔄</span> Refresh
             </button>
+            <button class="btn-refresh" onclick="resetToken()" title="Token resetten" style="margin-left:8px;font-size:0.85em;">
+                🔑 Reset Token
+            </button>
         </div>
     </div>
     
@@ -1047,6 +1050,14 @@
             }
         }
         
+        
+        function resetToken() {
+            if (confirm('Weet je zeker dat je de opgeslagen token wilt wissen? Je moet dan opnieuw je GitHub token invoeren.')) {
+                localStorage.removeItem('encrypted_github_token');
+                alert('✅ Token gewist. Bij de volgende actie wordt opnieuw gevraagd.');
+            }
+        }
+
         async function getToken() {
             // Check of er een encrypted token in localStorage staat
             const encryptedToken = localStorage.getItem('encrypted_github_token');
@@ -1063,11 +1074,30 @@
                 }
                 
                 const token = await decryptToken(encryptedToken, pwd);
-                if (!token) {
-                    alert('❌ Kon token niet ontsleutelen. Probeer opnieuw.');
+                if (!token || token.length < 10) {
+                    alert('❌ Kon token niet ontsleutelen. Token wordt gereset, probeer opnieuw.');
                     localStorage.removeItem('encrypted_github_token');
                     return null;
                 }
+                
+                // Valideer de token tegen GitHub API
+                try {
+                    const testResp = await fetch('https://api.github.com/user', {
+                        headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+                    });
+                    if (!testResp.ok) {
+                        const useAnyway = confirm('⚠️ Token lijkt ongeldig (GitHub geeft een fout).\n\nWil je de opgeslagen token wissen en opnieuw invoeren?');
+                        if (useAnyway) {
+                            localStorage.removeItem('encrypted_github_token');
+                            // Meteen opnieuw vragen
+                            return await getTokenFirstTime(pwd);
+                        }
+                        return null;
+                    }
+                } catch(e) {
+                    // Netwerk error, gebruik token toch
+                }
+                
                 return token;
             } else {
                 // Eerste keer: vraag wachtwoord + token
@@ -1080,15 +1110,36 @@
                     return null;
                 }
                 
-                const token = prompt('🔑 GitHub Token (eenmalig, wordt versleuteld opgeslagen):');
-                if (!token) return null;
-                
-                const encrypted = await encryptToken(token, pwd);
-                localStorage.setItem('encrypted_github_token', encrypted);
-                alert('✅ Token versleuteld opgeslagen! Volgende keer alleen wachtwoord nodig.');
-                return token;
+                return await getTokenFirstTime(pwd);
             }
         }
+        
+        async function getTokenFirstTime(pwd) {
+            const token = prompt('🔑 GitHub Token (eenmalig, wordt versleuteld opgeslagen):');
+            if (!token || token.trim().length < 10) {
+                alert('❌ Ongeldige token');
+                return null;
+            }
+            
+            // Valideer token eerst
+            try {
+                const testResp = await fetch('https://api.github.com/user', {
+                    headers: { 'Authorization': `Bearer ${token.trim()}`, 'Accept': 'application/vnd.github.v3+json' }
+                });
+                if (!testResp.ok) {
+                    alert('❌ Deze token werkt niet bij GitHub. Controleer of je token geldig is.');
+                    return null;
+                }
+            } catch(e) {
+                // Netwerk error, sla toch op
+            }
+            
+            const encrypted = await encryptToken(token.trim(), pwd);
+            localStorage.setItem('encrypted_github_token', encrypted);
+            alert('✅ Token gevalideerd en versleuteld opgeslagen! Volgende keer alleen wachtwoord nodig.');
+            return token.trim();
+        }
+
 
         // Stories laden vanuit GitHub
         async function loadStories() {
