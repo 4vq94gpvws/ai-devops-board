@@ -429,6 +429,222 @@
             .stats { flex-wrap: wrap; }
         }
 
+
+        /* CRUD Form Modal */
+        .form-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 200;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 40px;
+        }
+        .form-modal.active { display: flex; }
+        
+        .form-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 560px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 24px;
+        }
+        
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .form-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 10px 12px;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 2px rgba(88,166,255,0.2);
+        }
+        
+        .form-group textarea { min-height: 80px; resize: vertical; }
+        
+        .form-group select { cursor: pointer; }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .btn-form {
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        
+        .btn-form.cancel {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+        
+        .btn-form.cancel:hover {
+            color: var(--text-primary);
+        }
+        
+        .btn-form.save {
+            background: var(--accent-blue);
+            color: #fff;
+            border-color: var(--accent-blue);
+        }
+        
+        .btn-form.save:hover {
+            opacity: 0.9;
+        }
+        
+        .btn-add-story {
+            background: var(--accent-green);
+            border: none;
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        
+        .btn-add-story:hover {
+            opacity: 0.85;
+        }
+        
+        /* Edit/Delete buttons in story modal */
+        .modal-crud-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .btn-edit {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--accent-blue);
+            color: var(--accent-blue);
+            padding: 6px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        
+        .btn-edit:hover {
+            background: var(--accent-blue);
+            color: #fff;
+        }
+        
+        .btn-delete {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+            padding: 6px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        
+        .btn-delete:hover {
+            background: var(--accent-red);
+            color: #fff;
+        }
+        
+        /* Confirm dialog */
+        .confirm-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 300;
+            justify-content: center;
+            align-items: center;
+        }
+        .confirm-overlay.active { display: flex; }
+        
+        .confirm-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--accent-red);
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .confirm-box h3 {
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .confirm-box p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .confirm-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
         /* Refresh animation */
         .refreshing { opacity: 0.5; pointer-events: none; }
         
@@ -935,6 +1151,12 @@
                 actionsHTML = `<button class="btn btn-move" onclick="moveStory('review')">📋 Naar Review</button>`;
             }
             
+            actionsHTML += `
+                <div class="modal-crud-actions">
+                    <button class="btn-edit" onclick="openEditForm('${currentStory.id}')">✏️ Bewerken</button>
+                    <button class="btn-delete" onclick="requestDelete('${currentStory.id}')">🗑️ Verwijderen</button>
+                </div>
+            `;
             document.getElementById('modal-actions').innerHTML = actionsHTML;
             document.getElementById('modal-overlay').classList.add('active');
         }
@@ -969,8 +1191,212 @@
             arrow.innerHTML = section.classList.contains('open') ? '&#9650;' : '&#9660;';
         }
         
+
+        // ===== CRUD FUNCTIONS =====
+        let editingStoryId = null;
+        let deleteStoryId = null;
+        
+        function openCreateForm() {
+            editingStoryId = null;
+            document.getElementById('form-title').textContent = '➕ Nieuwe Story';
+            document.getElementById('form-story-id').value = '';
+            document.getElementById('form-story-title').value = '';
+            document.getElementById('form-story-desc').value = '';
+            document.getElementById('form-story-type').value = 'feature';
+            document.getElementById('form-story-priority').value = 'medium';
+            document.getElementById('form-story-status').value = 'backlog';
+            document.getElementById('form-story-project').value = 'AI Assistent';
+            document.getElementById('form-story-impact').value = '';
+            document.getElementById('form-story-approach').value = '';
+            document.getElementById('form-modal').classList.add('active');
+        }
+        
+        function openEditForm(id) {
+            const story = allStories.find(s => s.id === id);
+            if (!story) return;
+            
+            editingStoryId = id;
+            document.getElementById('form-title').textContent = '✏️ Story bewerken';
+            document.getElementById('form-story-id').value = id;
+            document.getElementById('form-story-title').value = story.title || '';
+            document.getElementById('form-story-desc').value = story.description || '';
+            document.getElementById('form-story-type').value = story.type || 'feature';
+            document.getElementById('form-story-priority').value = story.priority || 'medium';
+            document.getElementById('form-story-status').value = story.status || 'backlog';
+            document.getElementById('form-story-project').value = story.project || '';
+            document.getElementById('form-story-impact').value = story.impact || '';
+            document.getElementById('form-story-approach').value = story.approach || '';
+            
+            // Close detail modal first
+            document.getElementById('modal-overlay').classList.remove('active');
+            currentStory = null;
+            
+            document.getElementById('form-modal').classList.add('active');
+        }
+        
+        function closeForm() {
+            document.getElementById('form-modal').classList.remove('active');
+            editingStoryId = null;
+        }
+        
+        function generateStoryId() {
+            return 'story-' + Math.random().toString(36).substr(2, 4);
+        }
+        
+        async function saveStoryForm() {
+            const title = document.getElementById('form-story-title').value.trim();
+            if (!title) {
+                alert('Titel is verplicht!');
+                return;
+            }
+            
+            const storyData = {
+                title: title,
+                description: document.getElementById('form-story-desc').value.trim(),
+                type: document.getElementById('form-story-type').value,
+                priority: document.getElementById('form-story-priority').value,
+                status: document.getElementById('form-story-status').value,
+                project: document.getElementById('form-story-project').value.trim(),
+                impact: document.getElementById('form-story-impact').value.trim(),
+                approach: document.getElementById('form-story-approach').value.trim(),
+                updated: new Date().toISOString()
+            };
+            
+            if (editingStoryId) {
+                // Edit existing
+                const idx = allStories.findIndex(s => s.id === editingStoryId);
+                if (idx !== -1) {
+                    allStories[idx] = { ...allStories[idx], ...storyData };
+                }
+            } else {
+                // Create new
+                storyData.id = generateStoryId();
+                storyData.created = new Date().toISOString();
+                storyData.author = '👤 Enrico (handmatig)';
+                allStories.push(storyData);
+            }
+            
+            await saveStories();
+            closeForm();
+            renderBoard();
+        }
+        
+        function requestDelete(id) {
+            deleteStoryId = id;
+            const story = allStories.find(s => s.id === id);
+            document.getElementById('confirm-text').textContent = 
+                `Weet je zeker dat je "${story ? story.title : id}" wilt verwijderen? Dit kan niet ongedaan worden.`;
+            
+            // Close detail modal
+            document.getElementById('modal-overlay').classList.remove('active');
+            currentStory = null;
+            
+            document.getElementById('confirm-overlay').classList.add('active');
+        }
+        
+        function closeConfirm() {
+            document.getElementById('confirm-overlay').classList.remove('active');
+            deleteStoryId = null;
+        }
+        
+        async function confirmDelete() {
+            if (!deleteStoryId) return;
+            allStories = allStories.filter(s => s.id !== deleteStoryId);
+            await saveStories();
+            closeConfirm();
+            renderBoard();
+        }
+
         // Init
         loadStories();
     </script>
+
+    <!-- Create/Edit Story Form -->
+    <div class="form-modal" id="form-modal" onclick="if(event.target===this)closeForm()">
+        <div class="form-container">
+            <div class="form-header">
+                <h2 id="form-title">Nieuwe Story</h2>
+                <button class="modal-close" onclick="closeForm()">&times;</button>
+            </div>
+            <input type="hidden" id="form-story-id" value="">
+            
+            <div class="form-group">
+                <label>Titel *</label>
+                <input type="text" id="form-story-title" placeholder="Beschrijf de story...">
+            </div>
+            
+            <div class="form-group">
+                <label>Beschrijving</label>
+                <textarea id="form-story-desc" placeholder="Gedetailleerde beschrijving..."></textarea>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Type</label>
+                    <select id="form-story-type">
+                        <option value="feature">🚀 Feature</option>
+                        <option value="improvement">⚡ Improvement</option>
+                        <option value="bugfix">🐛 Bugfix</option>
+                        <option value="idea">💡 Idea</option>
+                        <option value="security">🔒 Security</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Prioriteit</label>
+                    <select id="form-story-priority">
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                        <option value="low">Low</option>
+                        <option value="critical">Critical</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="form-story-status">
+                        <option value="backlog">📥 Backlog</option>
+                        <option value="review">🔍 Review</option>
+                        <option value="approved">✅ Approved</option>
+                        <option value="in_progress">🔨 In Progress</option>
+                        <option value="done">🎉 Done</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Project</label>
+                    <input type="text" id="form-story-project" placeholder="bijv. AI Assistent" value="AI Assistent">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Impact</label>
+                <textarea id="form-story-impact" placeholder="Wat is de verwachte impact?" style="min-height:50px"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Aanpak</label>
+                <textarea id="form-story-approach" placeholder="Hoe pakken we dit aan?" style="min-height:50px"></textarea>
+            </div>
+            
+            <div class="form-actions">
+                <button class="btn-form cancel" onclick="closeForm()">Annuleren</button>
+                <button class="btn-form save" onclick="saveStoryForm()">💾 Opslaan</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Delete Confirm Dialog -->
+    <div class="confirm-overlay" id="confirm-overlay" onclick="if(event.target===this)closeConfirm()">
+        <div class="confirm-box">
+            <h3>⚠️ Story verwijderen?</h3>
+            <p id="confirm-text">Weet je zeker dat je deze story wilt verwijderen? Dit kan niet ongedaan worden.</p>
+            <div class="confirm-actions">
+                <button class="btn-form cancel" onclick="closeConfirm()">Annuleren</button>
+                <button class="btn-form save" style="background:var(--accent-red);border-color:var(--accent-red)" onclick="confirmDelete()">🗑️ Verwijderen</button>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
