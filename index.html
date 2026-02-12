@@ -162,6 +162,59 @@
             gap: 8px;
         }
         
+        .card-author {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .team-discussion {
+            margin-top: 12px;
+        }
+        
+        .team-comment {
+            background: var(--bg-tertiary);
+            border-left: 3px solid var(--accent-blue);
+            border-radius: 0 6px 6px 0;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+        }
+        
+        .team-comment-author {
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--accent-blue);
+            margin-bottom: 4px;
+        }
+        
+        .team-comment-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        .team-comment:nth-child(2) { border-left-color: var(--accent-green); }
+        .team-comment:nth-child(2) .team-comment-author { color: var(--accent-green); }
+        .team-comment:nth-child(3) { border-left-color: var(--accent-purple); }
+        .team-comment:nth-child(3) .team-comment-author { color: var(--accent-purple); }
+        .team-comment:nth-child(4) { border-left-color: #f0883e; }
+        .team-comment:nth-child(4) .team-comment-author { color: #f0883e; }
+        
+        .story-author-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 13px;
+            color: var(--accent-blue);
+            font-weight: 500;
+        }
+        
         /* Cards */
         .card {
             background: var(--bg-secondary);
@@ -594,6 +647,7 @@
                             <span class="tag priority-${story.priority}">${story.priority}</span>
                             <span class="card-project">${story.project || ''}</span>
                         </div>
+                        ${story.author ? '<div class="card-author">' + story.author + '</div>' : ''}
                     </div>
                 `).join('');
             });
@@ -657,6 +711,28 @@
                             <p>${currentStory.ai_review}</p>
                         </div>
                     </div>`;
+            }
+            
+            // Author badge
+            if (currentStory.author) {
+                bodyHTML += `
+                    <div class="modal-section">
+                        <h3>Voorgesteld door</h3>
+                        <div class="story-author-badge">${currentStory.author}</div>
+                    </div>`;
+            }
+            
+            // Team discussion
+            if (currentStory.team_discussion && currentStory.team_discussion.length > 0) {
+                bodyHTML += `<div class="modal-section"><h3>💬 Team Discussie</h3><div class="team-discussion">`;
+                currentStory.team_discussion.forEach(comment => {
+                    bodyHTML += `
+                        <div class="team-comment">
+                            <div class="team-comment-author">${comment.from}</div>
+                            <div class="team-comment-text">${comment.comment}</div>
+                        </div>`;
+                });
+                bodyHTML += `</div></div>`;
             }
             
             bodyHTML += `

@@ -2,60 +2,201 @@
   "stories": [
     {
       "id": "story-001",
-      "title": "DevOps Board: Drag & drop support toevoegen",
-      "description": "Stories moeten met drag & drop tussen kolommen verplaatst kunnen worden, naast de huidige button-flow.",
+      "title": "DevOps Board: Drag & Drop support toevoegen",
+      "description": "Het board zou drag & drop moeten ondersteunen zodat stories sneller tussen kolommen verplaatst kunnen worden. Dit vervangt niet de knoppen, maar voegt een extra interactiemethode toe.",
       "type": "feature",
       "priority": "medium",
       "status": "review",
       "project": "AI DevOps Board",
-      "impact": "Verbetert de UX aanzienlijk - snellere workflow voor Enrico bij het reviewen van stories.",
-      "approach": "HTML5 Drag and Drop API gebruiken. dragstart/dragover/drop events op cards en columns.",
-      "ai_review": "Goed idee voor UX. Overweeg ook touch support voor mobiel (touch events of een library als SortableJS).",
+      "author": "Marcus de Groot 🎯",
+      "impact": "Snellere workflow voor Enrico. Minder clicks, meer flow. Vooral bij grotere boards met 10+ stories wordt dit cruciaal.",
+      "approach": "HTML5 Drag and Drop API met dragstart/dragover/drop events. Visuele feedback met CSS transitions. Touch events voor mobiel via pointer events API.",
+      "team_discussion": [
+        {
+          "from": "Nina van den Berg 🔍",
+          "comment": "Zorg voor goede accessibility — screen readers moeten de status-wijziging ook meekrijgen. Voeg ARIA live regions toe."
+        },
+        {
+          "from": "Yuki Tanaka 🐳",
+          "comment": "Geen infra impact. Puur frontend. 👍"
+        },
+        {
+          "from": "Sofia Bakker 🛡️",
+          "comment": "Let op dat drag & drop events geen onbedoelde state mutations triggeren. Valideer server-side dat de statusovergang geldig is (bijv. geen skip van 'review' naar 'done')."
+        },
+        {
+          "from": "Jan-Willem Hofstra 🏗️",
+          "comment": "Overweeg een optimistic UI update met rollback bij API fout. Houdt het responsive."
+        }
+      ],
+      "ai_review": "Team unaniem positief. Nina's punt over accessibility is belangrijk — toevoegen aan acceptance criteria. Sofia's validatie-punt is terecht: bouw een state machine voor geldige overgangen.",
       "created": "2025-06-21T10:00:00Z",
-      "updated": "2025-06-21T10:00:00Z"
+      "updated": "2026-02-12T16:07:03Z"
     },
     {
       "id": "story-002",
-      "title": "Telegram notificatie bij nieuwe story",
-      "description": "Als de AI-assistent een nieuwe story aanmaakt op het board, krijgt Enrico automatisch een Telegram alert met titel en korte beschrijving.",
+      "title": "Telegram notificatie bij nieuwe story op het board",
+      "description": "Wanneer de AI-assistent een nieuwe story aanmaakt, krijgt Enrico automatisch een Telegram alert. Zo hoeft hij niet steeds het board te checken.",
       "type": "feature",
       "priority": "high",
       "status": "review",
       "project": "AI Assistent",
-      "impact": "Enrico hoeft niet steeds het board te checken - wordt proactief ge\u00efnformeerd over nieuwe voorstellen.",
-      "approach": "Na devops_board_add_story() automatisch send_message() aanroepen vanuit de AI-assistent flow.",
-      "ai_review": "Logische next step. Houd de notificatie kort: titel + type + link naar board. Niet elk detail in het bericht.",
+      "author": "Jan-Willem Hofstra 🏗️",
+      "impact": "Enrico wordt proactief geïnformeerd. Cruciaal voor de 'AI als DevOps team'-visie — het team rapporteert aan de teamlead (Enrico).",
+      "approach": "Na elke devops_board_add_story() call automatisch send_message() triggeren met titel, type, prioriteit en een directe link naar het board.",
+      "team_discussion": [
+        {
+          "from": "Marcus de Groot 🎯",
+          "comment": "Goed idee, maar bouw throttling in. Als ik 5 stories tegelijk genereer wil je niet 5 losse berichten. Bundel ze in 1 digest als ze binnen 60 seconden vallen."
+        },
+        {
+          "from": "Nina van den Berg 🔍",
+          "comment": "Het bericht-format moet consistent zijn. Maak een template: emoji + type + titel + 1-liner impact."
+        },
+        {
+          "from": "Sofia Bakker 🛡️",
+          "comment": "Geen security risico zolang we geen gevoelige code-snippets in het Telegram bericht stoppen. Alleen metadata."
+        },
+        {
+          "from": "Yuki Tanaka 🐳",
+          "comment": "Telegram API is extern — zorg voor retry logic bij timeouts. Niet de hele story-flow blokkeren als Telegram even niet bereikbaar is."
+        }
+      ],
+      "ai_review": "Marcus' throttling-idee is slim. Implementeer een 60-seconden buffer: verzamel stories, stuur dan 1 samenvatting. Yuki's punt over error handling is essentieel — fire-and-forget pattern gebruiken.",
       "created": "2025-06-21T10:05:00Z",
-      "updated": "2025-06-21T10:05:00Z"
+      "updated": "2026-02-12T16:07:03Z"
     },
     {
       "id": "story-003",
-      "title": "OfferteRadar: SEO meta tags toevoegen",
-      "description": "De OfferteRadar website mist Open Graph en Twitter Card meta tags. Dit is essentieel voor social media sharing (TikTok bio link, Instagram bio).",
+      "title": "OfferteRadar: SEO & Social Media meta tags",
+      "description": "De OfferteRadar website mist Open Graph, Twitter Card en standaard SEO meta tags. Essentieel voor social media sharing vanuit TikTok bio en Instagram link.",
       "type": "improvement",
       "priority": "high",
       "status": "review",
       "project": "OfferteRadar",
-      "impact": "Betere previews bij het delen op social media \u2192 meer clicks vanuit TikTok/Instagram traffic.",
-      "approach": "og:title, og:description, og:image, twitter:card meta tags toevoegen aan de HTML head.",
-      "ai_review": "Essentieel voor een content-project dat traffic van social media moet trekken. Voeg ook een canonical URL toe.",
+      "author": "Nina van den Berg 🔍",
+      "impact": "Betere previews op social media → hogere CTR vanuit TikTok/Instagram traffic. Direct effect op conversie.",
+      "approach": "Toevoegen: og:title, og:description, og:image, og:url, twitter:card, twitter:title, twitter:description, twitter:image. Plus canonical URL en structured data (JSON-LD).",
+      "team_discussion": [
+        {
+          "from": "Marcus de Groot 🎯",
+          "comment": "Voeg ook een sitemap.xml en robots.txt toe als die er nog niet zijn. Kost 5 minuten extra en is gratis SEO."
+        },
+        {
+          "from": "Jan-Willem Hofstra 🏗️",
+          "comment": "Voor de og:image: gebruik een dedicated social preview image (1200x630px). Niet de favicon of een random screenshot."
+        },
+        {
+          "from": "Sofia Bakker 🛡️",
+          "comment": "Check of er geen gevoelige info in de meta description lekt. En voeg een Content-Security-Policy header toe als dat nog niet gedaan is."
+        },
+        {
+          "from": "Yuki Tanaka 🐳",
+          "comment": "GitHub Pages serveert automatisch met de juiste content-type headers. Geen infra actie nodig. Wel caching: GitHub Pages cached agressief — na deploy even purgen."
+        }
+      ],
+      "ai_review": "Quick win met hoge impact. Marcus' sitemap-suggestie meenemen. Jan-Willem's punt over de og:image is cruciaal — een 1200x630 branded image genereren met ComfyUI zou mooi zijn.",
       "created": "2025-06-21T10:10:00Z",
-      "updated": "2025-06-21T10:10:00Z"
+      "updated": "2026-02-12T16:07:03Z"
     },
     {
-      "id": "story-8e147b8a",
-      "title": "AI Assistent: Projectenmap scanning voor automatische verbetervoorstellen",
-      "description": "Wanneer Enrico toegang geeft tot zijn projectenmap, moet de AI-assistent zelfstandig door de code kunnen lopen, zwaktes identificeren, en verbetervoorstellen als stories op het DevOps Board zetten.",
+      "id": "story-004",
+      "title": "AI Assistent: Automatische projectscan & verbetervoorstellen",
+      "description": "De AI-assistent scant zelfstandig door Enrico's projectcode, identificeert zwaktes, en maakt stories aan op het DevOps Board. Het volledige team (alle 5 personas) reviewt elke bevinding voordat het op het board komt.",
       "type": "feature",
       "priority": "high",
       "status": "review",
       "project": "AI Assistent",
-      "impact": "Maakt de AI-assistent echt autonoom als DevOps team - pro-actief verbeteringen voorstellen zonder dat Enrico het hoeft te vragen.",
-      "approach": "1. Scan project directory recursief. 2. Analyseer code kwaliteit, security, performance. 3. Genereer stories met AI review via github_models_chat. 4. Push stories naar DevOps Board.",
-      "ai_review": "Cruciaal voor de DevOps-team ambitie. Start met basis checks (dependencies, security headers, SEO) en breid later uit met diepere code analyse.",
-      "created": "2026-02-12T15:47:00.912089Z",
-      "updated": "2026-02-12T15:47:00.912094Z"
+      "author": "Marcus de Groot 🎯",
+      "impact": "Dit is de kern-feature van het AI DevOps Team concept. Maakt de assistent proactief in plaats van reactief.",
+      "approach": "1. Scan projectenmap (wanneer toegang gegeven). 2. Elk bestand door Claude analyseren vanuit alle 5 perspectieven. 3. Bevindingen bundelen per categorie (security, performance, architecture, code quality, containers). 4. Stories genereren met team-discussie. 5. GPT-4.1 als second opinion.",
+      "team_discussion": [
+        {
+          "from": "Nina van den Berg 🔍",
+          "comment": "Begin met een prioriteitsmatrix: eerst security issues, dan architectuur, dan code quality. Niet alles tegelijk dumpen op het board."
+        },
+        {
+          "from": "Yuki Tanaka 🐳",
+          "comment": "Check Dockerfiles en docker-compose bestanden op best practices: multi-stage builds, non-root users, .dockerignore, health checks."
+        },
+        {
+          "from": "Sofia Bakker 🛡️",
+          "comment": "Scan op hardcoded secrets (API keys, passwords), OWASP Top 10 patronen, en dependency vulnerabilities. Dit heeft de hoogste prioriteit."
+        },
+        {
+          "from": "Jan-Willem Hofstra 🏗️",
+          "comment": "Analyseer de architectuur-structuur: is er separation of concerns? Zijn er single points of failure? Hoe zit het met schaalbaarheid?"
+        }
+      ],
+      "ai_review": "Dit is het flagship feature. Sofia's security-first aanpak is juist — begin met een secrets-scan en vulnerability check. Dan Nina's prioriteitsmatrix volgen. Faseer de implementatie: Phase 1 = security scan, Phase 2 = code quality, Phase 3 = architectuur.",
+      "created": "2025-06-21T10:15:00Z",
+      "updated": "2026-02-12T16:07:03Z"
+    },
+    {
+      "id": "story-005",
+      "title": "CI/CD Pipeline: Automatische tests bij board-wijzigingen",
+      "description": "Bij elke push naar de ai-devops-board repo zou een GitHub Actions workflow moeten draaien die de JSON structuur valideert, links checkt en een lighthouse audit doet op de dashboard HTML.",
+      "type": "feature",
+      "priority": "medium",
+      "status": "review",
+      "project": "AI DevOps Board",
+      "author": "Marcus de Groot 🎯",
+      "impact": "Vangt fouten vroegtijdig op. Voorkomt dat een kapotte stories.json het hele dashboard breekt.",
+      "approach": "GitHub Actions workflow met 3 stappen: 1) JSON schema validatie, 2) HTML/CSS lint, 3) Lighthouse performance audit. Resultaten als comment op de commit.",
+      "team_discussion": [
+        {
+          "from": "Nina van den Berg 🔍",
+          "comment": "Voeg ook een check toe dat elke story een uniek ID heeft en dat verplichte velden (title, type, status) aanwezig zijn."
+        },
+        {
+          "from": "Yuki Tanaka 🐳",
+          "comment": "Run de tests in een container voor reproduceerbare results. Een simpele node:alpine image is voldoende."
+        },
+        {
+          "from": "Sofia Bakker 🛡️",
+          "comment": "Scan de HTML op XSS-kwetsbaarheden — stories bevatten user-generated content die in innerHTML terechtkomt."
+        },
+        {
+          "from": "Jan-Willem Hofstra 🏗️",
+          "comment": "Houd de pipeline snel — onder de 2 minuten. Anders wordt het een bottleneck. Parallel runnen waar mogelijk."
+        }
+      ],
+      "ai_review": "Goed voorstel van Marcus. Sofia's XSS-punt is kritiek — de stories worden door AI gegenereerd maar escaping is alsnog noodzakelijk. Nina's schema validatie is de eerste prioriteit: vang structurele fouten op voor deployment.",
+      "created": "2026-02-12T16:07:03Z",
+      "updated": "2026-02-12T16:07:03Z"
+    },
+    {
+      "id": "story-006",
+      "title": "Security Audit: Content Security Policy & input sanitization",
+      "description": "Het DevOps Board dashboard laadt data dynamisch en rendert het in de DOM. Er is momenteel geen Content Security Policy header en story-content wordt niet gesanitized tegen XSS.",
+      "type": "security",
+      "priority": "urgent",
+      "status": "review",
+      "project": "AI DevOps Board",
+      "author": "Sofia Bakker 🛡️",
+      "impact": "Zonder sanitization kan een kwaadaardige story-title of description JavaScript injecteren. Urgente fix nodig.",
+      "approach": "1. DOMPurify library toevoegen voor HTML sanitization. 2. CSP meta tag: script-src 'self'; style-src 'self' 'unsafe-inline'. 3. Alle innerHTML vervangen door textContent waar mogelijk. 4. Story velden escapen voor ze gerenderd worden.",
+      "team_discussion": [
+        {
+          "from": "Marcus de Groot 🎯",
+          "comment": "Eens, urgente prioriteit. Dit moet voor alle andere features gefixt worden. Security first."
+        },
+        {
+          "from": "Nina van den Berg 🔍",
+          "comment": "Gebruik textContent in plaats van innerHTML voor alle tekstvelden. innerHTML alleen voor bewust gemarkeerde rich-text velden met DOMPurify."
+        },
+        {
+          "from": "Yuki Tanaka 🐳",
+          "comment": "GitHub Pages stuurt standaard geen custom headers mee, dus CSP moet via <meta> tag. Dat is minder sterk dan een echte header maar beter dan niets."
+        },
+        {
+          "from": "Jan-Willem Hofstra 🏗️",
+          "comment": "Op termijn migreren naar een framework met built-in escaping (React, Vue). Voor nu is DOMPurify de pragmatische keuze."
+        }
+      ],
+      "ai_review": "Sofia heeft gelijk — dit is urgent. De combinatie van AI-gegenereerde content + innerHTML is een risico. Fix: 1) textContent overal, 2) DOMPurify voor rich velden, 3) CSP meta tag. Moet vóór nieuwe features geïmplementeerd worden.",
+      "created": "2026-02-12T16:07:03Z",
+      "updated": "2026-02-12T16:07:03Z"
     }
-  ],
-  "updated": "2026-02-12T15:47:00.912159Z"
+  ]
 }
