@@ -351,7 +351,23 @@
       "team_discussion": [],
       "created": "2026-02-13T22:00:28Z",
       "updated": "2026-02-13T22:00:28Z"
+    },
+    {
+      "id": "story-013",
+      "title": "AI Portal: Backend Integratie (Story 7)",
+      "description": "Als developer wil ik een backend die de bestaande services koppelt: simple-chat → GitHub Models API, agent-chat → Claude Agent SDK pipeline, widgets → bestaande MCP tools (calendar, tasks, inbox, etc.). Alles draait in Docker, lokaal gehost.",
+      "type": "feature",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "De lijm tussen frontend en alle bestaande services — cruciaal voor het functioneren van het hele portal.",
+      "approach": "FastAPI als API gateway. Docker container met Dockerfile. Routes: /api/chat/simple (GitHub Models), /api/chat/agent (Claude pipeline), /api/widgets/* (proxy naar MCP tools). Docker-compose integratie met bestaande stack. Reverse proxy (nginx) voor routing.",
+      "ai_review": "",
+      "team_discussion": [],
+      "created": "2026-02-13T22:00:32Z",
+      "updated": "2026-02-13T22:00:32Z"
     }
   ],
-  "updated": "2026-02-13T22:00:28Z"
+  "updated": "2026-02-13T22:00:32Z"
 }
