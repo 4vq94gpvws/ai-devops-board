@@ -262,7 +262,7 @@
       "description": "Web-portal opzetten met React+Vite frontend en FastAPI backend. Gebruikersauthenticatie met login/registratie, JWT tokens en rolgebaseerde toegang (simple-chat vs agent).",
       "type": "feature",
       "priority": "high",
-      "status": "approved",
+      "status": "in_progress",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "",
@@ -270,7 +270,7 @@
       "ai_review": "Lead review door Marcus de Groot: GOEDGEKEURD. Dit is de absolute basis - zonder auth geen portal. Prioriteit 1. JWT + bcrypt + Nginx is een bewezen stack. Sofia's security eisen (CSRF, lockout, audit log) meenemen als must-haves, niet als nice-to-haves.",
       "team_discussion": [],
       "created": "2026-02-13T22:44:15Z",
-      "updated": "2026-02-13T22:59:04.649Z"
+      "updated": "2026-02-13T23:01:47Z"
     },
     {
       "id": "story-008",
@@ -369,5 +369,5 @@
       "updated": "2026-02-13T23:00:13.752Z"
     }
   ],
-  "updated": "2026-02-13T23:00:13.752Z"
+  "updated": "2026-02-13T23:01:47Z"
 }
