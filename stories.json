@@ -271,7 +271,23 @@
       "team_discussion": [],
       "created": "2026-02-13T22:00:07Z",
       "updated": "2026-02-13T22:00:07Z"
+    },
+    {
+      "id": "story-008",
+      "title": "AI Portal: Chat UI (Story 2)",
+      "description": "Als gebruiker wil ik een mooie chat-interface in Lovable-stijl, met streaming responses, markdown rendering, code highlighting en chat-geschiedenis. De UI moet responsive zijn en werken op desktop en mobiel.",
+      "type": "feature",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "Kernfunctionaliteit — de primaire interactie van gebruikers met het systeem.",
+      "approach": "React component met Server-Sent Events (SSE) voor streaming. Markdown via react-markdown + syntax highlighting. Chat history opslag in backend. Lovable-stijl design met Tailwind CSS.",
+      "ai_review": "",
+      "team_discussion": [],
+      "created": "2026-02-13T22:00:11Z",
+      "updated": "2026-02-13T22:00:11Z"
     }
   ],
-  "updated": "2026-02-13T22:00:07Z"
+  "updated": "2026-02-13T22:00:11Z"
 }
