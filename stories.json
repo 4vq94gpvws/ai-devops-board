@@ -330,11 +330,11 @@
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Unieke feature — transparantie over wat de agent doet, vergelijkbaar met Lovable's live preview.",
-      "approach": "noVNC iframe embed via reverse proxy (nginx/traefik) naar poort 6080. Rolcheck in frontend + backend. WebSocket proxy configuratie. Security: alleen authenticated users met power-rol krijgen toegang.",
-      "ai_review": "",
+      "approach": "## Story 5: Sandbox Live-View — Team Review\n\n### 🎯 Marcus de Groot (Lead)\n**Aanpak:** noVNC embed in een iframe, alleen voor power users. Verkeer via reverse proxy (niet direct naar poort 6080).\n\n**Twee weergave-opties:**\n1. Dedicated `/sandbox` pagina met full-screen noVNC\n2. Als widget op het dashboard (resizable panel)\n**Keuze:** Beide. Widget voor quick view, dedicated pagina voor full interaction.\n\n### 🏗️ Jan-Willem Hofstra (Infrastructure)\n**Proxy setup:**\n```\n[Browser] → [Nginx /sandbox/vnc/] → [noVNC container :6080]\n```\n- Nginx reverse proxy config:\n  ```nginx\n  location /sandbox/vnc/ {\n      proxy_pass http://novnc:6080/;\n      proxy_http_version 1.1;\n      proxy_set_header Upgrade $upgrade_type;\n      proxy_set_header Connection \"upgrade\";\n      proxy_set_header Host $host;\n  }\n  ```\n- WebSocket upgrade nodig voor VNC protocol\n- noVNC client files served via de proxy\n\n**Belangrijk:** De `novnc` container moet op hetzelfde Docker network zitten.\n\n### 🛡️ Sofia Bakker (Security)\n**Kritieke security punten:**\n- ⚠️ noVNC geeft volledige browser-control → ALLEEN power users\n- Auth check in Nginx: valideer JWT cookie/header voordat proxy doorlaat\n- Optie: Lua module in Nginx of auth_request naar FastAPI\n- CSP header: `frame-src 'self'` om clickjacking te voorkomen\n- Idle timeout: sluit VNC sessie na 30 min inactiviteit\n- Geen directe poort 6080 naar buiten (alleen via Nginx proxy)\n\n### 🐳 Yuki Tanaka (Containers)\n- noVNC container draait al (poort 6080 intern)\n- Portal container moet op hetzelfde Docker network\n- Nginx config toevoegen aan portal container\n- docker-compose: geen `ports: \"6080:6080\"` meer nodig (alleen intern)\n\n### 🔍 Nina van den Berg (Code Quality)\n**Acceptatiecriteria:**\n1. ✅ noVNC iframe laadt in sandbox pagina\n2. ✅ Alleen zichtbaar voor power users\n3. ✅ Niet-power users krijgen \"Geen toegang\" melding\n4. ✅ WebSocket verbinding werkt via reverse proxy\n5. ✅ Responsive: iframe schaalt mee met viewport\n6. ✅ Loading state terwijl VNC verbinding opbouwt\n7. ✅ Widget versie op dashboard (compact view)\n\n### 🔬 Daan Vermeer (Research)\n**Spike:** Test noVNC embed via reverse proxy:\n- Werkt WebSocket upgrade correct via Nginx?\n- Latency overhead van proxy?\n- Kan noVNC `autoconnect=true&resize=scale` params gebruiken?\n- Test URL: `/sandbox/vnc/vnc.html?autoconnect=true&resize=scale`\n\nVerwacht geen grote issues — noVNC via Nginx proxy is een bewezen pattern.",
+      "ai_review": "✅ Team-reviewed. Security is het belangrijkste aandachtspunt (Sofia's punten). Afhankelijk van Story 1 (auth/rollen). Geschatte effort: 2 dagen.",
       "team_discussion": [],
       "created": "2026-02-13T22:00:24Z",
-      "updated": "2026-02-13T22:00:24Z"
+      "updated": "2026-02-13T22:03:32Z"
     },
     {
       "id": "story-012",
@@ -369,5 +369,5 @@
       "updated": "2026-02-13T22:00:32Z"
     }
   ],
-  "updated": "2026-02-13T22:03:13Z"
+  "updated": "2026-02-13T22:03:32Z"
 }
