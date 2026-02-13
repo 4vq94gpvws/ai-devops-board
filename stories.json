@@ -287,7 +287,23 @@
       "team_discussion": [],
       "created": "2026-02-13T22:44:36Z",
       "updated": "2026-02-13T22:44:36Z"
+    },
+    {
+      "id": "story-009",
+      "title": "AI Portal: Agent Integratie (Claude + MCP Tools)",
+      "description": "De chat koppelen aan de bestaande Claude Agent backend via OpenWebUI API. Rolgebaseerd: simple-chat users krijgen alleen basis chat, admin users krijgen volledige agent met MCP tools.",
+      "type": "feature",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "",
+      "approach": "TECHNISCHE AANPAK:\n- Backend proxy: FastAPI endpoint die requests doorstuurt naar OpenWebUI API\n- Simple-chat route: /api/chat -> alleen tekst LLM (GPT-4.1 via GitHub Models)\n- Agent route: /api/agent -> volledige Claude agent met MCP tools via OpenWebUI\n- Auth check: JWT token bevat rol, backend controleert of user agent-toegang heeft\n- Streaming: SSE doorsturen van OpenWebUI response naar portal frontend\n- Rate limiting: per user, per endpoint (simple-chat: 50/uur, agent: 20/uur)\n\nTEAM DISCUSSIE:\n\nNina van den Berg (Code Review):\nDe proxy-laag moet minimaal zijn - geen business logica in de proxy, alleen auth check en doorsturen. Gebruik httpx.AsyncClient met streaming voor de doorverbinding naar OpenWebUI. Timeout instellen op 120 seconden voor agent calls (die kunnen lang duren met tool gebruik).\n\nSofia Bakker (Security):\nDe OpenWebUI API key mag NOOIT naar de frontend lekken. Die blijft server-side in de FastAPI backend. Input sanitization op user messages voordat ze doorgestuurd worden. Log alle agent-interacties voor audit (wie gebruikt welke tools). Rate limiting per user is essentieel - agent calls zijn duur.\n\nYuki Tanaka (Containers):\nDe portal-backend container heeft netwerktoegang nodig tot de OpenWebUI container. In docker-compose: zelfde netwerk, referentie via service naam (http://openwebui:8080). Geen extra poorten openzetten naar buiten. Health check toevoegen die de OpenWebUI connectie test.\n\nMarcus de Groot (Lead):\nDit is de kernwaarde van de portal - het verschil met OpenWebUI zelf is de gescheiden toegang. Simple-chat zonder tools voor gasten, volledige agent voor Enrico. Afhankelijk van story-007 (Auth) en story-008 (Chat UI).",
+      "ai_review": "Lead review door Marcus de Groot: GOEDGEKEURD. Kritisch pad - dit maakt of breekt de portal. Sofia's punt over API key isolatie is een harde eis. Yuki's container networking advies volgen. Effort: 2-3 dagen na Auth en Chat UI.",
+      "team_discussion": [],
+      "created": "2026-02-13T22:44:54Z",
+      "updated": "2026-02-13T22:44:54Z"
     }
   ],
-  "updated": "2026-02-13T22:44:36Z"
+  "updated": "2026-02-13T22:44:54Z"
 }
