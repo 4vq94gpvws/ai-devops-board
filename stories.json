@@ -302,7 +302,7 @@
       "ai_review": "Geschatte effort: 2-3 dagen. Afhankelijk van story 1, 2 en 7. Risico: OpenWebUI streaming format kan veranderen tussen versies. Mitigatie: abstractie laag in backend die het format parsed. Test met echte MCP tool calls.",
       "team_discussion": [],
       "created": "2026-02-13T22:00:16Z",
-      "updated": "2026-02-13T22:24:59Z"
+      "updated": "2026-02-13T22:42:28Z"
     },
     {
       "id": "story-010",
@@ -369,5 +369,5 @@
       "updated": "2026-02-13T22:24:01Z"
     }
   ],
-  "updated": "2026-02-13T22:26:00Z"
+  "updated": "2026-02-13T22:42:28Z"
 }
