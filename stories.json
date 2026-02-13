@@ -298,11 +298,11 @@
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Differentieert het portal van een simpele chatbot — geeft power users volledige agent-capabilities.",
-      "approach": "Backend routing op basis van user rol: simple-chat → GitHub Models API (GPT-4.1-mini), agent-chat → Claude Agent SDK pipeline. Proxy endpoints in FastAPI. Rolcheck middleware.",
-      "ai_review": "",
+      "approach": "## Story 3: Agent Integratie — Team Review\n\n### 🎯 Marcus de Groot (Lead)\n**Aanpak:** De Claude Agent pipeline (MCP tools) moet aangestuurd worden vanuit het portal. Dit is het meest complexe deel — de agent heeft toegang tot tools, kennisbank, browser, etc.\n\n**Twee opties onderzocht:**\n1. **Direct:** Portal → FastAPI → Claude Agent SDK (nieuwe instantie)\n2. **Via OpenWebUI:** Portal → FastAPI → OpenWebUI API → Claude pipe\n\n**Keuze: Optie 2 (via OpenWebUI)** — OpenWebUI heeft al de pipe-infrastructure, tool routing, en conversation management. We hoeven het wiel niet opnieuw uit te vinden.\n\n### 🏗️ Jan-Willem Hofstra (Infrastructure)\n**Flow:**\n```\n[Portal Chat UI] → POST /api/chat/agent\n    → [FastAPI] auth check (power user?)\n    → [OpenWebUI API] /api/chat/completions\n        → [Claude Pipe] → MCP tools, kennisbank, browser, etc.\n    → SSE stream terug naar Portal\n```\n- OpenWebUI API key nodig: `OPENWEBUI_API_TOKEN`\n- Model ID van de Claude pipe doorgeven\n- Conversation ID management in FastAPI\n\n### 🛡️ Sofia Bakker (Security)\n- Agent-chat is power-user only (strengste rolcheck)\n- OpenWebUI API token NIET exposed naar frontend\n- Tool-calls tonen in UI, maar geen interne URLs/tokens\n- Audit log: wie gebruikt de agent, wanneer (voor later)\n\n### 🐳 Yuki Tanaka (Containers)\n- Geen nieuwe container, maar portal moet op Docker network zitten met OpenWebUI\n- Network alias `openwebui` moet bereikbaar zijn vanuit portal container\n- Env var: `OPENWEBUI_URL=http://openwebui:8080`\n\n### 🔍 Nina van den Berg (Code Quality)\n**Acceptatiecriteria:**\n1. ✅ Power users kunnen agent-mode selecteren in chat\n2. ✅ Agent responses streamen real-time\n3. ✅ Tool-calls worden visueel getoond (bijv. \"🔍 Zoeken op internet...\")\n4. ✅ Afbeeldingen/screenshots van tools worden inline getoond\n5. ✅ Errors worden netjes afgehandeld (agent timeout, tool failure)\n6. ✅ Conversation context blijft behouden binnen een sessie\n7. ✅ Simple users zien agent-optie NIET\n\n### 🔬 Daan Vermeer (Research)\n**Spike nodig:** Test de OpenWebUI `/api/chat/completions` endpoint:\n- Ondersteunt het streaming?\n- Hoe worden tool-calls teruggegeven in de stream?\n- Wat is het response format voor afbeeldingen/screenshots?\n- Kan conversation history meegegeven worden?\n\nDit is de belangrijkste spike voor het hele project. Voorstel: 1 dag spike, documenteer het API contract.",
+      "ai_review": "✅ Team-reviewed. Kritiek pad — afhankelijk van Story 1+2. Spike nodig voor OpenWebUI API contract. Geschatte effort: 3-4 dagen (excl. spike).",
       "team_discussion": [],
       "created": "2026-02-13T22:00:16Z",
-      "updated": "2026-02-13T22:00:16Z"
+      "updated": "2026-02-13T22:02:57Z"
     },
     {
       "id": "story-010",
@@ -369,5 +369,5 @@
       "updated": "2026-02-13T22:00:32Z"
     }
   ],
-  "updated": "2026-02-13T22:02:38Z"
+  "updated": "2026-02-13T22:02:57Z"
 }
