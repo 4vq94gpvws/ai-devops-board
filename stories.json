@@ -287,7 +287,23 @@
       "team_discussion": [],
       "created": "2026-02-13T22:00:11Z",
       "updated": "2026-02-13T22:00:11Z"
+    },
+    {
+      "id": "story-009",
+      "title": "AI Portal: Agent Integratie (Story 3)",
+      "description": "Als power user wil ik via de chat-UI toegang tot de volledige Claude-agent met MCP tools, zodat ik taken kan uitvoeren zoals internet zoeken, kennisbank raadplegen, code uitvoeren, etc. Simple-chat users krijgen alleen GitHub Models (GPT-4.1).",
+      "type": "feature",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "Differentieert het portal van een simpele chatbot — geeft power users volledige agent-capabilities.",
+      "approach": "Backend routing op basis van user rol: simple-chat → GitHub Models API (GPT-4.1-mini), agent-chat → Claude Agent SDK pipeline. Proxy endpoints in FastAPI. Rolcheck middleware.",
+      "ai_review": "",
+      "team_discussion": [],
+      "created": "2026-02-13T22:00:16Z",
+      "updated": "2026-02-13T22:00:16Z"
     }
   ],
-  "updated": "2026-02-13T22:00:11Z"
+  "updated": "2026-02-13T22:00:16Z"
 }
