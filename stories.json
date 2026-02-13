@@ -310,7 +310,7 @@
       "description": "Hoofdpagina na login met widgets die Enrico zelf kan kiezen en rangschikken. Widgets voor weer, agenda, taken, nieuwsoverzicht, snelkoppelingen naar tools.",
       "type": "feature",
       "priority": "medium",
-      "status": "review",
+      "status": "approved",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "",
@@ -318,7 +318,7 @@
       "ai_review": "Lead review door Marcus de Groot: GOEDGEKEURD met opmerking. Lagere prioriteit dan Auth/Chat/Agent. Start met vaste widgets, voeg drag-and-drop later toe. react-grid-layout is een goede keuze op advies van Daan. Effort: 2-3 dagen.",
       "team_discussion": [],
       "created": "2026-02-13T22:45:15Z",
-      "updated": "2026-02-13T22:45:15Z"
+      "updated": "2026-02-13T22:59:59.352Z"
     },
     {
       "id": "story-011",
@@ -369,5 +369,5 @@
       "updated": "2026-02-13T22:46:16Z"
     }
   ],
-  "updated": "2026-02-13T22:59:55.936Z"
+  "updated": "2026-02-13T22:59:59.352Z"
 }
