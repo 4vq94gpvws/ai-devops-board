@@ -255,7 +255,23 @@
       "estimated_effort": "3-5 dagen",
       "created": "2026-02-12T19:08:52Z",
       "updated": "2026-02-12T20:27:28Z"
+    },
+    {
+      "id": "story-007",
+      "title": "AI Portal: Basisportal + Auth (Story 1)",
+      "description": "Als gebruiker wil ik kunnen inloggen op het AI-portal met gebruikersnaam/wachtwoord, zodat mijn sessie en rol worden herkend. Inclusief: login-pagina, JWT-sessie, rol-toewijzing (simple-chat vs power/agent), beschermde routes.",
+      "type": "feature",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "Fundament van het hele portal — zonder auth kunnen andere stories niet functioneren.",
+      "approach": "FastAPI backend met JWT auth, SQLite/PostgreSQL user store, bcrypt password hashing. Frontend login form in React/Vite. Middleware voor rolcheck op beschermde routes.",
+      "ai_review": "",
+      "team_discussion": [],
+      "created": "2026-02-13T22:00:07Z",
+      "updated": "2026-02-13T22:00:07Z"
     }
   ],
-  "updated": "2026-02-12T20:27:28Z"
+  "updated": "2026-02-13T22:00:07Z"
 }
