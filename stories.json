@@ -335,7 +335,23 @@
       "team_discussion": [],
       "created": "2026-02-13T22:00:24Z",
       "updated": "2026-02-13T22:00:24Z"
+    },
+    {
+      "id": "story-012",
+      "title": "AI Portal: Lovable-stijl Styling (Story 6)",
+      "description": "Als gebruiker wil ik een moderne, rustige UI die lijkt op Lovable: cards met zachte schaduwen, afgeronde hoeken, clean typografie, responsive design. Light/dark thema als nice-to-have.",
+      "type": "improvement",
+      "priority": "medium",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "Bepaalt de look & feel en professionele uitstraling van het hele portal.",
+      "approach": "Tailwind CSS met custom design tokens (kleuren, spacing, border-radius). Component library opzetten met consistente styling. Referentie: Lovable.dev UI patterns. Optioneel: CSS custom properties voor theme switching.",
+      "ai_review": "",
+      "team_discussion": [],
+      "created": "2026-02-13T22:00:28Z",
+      "updated": "2026-02-13T22:00:28Z"
     }
   ],
-  "updated": "2026-02-13T22:00:24Z"
+  "updated": "2026-02-13T22:00:28Z"
 }
