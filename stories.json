@@ -278,7 +278,7 @@
       "description": "Chat interface bouwen in Lovable-stijl met real-time streaming responses, markdown rendering, conversation history en een clean modern design.",
       "type": "feature",
       "priority": "high",
-      "status": "review",
+      "status": "approved",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "",
@@ -286,7 +286,7 @@
       "ai_review": "Lead review door Marcus de Groot: GOEDGEKEURD. Afhankelijk van story-007 (Auth). SSE streaming is de juiste keuze. Jan-Willems punt over Nginx buffering is kritisch - dat als eerste testen. Daan's design research geeft een helder richtpunt voor de UI.",
       "team_discussion": [],
       "created": "2026-02-13T22:44:36Z",
-      "updated": "2026-02-13T22:44:36Z"
+      "updated": "2026-02-13T22:59:50.587Z"
     },
     {
       "id": "story-009",
@@ -369,5 +369,5 @@
       "updated": "2026-02-13T22:46:16Z"
     }
   ],
-  "updated": "2026-02-13T22:59:21.359Z"
+  "updated": "2026-02-13T22:59:50.587Z"
 }
