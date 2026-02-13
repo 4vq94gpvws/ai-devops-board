@@ -303,7 +303,23 @@
       "team_discussion": [],
       "created": "2026-02-13T22:00:16Z",
       "updated": "2026-02-13T22:00:16Z"
+    },
+    {
+      "id": "story-010",
+      "title": "AI Portal: Dashboard Widgets (Story 4)",
+      "description": "Als gebruiker wil ik een customizebare hoofdpagina met widgets: agenda, taken, inbox samenvatting, recente activiteit, snelkoppelingen. Widgets zijn configureerbaar per gebruiker/rol.",
+      "type": "feature",
+      "priority": "medium",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "Maakt het portal bruikbaar als dagelijks dashboard naast de chat-functionaliteit.",
+      "approach": "Widget-grid layout (CSS Grid/react-grid-layout). Elke widget haalt data via bestaande MCP tools/API's (get_calendar_events, get_tasks, get_inbox_summary, get_recent_activity). Widget configuratie per user opgeslagen in backend.",
+      "ai_review": "",
+      "team_discussion": [],
+      "created": "2026-02-13T22:00:20Z",
+      "updated": "2026-02-13T22:00:20Z"
     }
   ],
-  "updated": "2026-02-13T22:00:16Z"
+  "updated": "2026-02-13T22:00:20Z"
 }
