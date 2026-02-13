@@ -266,11 +266,11 @@
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Fundament van het hele portal — zonder auth kunnen andere stories niet functioneren.",
-      "approach": "FastAPI backend met JWT auth, SQLite/PostgreSQL user store, bcrypt password hashing. Frontend login form in React/Vite. Middleware voor rolcheck op beschermde routes.",
-      "ai_review": "",
+      "approach": "## Story 1: Basisportal + Auth — Team Review\n\n### 🎯 Marcus de Groot (Lead)\n**Aanpak:** React + Vite als frontend framework. FastAPI als BFF (Backend-for-Frontend) die als reverse proxy en auth-gateway fungeert. Alles in één nieuwe Docker container.\n\n**Tech stack keuze:**\n- Frontend: React 18 + Vite + TypeScript + TailwindCSS\n- Auth: JWT tokens via FastAPI backend, bcrypt password hashing\n- Database: SQLite (users tabel) — lightweight, geen extra container\n- Reverse proxy: Nginx in dezelfde container als entrypoint\n\n**Fasering:** Dit is story 1, dus het fundament. Eerst werkende auth, dan pas de rest.\n\n### 🏗️ Jan-Willem Hofstra (Infrastructure)\n**Architectuur:**\n```\n[Browser] → [Nginx :3000] → [React SPA]\n                           → [FastAPI /api/*]\n                              → [OpenWebUI :8080]\n                              → [Claude Agent]\n                              → [Jupyter :8888]\n                              → [noVNC :6080]\n```\n- Nginx dient de React build uit en proxied /api/* naar FastAPI\n- FastAPI handelt auth af en proxied door naar backend services\n- Eén `docker-compose.yml` entry: `ai-portal`\n- Persistent volume voor SQLite DB: `/data/portal.db`\n\n### 🛡️ Sofia Bakker (Security)\n**Auth requirements:**\n- JWT access tokens (15 min expiry) + refresh tokens (7 dagen)\n- Passwords: bcrypt met cost factor 12\n- CORS: strict, alleen eigen origin\n- Rate limiting op login endpoint: max 5 pogingen per minuut\n- Rollen in JWT payload: `role: \"simple\" | \"power\"`\n- Geen plaintext passwords in logs\n- HttpOnly cookies voor refresh token\n\n### 🐳 Yuki Tanaka (Containers)\n**Dockerfile strategie:**\n- Multi-stage build: Node (build React) → Python (FastAPI) → Nginx (serve)\n- Of simpeler: Node build stage, dan Python + Nginx in final stage\n- Health check: `/api/health` endpoint\n- Environment vars: `JWT_SECRET`, `ADMIN_PASSWORD` (via .env)\n\n### 🔍 Nina van den Berg (Code Quality)\n**Acceptatiecriteria:**\n1. ✅ Login pagina met email/wachtwoord\n2. ✅ JWT token wordt opgeslagen en meegestuurd bij API calls\n3. ✅ Twee rollen: simple-chat en power-user\n4. ✅ Niet-ingelogde users worden redirect naar /login\n5. ✅ Power-user features zijn niet zichtbaar voor simple users\n6. ✅ Logout knop werkt en cleared tokens\n7. ✅ Rate limiting op login endpoint\n8. ✅ Unit tests voor auth flow\n\n### 🔬 Daan Vermeer (Research)\n**Spike needed:** Geen grote spikes nodig. FastAPI + JWT is proven stack. Enige aandachtspunt: hoe users aanmaken? Voorstel: CLI command of admin-only /api/users endpoint (alleen voor power users).",
+      "ai_review": "✅ Team-reviewed. Alle 6 teamleden akkoord. Hoge prioriteit, fundament voor alle andere stories. Geschatte effort: 2-3 dagen.",
       "team_discussion": [],
       "created": "2026-02-13T22:00:07Z",
-      "updated": "2026-02-13T22:00:07Z"
+      "updated": "2026-02-13T22:02:22Z"
     },
     {
       "id": "story-008",
@@ -369,5 +369,5 @@
       "updated": "2026-02-13T22:00:32Z"
     }
   ],
-  "updated": "2026-02-13T22:00:32Z"
+  "updated": "2026-02-13T22:02:22Z"
 }
