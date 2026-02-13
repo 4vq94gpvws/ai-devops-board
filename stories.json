@@ -346,11 +346,11 @@
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Bepaalt de look & feel en professionele uitstraling van het hele portal.",
-      "approach": "Tailwind CSS met custom design tokens (kleuren, spacing, border-radius). Component library opzetten met consistente styling. Referentie: Lovable.dev UI patterns. Optioneel: CSS custom properties voor theme switching.",
-      "ai_review": "",
+      "approach": "## Story 6: Lovable-stijl Styling — Team Review\n\n### 🎯 Marcus de Groot (Lead)\n**Aanpak:** Dit is een cross-cutting concern — styling wordt PARALLEL aan alle andere stories gebouwd, niet sequentieel. Design system eerst, dan toepassen.\n\n**Design system componenten:**\n1. Color palette (light theme, dark theme later)\n2. Typography scale (Inter of Geist font)\n3. Spacing/sizing tokens\n4. Component library: Button, Input, Card, Modal, Badge, Avatar, Skeleton\n5. Layout components: Sidebar, Header, Main, Grid\n\n### 🏗️ Jan-Willem Hofstra (Infrastructure)\n**TailwindCSS config:**\n```js\n// tailwind.config.js\ntheme: {\n  extend: {\n    colors: {\n      primary: { 50: '...', 500: '...', 900: '...' },\n      surface: { light: '#ffffff', dark: '#0a0a0a' },\n      border: { light: '#e5e5e5', dark: '#262626' },\n    },\n    fontFamily: {\n      sans: ['Inter', 'system-ui', 'sans-serif'],\n      mono: ['JetBrains Mono', 'monospace'],\n    },\n    borderRadius: {\n      'card': '12px',\n      'button': '8px',\n      'input': '8px',\n    },\n    boxShadow: {\n      'card': '0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)',\n      'card-hover': '0 4px 12px rgba(0,0,0,0.1)',\n    }\n  }\n}\n```\n\n### 🛡️ Sofia Bakker (Security)\n- Geen security concerns voor styling\n- Wel: geen user-generated CSS (XSS vector)\n\n### 🐳 Yuki Tanaka (Containers)\n- Fonts via CDN of lokaal bundelen (beter voor offline/lokaal)\n- Font files in `/public/fonts/`, referenced in CSS\n\n### 🔍 Nina van den Berg (Code Quality)\n**Acceptatiecriteria:**\n1. ✅ Consistent design system met tokens (colors, spacing, typography)\n2. ✅ Alle componenten gebruiken design tokens (geen hardcoded kleuren)\n3. ✅ Cards met subtiele schaduwen en rounded corners\n4. ✅ Smooth transitions/animations (hover, focus, page transitions)\n5. ✅ Responsive op alle breakpoints\n6. ✅ Accessibility: focus visible, contrast ratio ≥ 4.5:1\n7. ✅ Loading states met skeleton screens\n8. ✅ Lovable-achtige look: clean, ruimtelijk, modern\n\n### 🔬 Daan Vermeer (Research)\n**Referentie-analyse Lovable.dev:**\n- Kleurenpalet: wit/lichtgrijs achtergrond, paarse accenten, subtiele borders\n- Cards: grote border-radius (12-16px), lichte schaduwen\n- Typography: clean sans-serif, goede hiërarchie\n- Animaties: subtiele fade-in, smooth hover transitions\n- Layout: veel whitespace, centered content, max-width containers\n\n**Font keuze:** Inter (gratis, uitstekende leesbaarheid, Lovable gebruikt het ook)",
+      "ai_review": "✅ Team-reviewed. Cross-cutting concern — wordt parallel aan andere stories opgepakt. Design system eerst opzetten, dan toepassen. Geschatte effort: 2 dagen voor design system, doorlopend voor toepassing.",
       "team_discussion": [],
       "created": "2026-02-13T22:00:28Z",
-      "updated": "2026-02-13T22:00:28Z"
+      "updated": "2026-02-13T22:03:48Z"
     },
     {
       "id": "story-013",
@@ -369,5 +369,5 @@
       "updated": "2026-02-13T22:00:32Z"
     }
   ],
-  "updated": "2026-02-13T22:03:32Z"
+  "updated": "2026-02-13T22:03:48Z"
 }
