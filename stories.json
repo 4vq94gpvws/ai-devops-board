@@ -351,7 +351,23 @@
       "team_discussion": [],
       "created": "2026-02-13T22:45:54Z",
       "updated": "2026-02-13T22:45:54Z"
+    },
+    {
+      "id": "story-013",
+      "title": "AI Portal: Backend Integratie (Docker + Nginx + Services)",
+      "description": "Alle services aan elkaar knopen via Docker Compose en Nginx. Portal containers toevoegen aan de bestaande stack, routing configureren, environment variables beheren, health checks instellen.",
+      "type": "feature",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "",
+      "approach": "TECHNISCHE AANPAK:\n- Docker Compose: portal-frontend en portal-backend containers toevoegen aan bestaande stack\n- Nginx: reverse proxy configuratie voor alle routes\n  - / naar portal-frontend (React)\n  - /api/* naar portal-backend (FastAPI)\n  - /openwebui/* naar OpenWebUI (bestaand)\n  - /vnc/* naar noVNC (poort 6080)\n- Environment: .env bestand met alle configuratie (JWT secret, API keys, ports)\n- Health checks: elke service krijgt een /health endpoint\n- Volumes: persistent storage voor SQLite database en user uploads\n- Netwerk: alle containers op hetzelfde Docker netwerk\n\nTEAM DISCUSSIE:\n\nYuki Tanaka (Containers):\nNieuwe docker-compose.portal.yml die extend doet op de bestaande docker-compose.yml. Zo blijft de huidige setup intact en kun je de portal apart starten of stoppen. Multi-stage Dockerfile voor de React frontend: build stage met Node, serve stage met Nginx. Backend: slim Python image met alleen de benodigde dependencies.\n\nJan-Willem Hofstra (Infrastructure):\nNginx configuratie is het zenuwcentrum. Gebruik upstream blocks voor elke service. WebSocket support nodig voor VNC (proxy_set_header Upgrade). SSL termination voorbereiden in de config maar nog niet activeren (dat komt bij eigen domein). Logging per upstream voor debugging.\n\nSofia Bakker (Security):\nAlle inter-container communicatie via intern Docker netwerk, geen poorten naar buiten behalve Nginx (80/443) en VNC (6080). JWT_SECRET als Docker secret, niet als environment variable in de compose file. .env file met restrictieve permissions (chmod 600). Geen default passwords in de codebase.\n\nMarcus de Groot (Lead):\nDit is de lijm-story. Kan deels parallel met de andere stories, maar de finale integratie test moet als laatste. Yuki's advies voor een aparte compose file is slim - voorkomt dat we de werkende stack breken.",
+      "ai_review": "Lead review door Marcus de Groot: GOEDGEKEURD. Integratie-story die alle andere stories verbindt. Begin vroeg met de Nginx config en Docker setup zodat andere stories daar tegenaan kunnen ontwikkelen. Yuki's aparte compose file aanpak voorkomt risico voor de huidige werkende stack. Effort: 2-3 dagen, deels parallel met andere stories.",
+      "team_discussion": [],
+      "created": "2026-02-13T22:46:16Z",
+      "updated": "2026-02-13T22:46:16Z"
     }
   ],
-  "updated": "2026-02-13T22:45:54Z"
+  "updated": "2026-02-13T22:46:16Z"
 }
