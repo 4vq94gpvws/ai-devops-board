@@ -319,7 +319,23 @@
       "team_discussion": [],
       "created": "2026-02-13T22:45:15Z",
       "updated": "2026-02-13T22:45:15Z"
+    },
+    {
+      "id": "story-011",
+      "title": "AI Portal: Sandbox Live-View (Browser Preview)",
+      "description": "Inline browser preview in de portal zodat Enrico live kan meekijken wanneer de agent websites bezoekt, formulieren invult of CAPTCHA's tegenkomt. Gebaseerd op de bestaande noVNC setup op poort 6080.",
+      "type": "feature",
+      "priority": "medium",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "",
+      "approach": "TECHNISCHE AANPAK:\n- noVNC embed: iframe naar de bestaande VNC server (poort 6080)\n- Toggle: knop in de chat UI om live-view panel te openen/sluiten\n- Layout: split-screen - chat links, live-view rechts (resizable)\n- Auto-open: wanneer agent een browser actie uitvoert, automatisch live-view tonen\n- Fallback: als VNC niet bereikbaar, toon melding met directe link\n\nTEAM DISCUSSIE:\n\nYuki Tanaka (Containers):\nDe noVNC server draait al op poort 6080. Voor de portal moet die poort bereikbaar zijn vanuit de browser van de gebruiker - dat is een client-side verbinding, geen server-side. Dus poort 6080 moet open blijven op de host. De iframe src wordt http://[server-ip]:6080/vnc.html met autoconnect parameter.\n\nSofia Bakker (Security):\nnoVNC over een onversleutelde verbinding is een risico op een netwerk. Voor lokaal gebruik (LAN) is het acceptabel. Bij toekomstig eigen domein: VNC achter de Nginx reverse proxy zetten met WSS (WebSocket Secure). Voorlopig: alleen toegankelijk voor admin rol users.\n\nNina van den Berg (Code Review):\nDe iframe communicatie is beperkt door same-origin policy. Geen directe JS interactie mogelijk tussen portal en VNC iframe, en dat is ook niet nodig. Zorg voor een clean loading state terwijl de VNC verbinding opbouwt. ResizeObserver gebruiken voor het responsive split-panel.\n\nMarcus de Groot (Lead):\nCool feature maar niet essentieel voor MVP. De huidige directe VNC link werkt ook. Implementeer dit als laatste van de 7 stories.",
+      "ai_review": "Lead review door Marcus de Groot: GOEDGEKEURD als nice-to-have. Laagste prioriteit van alle stories. De directe VNC link (http://192.168.0.116:6080) werkt nu al. Deze story voegt convenience toe door het in de portal te embedden. Effort: 1-2 dagen. Sofia's punt over WSS bij eigen domein noteren voor later.",
+      "team_discussion": [],
+      "created": "2026-02-13T22:45:32Z",
+      "updated": "2026-02-13T22:45:32Z"
     }
   ],
-  "updated": "2026-02-13T22:45:15Z"
+  "updated": "2026-02-13T22:45:32Z"
 }
