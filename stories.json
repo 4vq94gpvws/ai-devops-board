@@ -1009,10 +1009,34 @@
       "impact": "Maakt het portal geschikt voor complexere projecten met meerdere bestanden. Geeft een echte IDE-ervaring die Lovable kenmerkt. Zonder file explorer is multi-file generatie onoverzichtelijk.",
       "approach": "1) Tree component met iconen per bestandstype (HTML, CSS, JS, JSON, IMG). 2) Collapsible folders met smooth animatie. 3) Active state highlight voor geopend bestand. 4) Integreer links in het rechter panel (boven de code viewer). 5) Bestanden worden gepopuleerd vanuit AI responses die meerdere code blocks bevatten. 6) Context menu: Download, Copy path, Delete. 7) Drag & drop reordering (nice-to-have).",
       "ai_review": "File explorer completeert de IDE-ervaring. In combinatie met split-pane en code viewer wordt het portal een volwaardige AI workspace vergelijkbaar met Lovable.",
-      "team_discussion": [],
+      "team_discussion": [
+        {
+          "from": "Jan-Willem Hofstra",
+          "role": "Infrastructure Architect",
+          "comment": "De file tree moet een virtueel bestandssysteem zijn — een in-memory JSON structuur, geen echte filesystem calls. Structuur: {name, type: 'file'|'folder', children?, content?}. Dit maakt het makkelijk om bestanden toe te voegen vanuit AI responses en later te exporteren als ZIP.",
+          "emoji": "🏗️"
+        },
+        {
+          "from": "Nina van den Berg",
+          "role": "Code Review Engineer",
+          "comment": "Houd de tree component recursief maar simpel. Maximaal 3 niveaus diep voor v1. Iconen per type: 📄 HTML, 🎨 CSS, ⚡ JS, 📋 JSON, 🖼️ Images. Active file moet visueel duidelijk highlighted zijn. Keyboard navigatie met pijltjestoetsen is een must voor accessibility.",
+          "emoji": "🔍"
+        },
+        {
+          "from": "Sofia Bakker",
+          "role": "DevSecOps Engineer",
+          "comment": "De Download/Export functionaliteit moet content sanitizen voordat het als bestand wordt aangeboden. Voorkom XSS via gegenereerde HTML bestanden die direct geopend worden. Gebruik Blob URLs met juiste MIME types en revoke ze na download.",
+          "emoji": "🛡️"
+        }
+      ],
       "created": "2026-02-14T11:45:54Z",
-      "updated": "2026-02-14T11:45:54Z"
+      "updated": "2026-02-14T11:46:34Z",
+      "reviewed_by": "Jan-Willem Hofstra",
+      "reviewer_role": "Infrastructure Architect",
+      "complexity": "Medium",
+      "estimated_effort": "2 dagen",
+      "review_requested": true
     }
   ],
-  "updated": "2026-02-14T11:46:26Z"
+  "updated": "2026-02-14T11:46:34Z"
 }
