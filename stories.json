@@ -30,7 +30,7 @@
         }
       ],
       "created": "2025-06-21T10:00:00Z",
-      "updated": "2026-02-12T16:27:30Z",
+      "updated": "2026-02-14T10:02:09Z",
       "reviewed_by": "Nina van den Berg",
       "reviewer_role": "Code Review Engineer",
       "review_comment": "Sterk voorstel. De HTML5 Drag and Drop API is de juiste keuze, maar vergeet niet een fallback te bouwen voor browsers zonder volledige pointer events support. Mijn voorstel: schrijf eerst unit tests voor de state transitions voordat je aan de UI begint - zo vang je edge cases vroeg op.",
@@ -856,5 +856,5 @@
       "review_requested": true
     }
   ],
-  "updated": "2026-02-14T09:58:39.654Z"
+  "updated": "2026-02-14T10:02:09Z"
 }
