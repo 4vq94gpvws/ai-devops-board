@@ -877,7 +877,7 @@
       "description": "Implementeer een resizable split-pane workspace layout zoals Lovable.dev. Links het chatvenster/conversation panel, rechts een live preview van gegenereerde content (sandbox iframe). De gebruiker kan de verdeling aanpassen door de divider te slepen. Op mobile collapse naar tabbed view (Chat / Preview tabs). Dit is het kernkenmerk van Lovable's interface en het grootste verschil met ons huidige portal.",
       "type": "feature",
       "priority": "high",
-      "status": "review",
+      "status": "approved",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Transformeert het portal van een chat-app naar een echte AI workspace. Gebruikers zien direct het resultaat naast hun conversatie, precies zoals Lovable.dev. Dit is de #1 feature die het Lovable-gevoel geeft.",
@@ -910,7 +910,7 @@
         }
       ],
       "created": "2026-02-14T11:45:14Z",
-      "updated": "2026-02-14T11:46:10Z",
+      "updated": "2026-02-14T11:49:49.413Z",
       "reviewed_by": "Marcus de Groot",
       "reviewer_role": "Lead DevOps Engineer",
       "complexity": "Hoog",
@@ -1038,5 +1038,5 @@
       "review_requested": true
     }
   ],
-  "updated": "2026-02-14T11:46:34Z"
+  "updated": "2026-02-14T11:49:52.564Z"
 }
