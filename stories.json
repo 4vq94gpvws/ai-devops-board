@@ -410,11 +410,11 @@
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Micro-animaties geven de portal een premium gevoel. Het verschil tussen 'ziet er goed uit' en 'voelt geweldig'.",
-      "approach": "1) CSS transitions op alle interactieve elementen (200-300ms ease), 2) Staggered entrance animaties voor dashboard widgets, 3) Theme transition met crossfade, 4) Skeleton loading states, 5) Elevation system (3 niveaus shadows), 6) Focus-visible styling voor accessibility",
-      "ai_review": "Visual polish is wat een Lovable-achtige ervaring onderscheidt van een standaard dashboard. Relatief weinig effort, groot effect.",
+      "approach": "Pure CSS + minimal JS: 1) Skeleton loading states voor alle content areas, 2) Hover/focus micro-animaties (scale, glow, color transitions), 3) Page transition animaties, 4) Dark/light mode toggle verbeteren met smooth transitions. Geen externe animation libraries.\n\nTEAM REVIEW:\nreviewed_by: Jan-Willem Hofstra\nreviewer_role: Infrastructure Architect\nreview_comment: Visuele polish is wat het verschil maakt tussen een prototype en een product. De skeleton loaders zijn het belangrijkst — ze geven de gebruiker feedback dat er iets gebeurt. Hou de animaties subtiel: max 200ms voor micro-interactions, 300ms voor page transitions. Alles via CSS transitions/animations, geen JavaScript-driven animaties — dat is beter voor performance en battery life op mobiel.\n\nteam_discussion:\n- Nina van den Berg 🔍 (Code Review): \"Gebruik CSS custom properties voor alle timing values (--transition-fast: 150ms, --transition-normal: 300ms) zodat we het overal consistent houden. Voeg prefers-reduced-motion media query toe voor gebruikers die geen animaties willen.\"\n- Marcus de Groot 🎯 (Lead DevOps): \"Goed dat er geen externe dependencies bij komen. Ik zou dit combineren met story-014 in één sprint — de animaties en touch improvements versterken elkaar. Plan het als laatste zodat de functionaliteit eerst staat.\"\n- Sofia Bakker 🛡️ (DevSecOps): \"Vanuit security geen bezwaren. Wel een tip: gebruik will-change sparingly op geanimeerde elementen — te veel will-change vreet geheugen op mobile devices.\"",
+      "ai_review": "Visual polish die de portal een professionele, afgewerkte uitstraling geeft. Nice-to-have maar maakt groot verschil in user experience.",
       "team_discussion": [],
       "created": "2026-02-14T08:46:26Z",
-      "updated": "2026-02-14T08:46:26Z"
+      "updated": "2026-02-14T09:08:47Z"
     },
     {
       "id": "story-017",
@@ -433,5 +433,5 @@
       "updated": "2026-02-14T08:46:32Z"
     }
   ],
-  "updated": "2026-02-14T09:08:35Z"
+  "updated": "2026-02-14T09:08:47Z"
 }
