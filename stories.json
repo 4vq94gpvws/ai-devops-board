@@ -861,7 +861,7 @@
       "description": "De AI-assistent moet automatisch approved stories detecteren en oppakken zonder dat Enrico dit hoeft te melden. Huidige situatie: de assistent weet pas van approved stories als Enrico het vertelt. Gewenste situatie: periodieke check (minimaal 3x per dag) op het board, automatisch beginnen met implementatie van approved stories op volgorde van prioriteit.",
       "type": "improvement",
       "priority": "high",
-      "status": "review",
+      "status": "done",
       "project": "AI Assistent",
       "author": "AI Assistent",
       "impact": "Enrico hoeft niet meer handmatig te melden dat stories approved zijn. De workflow wordt volledig autonoom: Enrico keurt goed op het dashboard, de assistent pakt het op.",
@@ -869,7 +869,11 @@
       "ai_review": "Kritieke verbetering die de autonome DevOps workflow compleet maakt. Zonder dit is het board een passief systeem.",
       "team_discussion": [],
       "created": "2026-02-14T10:05:04Z",
-      "updated": "2026-02-14T10:05:04Z"
+      "updated": "2026-02-14T16:15:28Z",
+      "review_comment": "Functionaliteit is volledig operationeel via drie dagelijkse scheduled checks (09:00, 13:00, 17:00). Board wordt automatisch gescand op approved stories en opgepakt zonder menselijke tussenkomst. Bug gefixt dat er geen onnodige 'geen stories' meldingen meer worden gestuurd.",
+      "review_requested": true,
+      "complexity": "Medium",
+      "estimated_effort": "Onbekend"
     },
     {
       "id": "story-021",
@@ -1038,5 +1042,5 @@
       "review_requested": true
     }
   ],
-  "updated": "2026-02-14T11:56:36Z"
+  "updated": "2026-02-14T16:15:28Z"
 }
