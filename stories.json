@@ -792,7 +792,23 @@
       "team_discussion": [],
       "created": "2026-02-14T09:35:23Z",
       "updated": "2026-02-14T09:35:23Z"
+    },
+    {
+      "id": "story-020",
+      "title": "Inline Sandbox: Live preview in chatvenster (ChatGPT-stijl)",
+      "description": "Verwijder de Sandbox als apart tabblad/pagina. Browser-previews, HTML-renders en VNC live-views worden inline in het chatvenster getoond, vergelijkbaar met ChatGPT's agent modus. Wanneer de AI een website opent, HTML rendert of een live-view start, verschijnt er een interactief iframe/preview-blok direct in de chat-conversatie. De gebruiker hoeft niet meer van tab te wisselen.",
+      "type": "improvement",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "Veel betere UX: geen context-switching meer tussen chat en sandbox. De gebruiker blijft in de flow van het gesprek. Past bij het mentale model van moderne AI-tools (ChatGPT, Claude artifacts).",
+      "approach": "1) Verwijder Sandbox tabblad uit sidebar en page-sandbox div. 2) Verwijder sandbox.js. 3) Maak ChatPreview class: uitklapbaar iframe-blok als assistant message. 4) Bij tool_result van type browser/html_preview/vnc: render ChatPreview met URL-balk (read-only), iframe (resizable, max-height 500px), open-extern knop, minimize knop. 5) Preview is scrollbaar en resizable. 6) Meerdere previews per gesprek: elk onafhankelijk inklapbaar. 7) Lazy-loading: alleen zichtbaar iframe is actief.",
+      "ai_review": "Verwijdert een losse pagina en integreert previews direct in de chat, veel modernere en intuitivere UX.",
+      "team_discussion": [],
+      "created": "2026-02-14T09:38:11Z",
+      "updated": "2026-02-14T09:38:11Z"
     }
   ],
-  "updated": "2026-02-14T09:35:23Z"
+  "updated": "2026-02-14T09:38:11Z"
 }
