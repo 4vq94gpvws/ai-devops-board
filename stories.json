@@ -772,10 +772,41 @@
       "author": "AI Assistent",
       "impact": "Veel betere UX: geen context-switching meer tussen chat en sandbox. De gebruiker blijft in de flow van het gesprek. Past bij het mentale model van moderne AI-tools (ChatGPT, Claude artifacts).",
       "approach": "1) Verwijder het Sandbox tabblad uit de sidebar navigatie en de page-sandbox div uit index.html. 2) Verwijder sandbox.js als apart bestand. 3) Maak een nieuwe chat-inline component: ChatPreview — een uitklapbaar iframe-blok dat als 'assistant message' in de chat wordt gerenderd. 4) Wanneer Agent een tool_result van type 'browser', 'html_preview' of 'vnc' ontvangt, render een ChatPreview blok met: URL-balk (read-only), iframe (resizable, max-height 500px), open-extern knop, sluiten/minimaliseren knop. 5) De preview is scrollbaar en resizable binnen de chat. 6) Bij meerdere previews in één gesprek: elk blok is onafhankelijk inklapbaar. 7) Sandbox.loadUrl() en Sandbox.loadPreview() worden vervangen door Chat.renderInlinePreview(url/html).",
-      "ai_review": "Verwijdert een losse pagina en integreert previews direct in de chat — veel modernere en intuïtievere UX.",
-      "team_discussion": [],
+      "ai_review": "Verwijdert een losse pagina en integreert previews direct in de chat — veel modernere en intuïtievere UX die context-switching elimineert.",
+      "team_discussion": [
+        {
+          "from": "Nina van den Berg",
+          "role": "Code Review Engineer",
+          "comment": "De ChatPreview class moet goed geabstraheerd worden zodat het zowel HTML-renders, browser-screenshots als VNC-streams kan tonen via een uniforme interface. Stel een PreviewType enum in (html, screenshot, vnc) met per type een specifieke renderer. Vergeet niet om XSS-sanitization toe te passen op inline HTML content.",
+          "emoji": "🔍"
+        },
+        {
+          "from": "Yuki Tanaka",
+          "role": "Container Specialist",
+          "comment": "VNC inline embedding via noVNC werkt goed in iframes, maar let op de WebSocket verbinding: als er meerdere previews open staan, kunnen de connections stacken. Implementeer een connection pool met auto-disconnect voor niet-zichtbare previews. Ook belangrijk: CSP headers moeten frame-src toestaan voor de VNC host.",
+          "emoji": "🐳"
+        },
+        {
+          "from": "Sofia Bakker",
+          "role": "DevSecOps Engineer",
+          "comment": "Inline iframes zijn een potentieel attack vector. Zorg voor sandbox attributes op alle iframes (sandbox=\"allow-scripts allow-same-origin\"), stel een strikte CSP in, en valideer alle URLs server-side voordat ze gerenderd worden. Nooit user-supplied HTML direct renderen zonder DOMPurify sanitization.",
+          "emoji": "🛡️"
+        },
+        {
+          "from": "Marcus de Groot",
+          "role": "Lead DevOps Engineer",
+          "comment": "Pragmatisch goed plan. Ik zou aanraden om eerst een MVP te bouwen met alleen HTML-preview support, dan screenshots, en VNC als laatste. Zo kunnen we incrementeel testen en deployen. Feature flag erbij zodat we kunnen terugvallen op het oude tabblad als er issues zijn.",
+          "emoji": "🎯"
+        }
+      ],
       "created": "2026-02-14T09:35:10Z",
-      "updated": "2026-02-14T09:35:10Z"
+      "updated": "2026-02-14T09:35:10Z",
+      "complexity": "Hoog",
+      "estimated_effort": "5-8 dagen",
+      "review_comment": "Uitstekend voorstel dat de UX aanzienlijk verbetert. De aanpak om previews inline in de chat te renderen is technisch solide en sluit aan bij wat gebruikers gewend zijn van ChatGPT en Claude artifacts. Belangrijk aandachtspunt: memory management bij meerdere iframes in een lang gesprek. Stel een maximum in van 3 actieve previews, oudere worden lazy-loaded. Geschatte doorlooptijd: 6 dagen inclusief testen op mobile.",
+      "reviewed_by": "Jan-Willem Hofstra",
+      "reviewer_role": "Infrastructure Architect",
+      "review_requested": true
     },
     {
       "id": "story-019",
@@ -788,27 +819,42 @@
       "author": "AI Assistent",
       "impact": "Tools worden ontdekbaar en bruikbaar zonder de chat te verlaten. Vermindert het aantal tabbladen van 5 naar 3 (Chat, Dashboard, Instellingen). Sluit aan bij de UX-patronen die gebruikers kennen van ChatGPT en OpenWebUI.",
       "approach": "1) Verwijder het Tools tabblad uit de sidebar navigatie en de page-tools div uit index.html. 2) Voeg een tool-bar toe direct boven het chat-invoerveld: een horizontale rij met tool-chips. 3) Elke chip toont een icoon + korte naam (bijv. 🔍 Zoeken, 📧 Email, 📅 Agenda). 4) Chips zijn togglebaar: klik = aan/uit (highlighted border + achtergrond). 5) Een ➕ knop aan het einde opent een compact dropdown/popover met alle tools in een grid (icoon + naam + korte beschrijving). 6) Actieve tools worden meegestuurd als context naar de agent backend (zodat de AI weet welke tools de gebruiker wil gebruiken). 7) Tool-selectie wordt opgeslagen in localStorage per gebruiker. 8) De tool-bar is responsive: op mobiel scrolbaar horizontaal. 9) Animaties: smooth toggle, dropdown slide-in.",
-      "ai_review": "Vervangt een statische tools-pagina door een interactieve tool-bar in de chat — veel meer in lijn met moderne AI-interfaces.",
-      "team_discussion": [],
+      "ai_review": "Vervangt een statische tools-pagina door een interactieve tool-bar in de chat — veel meer in lijn met moderne AI-interfaces en vermindert navigatie-overhead.",
+      "team_discussion": [
+        {
+          "from": "Nina van den Berg",
+          "role": "Code Review Engineer",
+          "comment": "De tool-chip component moet herbruikbaar zijn: een ToolChip class met properties voor naam, icon, enabled-status en een click-handler. Gebruik event delegation op de toolbar container in plaats van individuele listeners per chip. Sla de enabled-status op in localStorage zodat gebruikersvoorkeuren persistent zijn.",
+          "emoji": "🔍"
+        },
+        {
+          "from": "Jan-Willem Hofstra",
+          "role": "Infrastructure Architect",
+          "comment": "De tool-configuratie (welke tools beschikbaar zijn, hun capabilities en parameters) moet vanuit de backend komen via een /api/tools endpoint. Niet hardcoden in de frontend. Dit maakt het systeem extensible: nieuwe tools worden automatisch zichtbaar zonder frontend-deployment.",
+          "emoji": "🏗️"
+        },
+        {
+          "from": "Daan Vermeer",
+          "role": "R&D Engineer",
+          "comment": "Interessant om te kijken naar hoe OpenWebUI dit technisch oplost — zij gebruiken een Svelte store met reactive tool-state. Voor onze vanilla JS implementatie kunnen we een vergelijkbaar reactive pattern bouwen met Proxy objects of een lightweight pub/sub systeem. Dit houdt de UI in sync met de tool-state zonder handmatige DOM updates.",
+          "emoji": "🔬"
+        },
+        {
+          "from": "Sofia Bakker",
+          "role": "DevSecOps Engineer",
+          "comment": "Tool-toggles moeten server-side gevalideerd worden: een gebruiker mag niet via de UI tools activeren waar hij geen rechten voor heeft. Implementeer role-based tool access in de backend en gebruik de /api/tools response om alleen geautoriseerde tools te tonen.",
+          "emoji": "🛡️"
+        }
+      ],
       "created": "2026-02-14T09:35:23Z",
-      "updated": "2026-02-14T09:35:23Z"
-    },
-    {
-      "id": "story-020",
-      "title": "Inline Sandbox: Live preview in chatvenster (ChatGPT-stijl)",
-      "description": "Verwijder de Sandbox als apart tabblad/pagina. Browser-previews, HTML-renders en VNC live-views worden inline in het chatvenster getoond, vergelijkbaar met ChatGPT's agent modus. Wanneer de AI een website opent, HTML rendert of een live-view start, verschijnt er een interactief iframe/preview-blok direct in de chat-conversatie. De gebruiker hoeft niet meer van tab te wisselen.",
-      "type": "improvement",
-      "priority": "high",
-      "status": "review",
-      "project": "AI Portal",
-      "author": "AI Assistent",
-      "impact": "Veel betere UX: geen context-switching meer tussen chat en sandbox. De gebruiker blijft in de flow van het gesprek. Past bij het mentale model van moderne AI-tools (ChatGPT, Claude artifacts).",
-      "approach": "1) Verwijder Sandbox tabblad uit sidebar en page-sandbox div. 2) Verwijder sandbox.js. 3) Maak ChatPreview class: uitklapbaar iframe-blok als assistant message. 4) Bij tool_result van type browser/html_preview/vnc: render ChatPreview met URL-balk (read-only), iframe (resizable, max-height 500px), open-extern knop, minimize knop. 5) Preview is scrollbaar en resizable. 6) Meerdere previews per gesprek: elk onafhankelijk inklapbaar. 7) Lazy-loading: alleen zichtbaar iframe is actief.",
-      "ai_review": "Verwijdert een losse pagina en integreert previews direct in de chat, veel modernere en intuitivere UX.",
-      "team_discussion": [],
-      "created": "2026-02-14T09:38:11Z",
-      "updated": "2026-02-14T09:38:11Z"
+      "updated": "2026-02-14T09:35:23Z",
+      "complexity": "Medium",
+      "estimated_effort": "3-5 dagen",
+      "review_comment": "Sterk UX-voorstel dat het aantal tabbladen reduceert en tools beter vindbaar maakt. De tool-bar met togglebare chips is een bewezen pattern uit OpenWebUI en ChatGPT. Let op responsive design: op mobile moeten de chips horizontaal scrollbaar zijn. Zorg dat de actieve tool-status ook via WebSocket gesynchroniseerd wordt zodat tool-toggles persistent zijn binnen een sessie. Geschatte doorlooptijd: 4 dagen.",
+      "reviewed_by": "Marcus de Groot",
+      "reviewer_role": "Lead DevOps Engineer",
+      "review_requested": true
     }
   ],
-  "updated": "2026-02-14T09:38:11Z"
+  "updated": "2025-02-14T12:00:00Z"
 }
