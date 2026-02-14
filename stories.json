@@ -685,7 +685,7 @@
       "description": "De UI is functioneel maar voelt statisch. Mist: hover/focus states op interactieve elementen, smooth transitions bij theme switch (dark/light), entrance animaties voor widgets op het dashboard, subtle loading skeletons, en consistent gebruik van shadows/elevation. Ook de kleurenpalet kan verfijnder: meer contrast tussen actieve/inactieve states.",
       "type": "improvement",
       "priority": "medium",
-      "status": "approved",
+      "status": "done",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Micro-animaties geven de portal een premium gevoel. Het verschil tussen 'ziet er goed uit' en 'voelt geweldig'.",
@@ -712,7 +712,7 @@
         }
       ],
       "created": "2026-02-14T08:46:26Z",
-      "updated": "2026-02-14T09:58:32.287Z",
+      "updated": "2026-02-14T10:14:20Z",
       "review_requested": true,
       "complexity": "Laag",
       "estimated_effort": "2-3 dagen",
@@ -872,5 +872,5 @@
       "updated": "2026-02-14T10:05:04Z"
     }
   ],
-  "updated": "2026-02-14T10:14:19Z"
+  "updated": "2026-02-14T10:14:20Z"
 }
