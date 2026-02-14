@@ -929,9 +929,33 @@
       "impact": "Verhoogt het vertrouwen en de perceived performance significant. Gebruikers weten precies wat er gebeurt in plaats van naar een pulserende dot te staren. Geeft een professioneel en premium gevoel, precies zoals Lovable.",
       "approach": "1) Definieer pipeline stages: [Analyseren, Zoeken, Genereren, Toepassen, Klaar]. 2) Horizontale stepper component met iconen en labels. 3) Animate transitions tussen stages (fade/slide). 4) Backend stuurt stage-updates mee in het streaming response. 5) Bij tools-gebruik: toon welke tool actief is (bijv. \"🔍 Zoeken op internet...\"). 6) Collapsible na voltooiing — toont alleen \"Voltooid in X seconden\".",
       "ai_review": "Progress indicators zijn een bewezen UX-patroon dat wachttijd draaglijker maakt. Combinatie met tool-status geeft unieke meerwaarde ten opzichte van Lovable.",
-      "team_discussion": [],
+      "team_discussion": [
+        {
+          "from": "Daan Vermeer",
+          "role": "R&D Engineer",
+          "comment": "De progress pipeline moet event-driven zijn, niet time-based. Gebruik custom events of een state machine (bijv. XState-patroon, maar dan lightweight zelf gebouwd) zodat stages alleen voortgaan op echte signalen. Fake progress voelt altijd nep — beter een eerlijke indicator dan een smooth maar oneerlijke animatie.",
+          "emoji": "🔬"
+        },
+        {
+          "from": "Nina van den Berg",
+          "role": "Code Review Engineer",
+          "comment": "De stepper component moet herbruikbaar zijn — niet hardcoded voor deze specifieke stages. Definieer stages als een array van objecten met {id, label, icon, status}. Dan kunnen we later makkelijk stages toevoegen of herordenen. CSS transitions voor de state changes, geen JS animations.",
+          "emoji": "🔍"
+        },
+        {
+          "from": "Jan-Willem Hofstra",
+          "role": "Infrastructure Architect",
+          "comment": "Dit vereist dat de backend stage-informatie meestuurt in het streaming response. Voeg een event-type toe aan de SSE stream: type='stage_update' met de huidige stage. Zo kan de frontend real-time updaten zonder polling. Dit is een backend-wijziging die we moeten coördineren.",
+          "emoji": "🏗️"
+        }
+      ],
       "created": "2026-02-14T11:45:28Z",
-      "updated": "2026-02-14T11:45:28Z"
+      "updated": "2026-02-14T11:46:18Z",
+      "reviewed_by": "Marcus de Groot",
+      "reviewer_role": "Lead DevOps Engineer",
+      "complexity": "Medium",
+      "estimated_effort": "2-3 dagen",
+      "review_requested": true
     },
     {
       "id": "story-023",
@@ -966,5 +990,5 @@
       "updated": "2026-02-14T11:45:54Z"
     }
   ],
-  "updated": "2026-02-14T11:46:10Z"
+  "updated": "2026-02-14T11:46:18Z"
 }
