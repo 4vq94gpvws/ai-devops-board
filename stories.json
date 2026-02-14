@@ -776,7 +776,23 @@
       "team_discussion": [],
       "created": "2026-02-14T09:35:10Z",
       "updated": "2026-02-14T09:35:10Z"
+    },
+    {
+      "id": "story-019",
+      "title": "Tools als inline chat-toggles (OpenWebUI/ChatGPT-stijl)",
+      "description": "Verwijder de Tools-pagina als apart tabblad. Tools worden in plaats daarvan zichtbaar als togglebare chips/badges in het chatvenster, vergelijkbaar met hoe OpenWebUI en ChatGPT tools tonen. Boven of onder het chat-invoerveld verschijnt een rij met tool-iconen die aan/uit gezet kunnen worden met een klik. Actieve tools zijn gehighlight. Een + knop opent een compact dropdown-menu met alle beschikbare tools.",
+      "type": "improvement",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "Tools worden ontdekbaar en bruikbaar zonder de chat te verlaten. Vermindert het aantal tabbladen van 5 naar 3 (Chat, Dashboard, Instellingen). Sluit aan bij de UX-patronen die gebruikers kennen van ChatGPT en OpenWebUI.",
+      "approach": "1) Verwijder het Tools tabblad uit de sidebar navigatie en de page-tools div uit index.html. 2) Voeg een tool-bar toe direct boven het chat-invoerveld: een horizontale rij met tool-chips. 3) Elke chip toont een icoon + korte naam (bijv. 🔍 Zoeken, 📧 Email, 📅 Agenda). 4) Chips zijn togglebaar: klik = aan/uit (highlighted border + achtergrond). 5) Een ➕ knop aan het einde opent een compact dropdown/popover met alle tools in een grid (icoon + naam + korte beschrijving). 6) Actieve tools worden meegestuurd als context naar de agent backend (zodat de AI weet welke tools de gebruiker wil gebruiken). 7) Tool-selectie wordt opgeslagen in localStorage per gebruiker. 8) De tool-bar is responsive: op mobiel scrolbaar horizontaal. 9) Animaties: smooth toggle, dropdown slide-in.",
+      "ai_review": "Vervangt een statische tools-pagina door een interactieve tool-bar in de chat — veel meer in lijn met moderne AI-interfaces.",
+      "team_discussion": [],
+      "created": "2026-02-14T09:35:23Z",
+      "updated": "2026-02-14T09:35:23Z"
     }
   ],
-  "updated": "2026-02-14T09:35:10Z"
+  "updated": "2026-02-14T09:35:23Z"
 }
