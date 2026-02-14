@@ -415,7 +415,23 @@
       "team_discussion": [],
       "created": "2026-02-14T08:46:26Z",
       "updated": "2026-02-14T08:46:26Z"
+    },
+    {
+      "id": "story-017",
+      "title": "AI Portal UI: Toegankelijkheid & PWA Installatie",
+      "description": "De portal mist PWA-installeerbaarheid (Add to Home Screen) en basis accessibility features: ARIA labels op navigatie-elementen, focus management bij pagina-wisselingen, proper heading hierarchy, color contrast ratio's (WCAG AA), en keyboard-only navigatie support. Ook mist een service worker voor offline fallback en caching.",
+      "type": "improvement",
+      "priority": "medium",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "PWA-installatie maakt de portal een echte 'app' op Enrico's telefoon. Accessibility verbetert de algehele UX voor iedereen.",
+      "approach": "1) Web App Manifest met icons en theme colors, 2) Service Worker met cache-first strategie voor static assets, 3) ARIA labels audit en toevoegen, 4) Focus trap in modals, 5) Skip-to-content link, 6) Color contrast check en aanpassingen",
+      "ai_review": "PWA-installatie is een quick win die de portal transformeert van website naar app. Accessibility is een must-have voor professionele kwaliteit.",
+      "team_discussion": [],
+      "created": "2026-02-14T08:46:32Z",
+      "updated": "2026-02-14T08:46:32Z"
     }
   ],
-  "updated": "2026-02-14T08:46:26Z"
+  "updated": "2026-02-14T08:46:32Z"
 }
