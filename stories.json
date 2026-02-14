@@ -918,7 +918,23 @@
       "team_discussion": [],
       "created": "2026-02-14T11:45:42Z",
       "updated": "2026-02-14T11:45:42Z"
+    },
+    {
+      "id": "story-024",
+      "title": "AI Portal: Project File Explorer (Lovable-stijl)",
+      "description": "Voeg een collapsible file tree toe in het rechter panel, vergelijkbaar met Lovable's project navigator. Wanneer de AI meerdere bestanden genereert (bijv. een website met index.html, style.css, app.js), toon deze als een tree-structuur met folder-iconen. Klik op een bestand om het in de code viewer te openen. Dit geeft overzicht bij complexere projecten en maakt het portal bruikbaar voor multi-file generatie.",
+      "type": "feature",
+      "priority": "medium",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "Maakt het portal geschikt voor complexere projecten met meerdere bestanden. Geeft een echte IDE-ervaring die Lovable kenmerkt. Zonder file explorer is multi-file generatie onoverzichtelijk.",
+      "approach": "1) Tree component met iconen per bestandstype (HTML, CSS, JS, JSON, IMG). 2) Collapsible folders met smooth animatie. 3) Active state highlight voor geopend bestand. 4) Integreer links in het rechter panel (boven de code viewer). 5) Bestanden worden gepopuleerd vanuit AI responses die meerdere code blocks bevatten. 6) Context menu: Download, Copy path, Delete. 7) Drag & drop reordering (nice-to-have).",
+      "ai_review": "File explorer completeert de IDE-ervaring. In combinatie met split-pane en code viewer wordt het portal een volwaardige AI workspace vergelijkbaar met Lovable.",
+      "team_discussion": [],
+      "created": "2026-02-14T11:45:54Z",
+      "updated": "2026-02-14T11:45:54Z"
     }
   ],
-  "updated": "2026-02-14T11:45:42Z"
+  "updated": "2026-02-14T11:45:54Z"
 }
