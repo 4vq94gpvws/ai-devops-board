@@ -767,7 +767,7 @@
       "description": "Verwijder de Sandbox als apart tabblad/pagina. In plaats daarvan worden browser-previews, HTML-renders en VNC live-views inline in het chatvenster getoond, vergelijkbaar met hoe ChatGPT's agent modus werkt. Wanneer de AI een website opent, HTML rendert of een live-view start, verschijnt er een interactief iframe/preview-blok direct in de chat-conversatie, tussen de berichten in. De gebruiker hoeft niet meer van tab te wisselen.",
       "type": "improvement",
       "priority": "high",
-      "status": "review",
+      "status": "approved",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Veel betere UX: geen context-switching meer tussen chat en sandbox. De gebruiker blijft in de flow van het gesprek. Past bij het mentale model van moderne AI-tools (ChatGPT, Claude artifacts).",
@@ -800,7 +800,7 @@
         }
       ],
       "created": "2026-02-14T09:35:10Z",
-      "updated": "2026-02-14T09:35:10Z",
+      "updated": "2026-02-14T09:58:22.697Z",
       "complexity": "Hoog",
       "estimated_effort": "5-8 dagen",
       "review_comment": "Uitstekend voorstel dat de UX aanzienlijk verbetert. De aanpak om previews inline in de chat te renderen is technisch solide en sluit aan bij wat gebruikers gewend zijn van ChatGPT en Claude artifacts. Belangrijk aandachtspunt: memory management bij meerdere iframes in een lang gesprek. Stel een maximum in van 3 actieve previews, oudere worden lazy-loaded. Geschatte doorlooptijd: 6 dagen inclusief testen op mobile.",
@@ -856,5 +856,5 @@
       "review_requested": true
     }
   ],
-  "updated": "2026-02-14T09:58:03.397Z"
+  "updated": "2026-02-14T09:58:27.177Z"
 }
