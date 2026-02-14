@@ -394,11 +394,11 @@
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Chat is de kernfunctie van de portal. Elke kleine verbetering hier heeft direct effect op de dagelijkse gebruikservaring.",
-      "approach": "Stapsgewijs: 1) Typing indicators en timestamps toevoegen, 2) Message editing/deleting met context menu, 3) Chat search met fuzzy matching, 4) Conversation management (rename, pin, archive). Alles in vanilla JS, data in localStorage.\n\nTEAM REVIEW:\nreviewed_by: Nina van den Berg\nreviewer_role: Code Review Engineer\nreview_comment: De chat is het hart van de portal, dus deze verbeteringen zijn cruciaal. De typing indicator moet goed getimed zijn — te snel voelt fake, te langzaam voelt traag. Message editing in localStorage is prima, maar we moeten een versie-history bijhouden zodat edits traceerbaar zijn. De fuzzy search zou ik implementeren met een simpel scoring-algoritme, geen externe library nodig.\n\nteam_discussion:\n- Marcus de Groot 🎯 (Lead DevOps): \"Goede prioritering. Ik zou de conversation management (rename/pin) als eerste pakken — dat is de meeste waarde voor de minste effort. De typing indicator hangt af van de backend SSE implementatie, dus dat moet synchroon lopen met story-009.\"\n- Jan-Willem Hofstra 🏗️ (Architecture Lead): \"De localStorage aanpak werkt voor nu, maar bij veel gesprekken (100+) gaat dat performance-problemen geven. Overweeg IndexedDB als toekomstige migratie. Voor nu: sla maximaal 50 gesprekken op en archiveer de rest.\"\n- Daan Vermeer 🔬 (R&D Engineer): \"De fuzzy search kun je elegant oplossen met een trigram-index — splits elke message in 3-letter blokken en match op overlap-percentage. Snel, geen dependencies, en werkt verrassend goed voor korte teksten.\"",
-      "ai_review": "Chat UX verbeteringen die de kernfunctie van de portal significant verbeteren. Must-have voor dagelijks gebruik.",
+      "approach": "1) Voeg typing indicator toe (animated dots) tijdens AI response. 2) Implementeer message actions: kopiëren, delen, hergenereren. 3) Bouw slash-commands menu (/) voor snelle tool-toegang. 4) Voeg file upload zone toe met drag-and-drop support. 5) Implementeer chat-zoekfunctie met Cmd+K shortcut.",
+      "ai_review": "Chat is de kernfunctie van de portal. Betere UX hier heeft direct impact op dagelijks gebruik.",
       "team_discussion": [],
       "created": "2026-02-14T08:46:17Z",
-      "updated": "2026-02-14T09:08:35Z"
+      "updated": "2026-02-14T09:12:06Z"
     },
     {
       "id": "story-016",
@@ -433,5 +433,5 @@
       "updated": "2026-02-14T09:08:58Z"
     }
   ],
-  "updated": "2026-02-14T09:12:02Z"
+  "updated": "2026-02-14T09:12:06Z"
 }
