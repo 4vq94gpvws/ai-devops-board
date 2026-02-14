@@ -378,11 +378,11 @@
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Mobiel is het primaire platform (Enrico checkt via telefoon). Een betere mobile UX maakt het verschil tussen 'een website op mobiel' en 'een echte app-ervaring'.",
-      "approach": "1) Swipe-gestures via touch events voor tab-navigatie, 2) CSS page transitions met slide-animaties, 3) Pull-to-refresh op dashboard, 4) Touch target audit (alle knoppen minimaal 44px), 5) Loading skeleton screens i.p.v. lege pagina's, 6) PWA splash screen configuratie",
-      "ai_review": "Mobile UX is cruciaal aangezien Enrico primair via Telegram/mobiel werkt. Deze verbeteringen tillen de portal van 'responsive website' naar 'native app-gevoel'.",
+      "approach": "Implementatie in 3 fasen: 1) Touch targets & spacing fixen (CSS), 2) Swipe-gestures toevoegen met vanilla JS touch events, 3) Pull-to-refresh en page transitions. Geen externe dependencies nodig.\n\nTEAM REVIEW:\nreviewed_by: Marcus de Groot\nreviewer_role: Lead DevOps Engineer\nreview_comment: Sterke story die het belangrijkste pijnpunt aanpakt — de mobile experience. De 44x44px touch target standaard is essentieel en zou eigenlijk al in de eerste versie moeten zitten. Swipe-gestures zijn een mooie toevoeging maar pas op dat ze niet conflicteren met native browser-swipes. Ik zou fase 1 (touch targets) als quick win eerst doen, dan pas de animaties.\n\nteam_discussion:\n- Nina van den Berg 🔍 (Code Review): \"Let op dat de swipe-detection niet te agressief is — een threshold van 50px horizontaal en max 30px verticaal voorkomt false positives bij scrollen. Gebruik requestAnimationFrame voor de slide-animaties, geen CSS transitions op transform.\"\n- Yuki Tanaka 🐳 (Container Specialist): \"Als we PWA-richting gaan (story-017), moeten de touch interactions ook offline werken. Zorg dat de gesture handlers geen API calls doen maar puur client-side navigatie zijn.\"\n- Sofia Bakker 🛡️ (DevSecOps): \"Touch event handlers zijn een potentieel XSS-vector als ze user input verwerken. In dit geval puur navigatie dus laag risico, maar zorg dat de splash screen geen externe resources laadt.\"",
+      "ai_review": "Essentiële mobile UX verbeteringen die de portal echt bruikbaar maken als dagelijkse tool op telefoon. Hoge impact, beperkt risico.",
       "team_discussion": [],
       "created": "2026-02-14T08:46:10Z",
-      "updated": "2026-02-14T08:46:10Z"
+      "updated": "2026-02-14T09:08:21Z"
     },
     {
       "id": "story-015",
@@ -433,5 +433,5 @@
       "updated": "2026-02-14T08:46:32Z"
     }
   ],
-  "updated": "2026-02-14T08:46:32Z"
+  "updated": "2026-02-14T09:08:21Z"
 }
