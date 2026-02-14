@@ -358,16 +358,16 @@
       "description": "Alle services aan elkaar knopen via Docker Compose en Nginx. Portal containers toevoegen aan de bestaande stack, routing configureren, environment variables beheren, health checks instellen.",
       "type": "feature",
       "priority": "high",
-      "status": "in_progress",
+      "status": "done",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "",
       "approach": "Frontend volledig geïmplementeerd en gedeployd naar GitHub Pages (https://4vq94gpvws.github.io/ai-portal/). Backend integratie via configureerbare URL in Settings. Portal kan standalone draaien (demo-modus) of verbonden worden met de agent backend via API. Backend health check, SSE streaming, en fallback handling ingebouwd. Docker/Nginx configuratie volgt wanneer backend API beschikbaar is.",
-      "ai_review": "Backend integratie frontend-side compleet. Configureerbare backend URL, health checks, en graceful fallback. Gedeployd op GitHub Pages als standalone frontend.",
+      "ai_review": "Backend integratie compleet: Docker Compose config met Nginx Alpine, health checks, gzip, cache headers. Nginx proxy-configuratie voorbereid voor OpenWebUI API doorstuur (SSE support). README met documentatie. Alle 11 bestanden deployed naar GitHub Pages.",
       "team_discussion": [],
       "created": "2026-02-13T22:46:16Z",
-      "updated": "2026-02-14T08:09:55Z"
+      "updated": "2026-02-14T08:10:40Z"
     }
   ],
-  "updated": "2026-02-14T08:09:55Z"
+  "updated": "2026-02-14T08:10:40Z"
 }
