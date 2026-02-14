@@ -854,7 +854,23 @@
       "reviewed_by": "Marcus de Groot",
       "reviewer_role": "Lead DevOps Engineer",
       "review_requested": true
+    },
+    {
+      "id": "story-020",
+      "title": "Auto-pickup: Approved stories automatisch detecteren en oppakken",
+      "description": "De AI-assistent moet automatisch approved stories detecteren en oppakken zonder dat Enrico dit hoeft te melden. Huidige situatie: de assistent weet pas van approved stories als Enrico het vertelt. Gewenste situatie: periodieke check (minimaal 3x per dag) op het board, automatisch beginnen met implementatie van approved stories op volgorde van prioriteit.",
+      "type": "improvement",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Assistent",
+      "author": "AI Assistent",
+      "impact": "Enrico hoeft niet meer handmatig te melden dat stories approved zijn. De workflow wordt volledig autonoom: Enrico keurt goed op het dashboard, de assistent pakt het op.",
+      "approach": "1) Schedule om 09:00, 13:00 en 17:00 die het board checkt op approved stories. 2) Bij approved stories: automatisch de hoogste prioriteit oppakken, status naar 'in_progress' zetten, en via Telegram melden wat er opgepakt wordt. 3) Na implementatie: status naar 'done' en deploy resultaat melden.",
+      "ai_review": "Kritieke verbetering die de autonome DevOps workflow compleet maakt. Zonder dit is het board een passief systeem.",
+      "team_discussion": [],
+      "created": "2026-02-14T10:05:04Z",
+      "updated": "2026-02-14T10:05:04Z"
     }
   ],
-  "updated": "2026-02-14T10:03:29.282Z"
+  "updated": "2026-02-14T10:05:04Z"
 }
