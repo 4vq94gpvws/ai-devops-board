@@ -331,10 +331,10 @@
       "author": "AI Assistent",
       "impact": "",
       "approach": "Sandbox module (sandbox.js) gebouwd met: URL-balk met navigatie, iframe-based preview, VNC live-view integratie (loadVNC methode voor browser sessies vanuit chat), HTML preview rendering (loadPreview methode), refresh en open-extern knoppen. Volledige Sandbox pagina in de portal met placeholder state.",
-      "ai_review": "Sandbox live-view geïmplementeerd. URL navigatie, VNC integratie, en inline HTML preview. Kan vanuit chat worden geactiveerd wanneer agent een browser sessie start.",
+      "ai_review": "Sandbox Live-View compleet: URL-balk met navigatie, iframe sandboxing (scripts/forms/popups), VNC live-view integratie voor agent browser sessies, HTML preview functie voor gegenereerde content, external open button.",
       "team_discussion": [],
       "created": "2026-02-13T22:45:32Z",
-      "updated": "2026-02-14T08:08:51Z"
+      "updated": "2026-02-14T08:09:48Z"
     },
     {
       "id": "story-012",
@@ -369,5 +369,5 @@
       "updated": "2026-02-14T08:08:56Z"
     }
   ],
-  "updated": "2026-02-14T08:09:46Z"
+  "updated": "2026-02-14T08:09:48Z"
 }
