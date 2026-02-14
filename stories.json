@@ -886,7 +886,23 @@
       "team_discussion": [],
       "created": "2026-02-14T11:45:14Z",
       "updated": "2026-02-14T11:45:14Z"
+    },
+    {
+      "id": "story-022",
+      "title": "AI Portal: Generatie Progress Pipeline (Lovable-stijl)",
+      "description": "Voeg een visuele stapsgewijze progress indicator toe tijdens AI-generatie, vergelijkbaar met Lovable.dev. In plaats van alleen een typing indicator, toon de gebruiker welke fase het systeem doorloopt: Denken → Zoeken → Genereren → Deployen. Elke stap heeft een icoon, label en animated status (spinning/check/pending). Dit geeft de gebruiker veel meer vertrouwen en inzicht in wat er achter de schermen gebeurt.",
+      "type": "feature",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "Verhoogt het vertrouwen en de perceived performance significant. Gebruikers weten precies wat er gebeurt in plaats van naar een pulserende dot te staren. Geeft een professioneel en premium gevoel, precies zoals Lovable.",
+      "approach": "1) Definieer pipeline stages: [Analyseren, Zoeken, Genereren, Toepassen, Klaar]. 2) Horizontale stepper component met iconen en labels. 3) Animate transitions tussen stages (fade/slide). 4) Backend stuurt stage-updates mee in het streaming response. 5) Bij tools-gebruik: toon welke tool actief is (bijv. \"🔍 Zoeken op internet...\"). 6) Collapsible na voltooiing — toont alleen \"Voltooid in X seconden\".",
+      "ai_review": "Progress indicators zijn een bewezen UX-patroon dat wachttijd draaglijker maakt. Combinatie met tool-status geeft unieke meerwaarde ten opzichte van Lovable.",
+      "team_discussion": [],
+      "created": "2026-02-14T11:45:28Z",
+      "updated": "2026-02-14T11:45:28Z"
     }
   ],
-  "updated": "2026-02-14T11:45:14Z"
+  "updated": "2026-02-14T11:45:28Z"
 }
