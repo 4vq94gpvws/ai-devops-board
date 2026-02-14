@@ -883,9 +883,39 @@
       "impact": "Transformeert het portal van een chat-app naar een echte AI workspace. Gebruikers zien direct het resultaat naast hun conversatie, precies zoals Lovable.dev. Dit is de #1 feature die het Lovable-gevoel geeft.",
       "approach": "1) CSS Grid/Flexbox layout met resizable divider (CSS resize of custom drag handler). 2) Links: bestaand chat component. 3) Rechts: sandbox iframe panel met tab-opties (Preview / Code). 4) LocalStorage voor verdeling-voorkeur. 5) Mobile: tabbed interface met swipe tussen Chat en Preview. 6) Keyboard shortcut Cmd+\\ om panels te togglen.",
       "ai_review": "De split-pane layout is het meest impactvolle verschil met Lovable. Relatief eenvoudig te implementeren met bestaande componenten, maar geeft een compleet andere gebruikerservaring.",
-      "team_discussion": [],
+      "team_discussion": [
+        {
+          "from": "Jan-Willem Hofstra",
+          "role": "Infrastructure Architect",
+          "comment": "De split-pane is architecturaal de belangrijkste wijziging — het verandert de hele layout-structuur. Gebruik CSS Grid als basis, geen absolute positioning. De divider moet een custom drag handler zijn met requestAnimationFrame voor smooth resizing. Sla de ratio op in localStorage zodat gebruikers hun voorkeur behouden.",
+          "emoji": "🏗️"
+        },
+        {
+          "from": "Nina van den Berg",
+          "role": "Code Review Engineer",
+          "comment": "Houd het simpel: één SplitPane component die twee children accepteert. Geen externe library nodig. Let op edge cases: minimale panelbreedte (300px), en een collapse-knop om het preview panel volledig te verbergen. De chat moet altijd bruikbaar blijven, ook als het preview panel groot is.",
+          "emoji": "🔍"
+        },
+        {
+          "from": "Yuki Tanaka",
+          "role": "Container Specialist",
+          "comment": "De sandbox iframe in het rechter panel moet lazy loaden — pas initialiseren wanneer er daadwerkelijk content is om te tonen. Anders betaal je een performance-penalty voor elke pageload. Overweeg ook een loading skeleton in het preview panel.",
+          "emoji": "🐳"
+        },
+        {
+          "from": "Sofia Bakker",
+          "role": "DevSecOps Engineer",
+          "comment": "Het iframe voor de sandbox preview moet een strikte sandbox attribute hebben: sandbox='allow-scripts allow-same-origin'. Geen allow-forms of allow-popups. CSP headers moeten frame-src whitelisten voor de sandbox URL.",
+          "emoji": "🛡️"
+        }
+      ],
       "created": "2026-02-14T11:45:14Z",
-      "updated": "2026-02-14T11:45:14Z"
+      "updated": "2026-02-14T11:46:10Z",
+      "reviewed_by": "Marcus de Groot",
+      "reviewer_role": "Lead DevOps Engineer",
+      "complexity": "Hoog",
+      "estimated_effort": "3-4 dagen",
+      "review_requested": true
     },
     {
       "id": "story-022",
@@ -936,5 +966,5 @@
       "updated": "2026-02-14T11:45:54Z"
     }
   ],
-  "updated": "2026-02-14T11:45:54Z"
+  "updated": "2026-02-14T11:46:10Z"
 }
