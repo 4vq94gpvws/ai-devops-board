@@ -1003,7 +1003,7 @@
       "description": "Voeg een collapsible file tree toe in het rechter panel, vergelijkbaar met Lovable's project navigator. Wanneer de AI meerdere bestanden genereert (bijv. een website met index.html, style.css, app.js), toon deze als een tree-structuur met folder-iconen. Klik op een bestand om het in de code viewer te openen. Dit geeft overzicht bij complexere projecten en maakt het portal bruikbaar voor multi-file generatie.",
       "type": "feature",
       "priority": "medium",
-      "status": "approved",
+      "status": "in_progress",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Maakt het portal geschikt voor complexere projecten met meerdere bestanden. Geeft een echte IDE-ervaring die Lovable kenmerkt. Zonder file explorer is multi-file generatie onoverzichtelijk.",
@@ -1030,7 +1030,7 @@
         }
       ],
       "created": "2026-02-14T11:45:54Z",
-      "updated": "2026-02-14T11:49:55.484Z",
+      "updated": "2026-02-14T11:50:25Z",
       "reviewed_by": "Jan-Willem Hofstra",
       "reviewer_role": "Infrastructure Architect",
       "complexity": "Medium",
@@ -1038,5 +1038,5 @@
       "review_requested": true
     }
   ],
-  "updated": "2026-02-14T11:50:21Z"
+  "updated": "2026-02-14T11:50:25Z"
 }
