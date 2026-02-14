@@ -760,7 +760,23 @@
       "review_comment": "PWA is een must-have — het maakt de portal tot een echte app op Enrico's telefoon. De service worker moet minimaal zijn: alleen index.html cachen voor offline fallback. ARIA labels zijn snel toe te voegen. Geschatte doorlooptijd: 2-3 dagen.",
       "reviewed_by": "Jan-Willem Hofstra",
       "reviewer_role": "Infrastructure Architect"
+    },
+    {
+      "id": "story-018",
+      "title": "Inline Sandbox: Live preview in chatvenster (ChatGPT-stijl)",
+      "description": "Verwijder de Sandbox als apart tabblad/pagina. In plaats daarvan worden browser-previews, HTML-renders en VNC live-views inline in het chatvenster getoond, vergelijkbaar met hoe ChatGPT's agent modus werkt. Wanneer de AI een website opent, HTML rendert of een live-view start, verschijnt er een interactief iframe/preview-blok direct in de chat-conversatie, tussen de berichten in. De gebruiker hoeft niet meer van tab te wisselen.",
+      "type": "improvement",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "Veel betere UX: geen context-switching meer tussen chat en sandbox. De gebruiker blijft in de flow van het gesprek. Past bij het mentale model van moderne AI-tools (ChatGPT, Claude artifacts).",
+      "approach": "1) Verwijder het Sandbox tabblad uit de sidebar navigatie en de page-sandbox div uit index.html. 2) Verwijder sandbox.js als apart bestand. 3) Maak een nieuwe chat-inline component: ChatPreview — een uitklapbaar iframe-blok dat als 'assistant message' in de chat wordt gerenderd. 4) Wanneer Agent een tool_result van type 'browser', 'html_preview' of 'vnc' ontvangt, render een ChatPreview blok met: URL-balk (read-only), iframe (resizable, max-height 500px), open-extern knop, sluiten/minimaliseren knop. 5) De preview is scrollbaar en resizable binnen de chat. 6) Bij meerdere previews in één gesprek: elk blok is onafhankelijk inklapbaar. 7) Sandbox.loadUrl() en Sandbox.loadPreview() worden vervangen door Chat.renderInlinePreview(url/html).",
+      "ai_review": "Verwijdert een losse pagina en integreert previews direct in de chat — veel modernere en intuïtievere UX.",
+      "team_discussion": [],
+      "created": "2026-02-14T09:35:10Z",
+      "updated": "2026-02-14T09:35:10Z"
     }
   ],
-  "updated": "2026-02-14T09:17:24Z"
+  "updated": "2026-02-14T09:35:10Z"
 }
