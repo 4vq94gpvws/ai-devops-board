@@ -814,7 +814,7 @@
       "description": "Verwijder de Tools-pagina als apart tabblad. Tools worden in plaats daarvan zichtbaar als togglebare chips/badges in het chatvenster, vergelijkbaar met hoe OpenWebUI en ChatGPT tools tonen. Boven of onder het chat-invoerveld verschijnt een rij met tool-iconen die aan/uit gezet kunnen worden met een klik. Actieve tools zijn gehighlight. Een + knop opent een compact dropdown-menu met alle beschikbare tools.",
       "type": "improvement",
       "priority": "high",
-      "status": "review",
+      "status": "approved",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Tools worden ontdekbaar en bruikbaar zonder de chat te verlaten. Vermindert het aantal tabbladen van 5 naar 3 (Chat, Dashboard, Instellingen). Sluit aan bij de UX-patronen die gebruikers kennen van ChatGPT en OpenWebUI.",
@@ -847,7 +847,7 @@
         }
       ],
       "created": "2026-02-14T09:35:23Z",
-      "updated": "2026-02-14T09:35:23Z",
+      "updated": "2026-02-14T09:57:55.045Z",
       "complexity": "Medium",
       "estimated_effort": "3-5 dagen",
       "review_comment": "Sterk UX-voorstel dat het aantal tabbladen reduceert en tools beter vindbaar maakt. De tool-bar met togglebare chips is een bewezen pattern uit OpenWebUI en ChatGPT. Let op responsive design: op mobile moeten de chips horizontaal scrollbaar zijn. Zorg dat de actieve tool-status ook via WebSocket gesynchroniseerd wordt zodat tool-toggles persistent zijn binnen een sessie. Geschatte doorlooptijd: 4 dagen.",
@@ -856,5 +856,5 @@
       "review_requested": true
     }
   ],
-  "updated": "2025-02-14T12:00:00Z"
+  "updated": "2026-02-14T09:57:59.144Z"
 }
