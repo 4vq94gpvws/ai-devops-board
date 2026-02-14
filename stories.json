@@ -644,7 +644,7 @@
       "description": "De chat-interface werkt maar mist polish: geen auto-resize van het input veld bij langere berichten, geen visuele feedback bij verzenden (loading spinner/animatie), geen 'scroll to bottom' knop bij langere gesprekken, geen keyboard shortcuts (Enter = verzend, Shift+Enter = newline), en de chat bubbles hebben geen timestamp of status-indicatie (verzonden/gelezen).",
       "type": "improvement",
       "priority": "high",
-      "status": "approved",
+      "status": "in_progress",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Chat is de kernfunctie van de portal. Elke kleine verbetering hier heeft direct effect op de dagelijkse gebruikservaring.",
@@ -671,7 +671,7 @@
         }
       ],
       "created": "2026-02-14T08:46:17Z",
-      "updated": "2026-02-14T09:58:39.654Z",
+      "updated": "2026-02-14T10:07:55Z",
       "review_requested": true,
       "complexity": "Hoog",
       "estimated_effort": "4-6 dagen",
@@ -872,5 +872,5 @@
       "updated": "2026-02-14T10:05:04Z"
     }
   ],
-  "updated": "2026-02-14T10:05:04Z"
+  "updated": "2026-02-14T10:07:55Z"
 }
