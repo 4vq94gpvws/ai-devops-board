@@ -923,7 +923,7 @@
       "description": "Voeg een visuele stapsgewijze progress indicator toe tijdens AI-generatie, vergelijkbaar met Lovable.dev. In plaats van alleen een typing indicator, toon de gebruiker welke fase het systeem doorloopt: Denken → Zoeken → Genereren → Deployen. Elke stap heeft een icoon, label en animated status (spinning/check/pending). Dit geeft de gebruiker veel meer vertrouwen en inzicht in wat er achter de schermen gebeurt.",
       "type": "feature",
       "priority": "high",
-      "status": "approved",
+      "status": "in_progress",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Verhoogt het vertrouwen en de perceived performance significant. Gebruikers weten precies wat er gebeurt in plaats van naar een pulserende dot te staren. Geeft een professioneel en premium gevoel, precies zoals Lovable.",
@@ -950,7 +950,7 @@
         }
       ],
       "created": "2026-02-14T11:45:28Z",
-      "updated": "2026-02-14T11:50:00.664Z",
+      "updated": "2026-02-14T11:50:21Z",
       "reviewed_by": "Marcus de Groot",
       "reviewer_role": "Lead DevOps Engineer",
       "complexity": "Medium",
@@ -1038,5 +1038,5 @@
       "review_requested": true
     }
   ],
-  "updated": "2026-02-14T11:50:20Z"
+  "updated": "2026-02-14T11:50:21Z"
 }
