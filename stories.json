@@ -426,12 +426,12 @@
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "PWA-installatie maakt de portal een echte 'app' op Enrico's telefoon. Accessibility verbetert de algehele UX voor iedereen.",
-      "approach": "1) Web App Manifest met icons en theme colors, 2) Service Worker met cache-first strategie voor static assets, 3) ARIA labels audit en toevoegen, 4) Focus trap in modals, 5) Skip-to-content link, 6) Color contrast check en aanpassingen",
-      "ai_review": "PWA-installatie is een quick win die de portal transformeert van website naar app. Accessibility is een must-have voor professionele kwaliteit.",
+      "approach": "Twee tracks: 1) PWA: manifest.json, service worker met cache-first strategie, install prompt handler, offline fallback pagina. 2) Accessibility: ARIA labels, keyboard navigatie, focus management, screen reader testing. Stap-voor-stap, eerst PWA basics dan a11y audit.\n\nTEAM REVIEW:\nreviewed_by: Yuki Tanaka\nreviewer_role: Container Specialist\nreview_comment: PWA is de logische volgende stap voor een mobile-first portal. De service worker moet slim cachen — statische assets cache-first, API calls network-first met fallback. Het manifest.json moet display: standalone gebruiken zodat het echt als app aanvoelt. Voor de offline fallback: toon het laatste gesprek uit localStorage, dat is het meest nuttig. Geschatte doorlooptijd: 4-5 dagen inclusief testing.\n\nteam_discussion:\n- Jan-Willem Hofstra 🏗️ (Architecture Lead): \"De service worker caching strategie is cruciaal. Ik stel voor: Stale-While-Revalidate voor de HTML shell, Cache-First voor CSS/JS/images, Network-First voor API endpoints. Versie de cache names zodat updates smooth gaan.\"\n- Nina van den Berg 🔍 (Code Review): \"De accessibility track is minstens zo belangrijk als PWA. Focus trapping in modals, skip-to-content link, aria-live regions voor de chat messages (zodat screen readers nieuwe berichten aankondigen). Test met VoiceOver op iOS.\"\n- Daan Vermeer 🔬 (R&D Engineer): \"Interessant idee: met de Background Sync API kunnen we chat berichten queuen als de gebruiker offline is en automatisch versturen zodra er weer verbinding is. Dat maakt de offline experience echt nuttig in plaats van alleen een 'je bent offline' pagina.\"",
+      "ai_review": "PWA en toegankelijkheid maken de portal installeerbaar en bruikbaar voor iedereen. Strategisch belangrijk voor mobile-first aanpak.",
       "team_discussion": [],
       "created": "2026-02-14T08:46:32Z",
-      "updated": "2026-02-14T08:46:32Z"
+      "updated": "2026-02-14T09:08:58Z"
     }
   ],
-  "updated": "2026-02-14T09:08:47Z"
+  "updated": "2026-02-14T09:08:58Z"
 }
