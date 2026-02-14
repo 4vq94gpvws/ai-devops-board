@@ -234,8 +234,8 @@
       "project": "AI Assistent",
       "author": "Enrico (handmatig)",
       "impact": "",
-      "approach": "Deep search tool bouwen in 4 stappen: 1) Query Decomposition - vraag opsplitsen in 2-3 sub-queries via LLM. 2) Multi-source search - elke sub-query parallel uitvoeren via zoek_internet. 3) Source reading - top-3 bronnen per query lezen via open_page/get_page_text. 4) Synthese - alle informatie samenvoegen tot een coherent antwoord met bronvermelding, Perplexity-stijl.",
-      "ai_review": "Team review afgerond. Complexiteit: Medium, geschatte effort: 3-5 dagen. Het team heeft hun input gegeven en de approach is geaccordeerd.",
+      "approach": "TECHNISCH PLAN: Zoekopdrachten verbeteren\n\n1. ANALYSE HUIDIGE SITUATIE\n- Inventariseer alle zoek-tools: zoek_internet(), zoek_kennisbank(), recall_facts(), search_emails()\n- Meet response-kwaliteit: relevantie van resultaten, snelheid, completeness\n- Identificeer gaps: wanneer levert een zoekopdracht geen of slechte resultaten op\n\n2. ZOEK-ROUTING VERBETEREN\n- Implementeer intelligente query-routing: op basis van de vraag automatisch de juiste tool(s) kiezen\n- Voeg query-classificatie toe: is het een feitelijke vraag, een document-zoekopdracht, een actuele nieuwsvraag, of een persoonlijke kennisbankquery?\n- Combineer resultaten uit meerdere bronnen wanneer relevant (hybride zoeken)\n\n3. QUERY OPTIMALISATIE\n- Voeg query-rewriting toe: herformuleer vage zoekopdrachten naar specifiekere queries\n- Implementeer synoniemen en gerelateerde termen voor bredere dekking\n- Voeg taaldetectie toe: automatisch vertalen naar Engels voor internet-zoekacties waar nodig\n\n4. KENNISBANK VERBETEREN\n- Optimaliseer Neo4j queries: meer hops voor diepere relaties waar relevant\n- Verbeter embedding-matching: experimenteer met chunk-grootte en overlap\n- Voeg re-ranking toe aan zoekresultaten op basis van relevantie-scores\n\n5. RESULTAAT-KWALITEIT\n- Implementeer een relevantie-filter: verwijder resultaten onder een drempelwaarde\n- Voeg source-attribution toe: duidelijke bronvermelding bij elk resultaat\n- Deduplicatie: voorkom dubbele resultaten uit overlappende bronnen\n\n6. DEEP SEARCH INTEGRATIE\n- Verbeter de deep_search workflow: betere decompositie van complexe vragen\n- Optimaliseer het aantal sub-queries (niet te veel, niet te weinig)\n- Verbeter synthese-stap: betere samenvatting met bronverwijzingen\n\nTECHNOLOGIEEN:\n- Python (MCP tools, execute_code)\n- Neo4j (kennisgraaf queries)\n- Embedding model (vector search optimalisatie)\n- httpx (async HTTP voor zoek-requests)\n\nBESTANDEN/COMPONENTEN:\n- MCP server tools: zoek_internet, zoek_kennisbank\n- Custom tools: deep_search_decompose, deep_search_synthesize\n- Neo4j database configuratie\n- Eventueel nieuwe custom tool voor query-routing\n\nRISICOS:\n- Performance: meer zoek-stappen = langere responstijd\n- Complexiteit: te veel routing-logica kan fragiel worden\n- Kosten: meer API-calls bij internet-zoekacties",
+      "ai_review": "TEAM REVIEW - Story x7cy: Zoekopdrachten verbeteren\n\n--- Marcus de Groot (Lead DevOps Engineer) ---\nDit is een brede verbetering die meerdere componenten raakt. Ik stel voor om het op te splitsen in fasen: eerst de quick wins (query-rewriting, betere routing), dan de complexere onderdelen (re-ranking, hybride zoeken). Start met een meetbare baseline zodat we verbetering kunnen aantonen. Haalbaar in de geschatte tijd als we fase 1 als scope nemen. Coordinatie-risico is laag omdat dit voornamelijk de MCP tools en custom tools raakt.\n\n--- Daan Vermeer (Research/Spike Engineer) ---\nVanuit research-perspectief raad ik aan om eerst een spike te doen op query-classificatie. We moeten meten welk percentage van de zoekopdrachten nu de verkeerde tool bereikt. Een A/B test-opzet met 20-30 typische queries zou waardevol zijn. Voor re-ranking zijn er bewezen technieken (cross-encoder reranking, reciprocal rank fusion) die we kunnen evalueren. De embedding chunk-grootte optimalisatie vergt experimenten met de bestaande dataset.\n\n--- Nina van den Berg (Code Review Engineer) ---\nCode quality aandachtspunten: de zoek-routing moet goed getest zijn met edge cases (lege queries, queries in meerdere talen, zeer lange queries). Zorg voor duidelijke separation of concerns: routing-logica los van de zoek-implementatie. Alle nieuwe code moet async zijn (httpx, niet urllib). Unit tests voor de query-rewriting functie zijn essentieel.\n\nCOMPLEXITEIT: Medium\nGESCHATTE EFFORT: 3-5 dagen (fase 1: routing + query-rewriting), 1-2 weken (compleet)\nAANBEVELING: Start met fase 1 (quick wins), evalueer resultaten, dan fase 2.",
       "team_discussion": [
         {
           "from": "Marcus de Groot",
@@ -254,7 +254,7 @@
       "complexity": "Medium",
       "estimated_effort": "3-5 dagen",
       "created": "2026-02-12T19:08:52Z",
-      "updated": "2026-02-12T19:48:30Z"
+      "updated": "2026-02-14T07:46:45Z"
     },
     {
       "id": "story-007",
@@ -369,5 +369,5 @@
       "updated": "2026-02-13T23:00:13.752Z"
     }
   ],
-  "updated": "2026-02-13T23:01:47Z"
+  "updated": "2026-02-14T07:46:45Z"
 }
