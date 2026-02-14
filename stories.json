@@ -358,7 +358,7 @@
       "description": "Alle services aan elkaar knopen via Docker Compose en Nginx. Portal containers toevoegen aan de bestaande stack, routing configureren, environment variables beheren, health checks instellen.",
       "type": "feature",
       "priority": "high",
-      "status": "done",
+      "status": "in_progress",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "",
@@ -366,8 +366,8 @@
       "ai_review": "Backend integratie frontend-side compleet. Configureerbare backend URL, health checks, en graceful fallback. Gedeployd op GitHub Pages als standalone frontend.",
       "team_discussion": [],
       "created": "2026-02-13T22:46:16Z",
-      "updated": "2026-02-14T08:08:56Z"
+      "updated": "2026-02-14T08:09:55Z"
     }
   ],
-  "updated": "2026-02-14T08:09:50Z"
+  "updated": "2026-02-14T08:09:55Z"
 }
