@@ -603,7 +603,7 @@
       "description": "De huidige mobile UI heeft een bottom navigation bar, maar mist diverse mobile-first optimalisaties: swipe-gestures voor navigatie, pull-to-refresh, haptic feedback patterns, betere touch targets (minimaal 44x44px), en smooth page transitions met animaties. Ook ontbreekt een proper splash/loading screen bij eerste load.",
       "type": "improvement",
       "priority": "high",
-      "status": "review",
+      "status": "approved",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Mobiel is het primaire platform (Enrico checkt via telefoon). Een betere mobile UX maakt het verschil tussen 'een website op mobiel' en 'een echte app-ervaring'.",
@@ -630,7 +630,7 @@
         }
       ],
       "created": "2026-02-14T08:46:10Z",
-      "updated": "2026-02-14T09:17:24Z",
+      "updated": "2026-02-14T10:03:24.982Z",
       "review_requested": true,
       "complexity": "Medium",
       "estimated_effort": "3-4 dagen",
@@ -856,5 +856,5 @@
       "review_requested": true
     }
   ],
-  "updated": "2026-02-14T10:02:09Z"
+  "updated": "2026-02-14T10:03:29.282Z"
 }
