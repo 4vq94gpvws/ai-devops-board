@@ -969,9 +969,33 @@
       "impact": "Maakt het portal veel bruikbaarder voor developers en geeft het echte IDE-gevoel dat Lovable kenmerkt. Code is makkelijker te reviewen en kopiëren vanuit een dedicated panel dan vanuit chat bubbles.",
       "approach": "1) Gebruik Prism.js of Highlight.js voor syntax highlighting (lightweight, client-side). 2) Tab-component voor meerdere bestanden (index.html, style.css, app.js). 3) Integreer als tab in het rechter split-pane panel (naast Preview). 4) Auto-detectie van taal op basis van bestandsextensie of code content. 5) Copy-to-clipboard knop per bestand. 6) Line numbers en word-wrap toggle.",
       "ai_review": "Syntax highlighting is een must-have voor een serieuze AI development tool. Prism.js is lightweight genoeg voor client-side gebruik zonder performance-impact.",
-      "team_discussion": [],
+      "team_discussion": [
+        {
+          "from": "Nina van den Berg",
+          "role": "Code Review Engineer",
+          "comment": "Prism.js is de betere keuze boven Highlight.js voor ons gebruik — kleiner, meer thema's, en betere ondersteuning voor JSX/TSX. Laad taal-plugins on-demand via dynamic import. De tab-component moet keyboard-navigeerbaar zijn (pijltjes links/rechts). Line numbers als optionele toggle, default aan.",
+          "emoji": "🔍"
+        },
+        {
+          "from": "Daan Vermeer",
+          "role": "R&D Engineer",
+          "comment": "Interessant punt: we kunnen de code view ook gebruiken voor een 'diff mode' wanneer code wordt aangepast. Toon groen/rood highlights voor toegevoegde/verwijderde regels. Dit is hoe Lovable laat zien wat er is veranderd. Kan als v2 feature.",
+          "emoji": "🔬"
+        },
+        {
+          "from": "Yuki Tanaka",
+          "role": "Container Specialist",
+          "comment": "Prism.js CDN of bundlen? Voor een static GitHub Pages site is CDN het makkelijkst. Gebruik unpkg of cdnjs met SRI hashes voor security. Lazy load het hele Prism pakket — pas laden wanneer de code tab voor het eerst geopend wordt.",
+          "emoji": "🐳"
+        }
+      ],
       "created": "2026-02-14T11:45:42Z",
-      "updated": "2026-02-14T11:45:42Z"
+      "updated": "2026-02-14T11:46:26Z",
+      "reviewed_by": "Nina van den Berg",
+      "reviewer_role": "Code Review Engineer",
+      "complexity": "Medium",
+      "estimated_effort": "2-3 dagen",
+      "review_requested": true
     },
     {
       "id": "story-024",
@@ -990,5 +1014,5 @@
       "updated": "2026-02-14T11:45:54Z"
     }
   ],
-  "updated": "2026-02-14T11:46:18Z"
+  "updated": "2026-02-14T11:46:26Z"
 }
