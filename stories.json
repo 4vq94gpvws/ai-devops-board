@@ -383,7 +383,23 @@
       "team_discussion": [],
       "created": "2026-02-14T08:46:10Z",
       "updated": "2026-02-14T08:46:10Z"
+    },
+    {
+      "id": "story-015",
+      "title": "AI Portal UI: Chat UX Verbeteringen",
+      "description": "De chat-interface werkt maar mist polish: geen auto-resize van het input veld bij langere berichten, geen visuele feedback bij verzenden (loading spinner/animatie), geen 'scroll to bottom' knop bij langere gesprekken, geen keyboard shortcuts (Enter = verzend, Shift+Enter = newline), en de chat bubbles hebben geen timestamp of status-indicatie (verzonden/gelezen).",
+      "type": "improvement",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "Chat is de kernfunctie van de portal. Elke kleine verbetering hier heeft direct effect op de dagelijkse gebruikservaring.",
+      "approach": "1) Auto-growing textarea (max 6 regels), 2) Typing indicator animatie (3 dots), 3) Scroll-to-bottom FAB bij nieuwe berichten, 4) Keyboard shortcut handling, 5) Timestamps op berichten, 6) Verzend-animatie met checkmarks",
+      "ai_review": "Chat is 80% van het portaalgebruik. Deze verbeteringen maken het verschil tussen een prototype en een afgewerkt product.",
+      "team_discussion": [],
+      "created": "2026-02-14T08:46:17Z",
+      "updated": "2026-02-14T08:46:17Z"
     }
   ],
-  "updated": "2026-02-14T08:46:10Z"
+  "updated": "2026-02-14T08:46:17Z"
 }
