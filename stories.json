@@ -963,7 +963,7 @@
       "description": "Voeg een code viewer toe met syntax highlighting en tabbed interface, vergelijkbaar met Lovable's code panel. Wanneer de AI code genereert, toon deze niet alleen als markdown codeblok in de chat, maar ook in een dedicated code panel (rechts, als onderdeel van de split-pane) met: syntax highlighting per taal, tabbladen per bestand, kopieerknop, en line numbers. Ondersteun HTML, CSS, JavaScript, Python en JSON.",
       "type": "feature",
       "priority": "medium",
-      "status": "in_progress",
+      "status": "done",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Maakt het portal veel bruikbaarder voor developers en geeft het echte IDE-gevoel dat Lovable kenmerkt. Code is makkelijker te reviewen en kopiëren vanuit een dedicated panel dan vanuit chat bubbles.",
@@ -990,7 +990,7 @@
         }
       ],
       "created": "2026-02-14T11:45:42Z",
-      "updated": "2026-02-14T11:50:28Z",
+      "updated": "2026-02-14T11:56:35Z",
       "reviewed_by": "Nina van den Berg",
       "reviewer_role": "Code Review Engineer",
       "complexity": "Medium",
@@ -1038,5 +1038,5 @@
       "review_requested": true
     }
   ],
-  "updated": "2026-02-14T11:56:32Z"
+  "updated": "2026-02-14T11:56:35Z"
 }
