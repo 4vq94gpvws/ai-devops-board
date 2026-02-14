@@ -726,7 +726,7 @@
       "description": "De portal mist PWA-installeerbaarheid (Add to Home Screen) en basis accessibility features: ARIA labels op navigatie-elementen, focus management bij pagina-wisselingen, proper heading hierarchy, color contrast ratio's (WCAG AA), en keyboard-only navigatie support. Ook mist een service worker voor offline fallback en caching.",
       "type": "improvement",
       "priority": "medium",
-      "status": "review",
+      "status": "approved",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "PWA-installatie maakt de portal een echte 'app' op Enrico's telefoon. Accessibility verbetert de algehele UX voor iedereen.",
@@ -753,7 +753,7 @@
         }
       ],
       "created": "2026-02-14T08:46:32Z",
-      "updated": "2026-02-14T09:17:24Z",
+      "updated": "2026-02-14T09:58:03.396Z",
       "review_requested": true,
       "complexity": "Medium",
       "estimated_effort": "2-3 dagen",
@@ -856,5 +856,5 @@
       "review_requested": true
     }
   ],
-  "updated": "2026-02-14T09:57:59.144Z"
+  "updated": "2026-02-14T09:58:03.397Z"
 }
