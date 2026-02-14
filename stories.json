@@ -399,7 +399,23 @@
       "team_discussion": [],
       "created": "2026-02-14T08:46:17Z",
       "updated": "2026-02-14T08:46:17Z"
+    },
+    {
+      "id": "story-016",
+      "title": "AI Portal UI: Micro-animaties & Visual Polish",
+      "description": "De UI is functioneel maar voelt statisch. Mist: hover/focus states op interactieve elementen, smooth transitions bij theme switch (dark/light), entrance animaties voor widgets op het dashboard, subtle loading skeletons, en consistent gebruik van shadows/elevation. Ook de kleurenpalet kan verfijnder: meer contrast tussen actieve/inactieve states.",
+      "type": "improvement",
+      "priority": "medium",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "Micro-animaties geven de portal een premium gevoel. Het verschil tussen 'ziet er goed uit' en 'voelt geweldig'.",
+      "approach": "1) CSS transitions op alle interactieve elementen (200-300ms ease), 2) Staggered entrance animaties voor dashboard widgets, 3) Theme transition met crossfade, 4) Skeleton loading states, 5) Elevation system (3 niveaus shadows), 6) Focus-visible styling voor accessibility",
+      "ai_review": "Visual polish is wat een Lovable-achtige ervaring onderscheidt van een standaard dashboard. Relatief weinig effort, groot effect.",
+      "team_discussion": [],
+      "created": "2026-02-14T08:46:26Z",
+      "updated": "2026-02-14T08:46:26Z"
     }
   ],
-  "updated": "2026-02-14T08:46:17Z"
+  "updated": "2026-02-14T08:46:26Z"
 }
