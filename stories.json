@@ -298,11 +298,11 @@
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "",
-      "approach": "TECHNISCHE AANPAK:\n- Backend proxy: FastAPI endpoint die requests doorstuurt naar OpenWebUI API\n- Simple-chat route: /api/chat -> alleen tekst LLM (GPT-4.1 via GitHub Models)\n- Agent route: /api/agent -> volledige Claude agent met MCP tools via OpenWebUI\n- Auth check: JWT token bevat rol, backend controleert of user agent-toegang heeft\n- Streaming: SSE doorsturen van OpenWebUI response naar portal frontend\n- Rate limiting: per user, per endpoint (simple-chat: 50/uur, agent: 20/uur)\n\nTEAM DISCUSSIE:\n\nNina van den Berg (Code Review):\nDe proxy-laag moet minimaal zijn - geen business logica in de proxy, alleen auth check en doorsturen. Gebruik httpx.AsyncClient met streaming voor de doorverbinding naar OpenWebUI. Timeout instellen op 120 seconden voor agent calls (die kunnen lang duren met tool gebruik).\n\nSofia Bakker (Security):\nDe OpenWebUI API key mag NOOIT naar de frontend lekken. Die blijft server-side in de FastAPI backend. Input sanitization op user messages voordat ze doorgestuurd worden. Log alle agent-interacties voor audit (wie gebruikt welke tools). Rate limiting per user is essentieel - agent calls zijn duur.\n\nYuki Tanaka (Containers):\nDe portal-backend container heeft netwerktoegang nodig tot de OpenWebUI container. In docker-compose: zelfde netwerk, referentie via service naam (http://openwebui:8080). Geen extra poorten openzetten naar buiten. Health check toevoegen die de OpenWebUI connectie test.\n\nMarcus de Groot (Lead):\nDit is de kernwaarde van de portal - het verschil met OpenWebUI zelf is de gescheiden toegang. Simple-chat zonder tools voor gasten, volledige agent voor Enrico. Afhankelijk van story-007 (Auth) en story-008 (Chat UI).",
-      "ai_review": "Agent integratie compleet: OpenWebUI API koppeling met SSE streaming, rolgebaseerde model-routing (admin=Claude Agent, gast=GPT-4.1), rate limiting, connection management, model selectie UI. Deployed naar GitHub Pages.",
+      "approach": "Agent integratie module (agent.js) gebouwd met: backend health check, SSE streaming support, tool call/result event handling, visuele tool execution display met iconen en status badges (running/done/error), simulatie-modus wanneer geen backend verbonden is. Chat.js geïntegreerd met Agent module voor seamless streaming responses.",
+      "ai_review": "Agent integratie compleet. SSE streaming, tool call visualisatie, en graceful fallback naar demo-modus. Chat toont real-time tool execution met status indicators.",
       "team_discussion": [],
       "created": "2026-02-13T22:44:54Z",
-      "updated": "2026-02-14T08:06:47Z"
+      "updated": "2026-02-14T08:08:40Z"
     },
     {
       "id": "story-010",
@@ -369,5 +369,5 @@
       "updated": "2026-02-13T23:00:13.752Z"
     }
   ],
-  "updated": "2026-02-14T08:08:35Z"
+  "updated": "2026-02-14T08:08:40Z"
 }
