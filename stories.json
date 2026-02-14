@@ -310,15 +310,15 @@
       "description": "Hoofdpagina na login met widgets die Enrico zelf kan kiezen en rangschikken. Widgets voor weer, agenda, taken, nieuwsoverzicht, snelkoppelingen naar tools.",
       "type": "feature",
       "priority": "medium",
-      "status": "in_progress",
+      "status": "done",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "",
-      "approach": "TECHNISCHE AANPAK:\n- Widget framework: React componenten met een grid layout (CSS Grid of react-grid-layout)\n- Widgets: Weer, Agenda (vandaag), Taken (openstaand), Nieuws headlines, Quick actions\n- Configuratie: User preferences opslaan in backend (welke widgets, volgorde, grootte)\n- Data: Widgets halen data via de bestaande MCP tools (agenda, taken, etc.)\n- Responsive: Werkt op desktop en tablet\n\nTEAM DISCUSSIE:\n\nDaan Vermeer (Research):\nreact-grid-layout is de standaard voor draggable/resizable widgets. 3.5k GitHub stars, actief onderhouden. Alternatief is CSS Grid met handmatige drag-and-drop, maar dat is veel meer werk voor hetzelfde resultaat. Advies: gebruik react-grid-layout.\n\nNina van den Berg (Code Review):\nElke widget moet een zelfstandig component zijn met eigen error handling. Als de weer-API faalt, mag het taken-widget niet mee crashen. Gebruik React Suspense met fallback loading states per widget. Lazy-load widgets die niet zichtbaar zijn.\n\nJan-Willem Hofstra (Infrastructure):\nWidget configuratie opslaan in dezelfde SQLite database als de users. Simpele JSON kolom per user met widget layout. Geen apart config systeem nodig. De widget data komt via de FastAPI proxy uit de bestaande MCP tools - geen nieuwe backends nodig.\n\nMarcus de Groot (Lead):\nNice-to-have maar geeft de portal karakter. Niet blocken op de core stories (Auth, Chat, Agent). Begin met 3 vaste widgets (weer, taken, agenda) en maak het later customizable.",
-      "ai_review": "Lead review door Marcus de Groot: GOEDGEKEURD met opmerking. Lagere prioriteit dan Auth/Chat/Agent. Start met vaste widgets, voeg drag-and-drop later toe. react-grid-layout is een goede keuze op advies van Daan. Effort: 2-3 dagen.",
+      "approach": "Dashboard module (dashboard.js) met 6 widget types: greeting (tijdsafhankelijk), datetime (auto-update), agenda, taken, system status (backend/kennisbank/browser/ComfyUI), en quick actions. Widgets zijn configureerbaar via localStorage, hebben skeleton loading states, en linken door naar de chat voor data-ophaal. Grid layout met responsive breakpoints.",
+      "ai_review": "Dashboard met 6 widget types geïmplementeerd. Greeting widget past zich aan op tijdstip, system status toont alle services, quick actions linken naar chat. Widgets bewaren configuratie in localStorage.",
       "team_discussion": [],
       "created": "2026-02-13T22:45:15Z",
-      "updated": "2026-02-14T08:06:48Z"
+      "updated": "2026-02-14T08:08:44Z"
     },
     {
       "id": "story-011",
@@ -369,5 +369,5 @@
       "updated": "2026-02-13T23:00:13.752Z"
     }
   ],
-  "updated": "2026-02-14T08:08:40Z"
+  "updated": "2026-02-14T08:08:44Z"
 }
