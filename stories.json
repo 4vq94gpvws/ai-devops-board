@@ -870,7 +870,23 @@
       "team_discussion": [],
       "created": "2026-02-14T10:05:04Z",
       "updated": "2026-02-14T10:05:04Z"
+    },
+    {
+      "id": "story-021",
+      "title": "AI Portal: Split-Pane Workspace (Lovable-stijl)",
+      "description": "Implementeer een resizable split-pane workspace layout zoals Lovable.dev. Links het chatvenster/conversation panel, rechts een live preview van gegenereerde content (sandbox iframe). De gebruiker kan de verdeling aanpassen door de divider te slepen. Op mobile collapse naar tabbed view (Chat / Preview tabs). Dit is het kernkenmerk van Lovable's interface en het grootste verschil met ons huidige portal.",
+      "type": "feature",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "Transformeert het portal van een chat-app naar een echte AI workspace. Gebruikers zien direct het resultaat naast hun conversatie, precies zoals Lovable.dev. Dit is de #1 feature die het Lovable-gevoel geeft.",
+      "approach": "1) CSS Grid/Flexbox layout met resizable divider (CSS resize of custom drag handler). 2) Links: bestaand chat component. 3) Rechts: sandbox iframe panel met tab-opties (Preview / Code). 4) LocalStorage voor verdeling-voorkeur. 5) Mobile: tabbed interface met swipe tussen Chat en Preview. 6) Keyboard shortcut Cmd+\\ om panels te togglen.",
+      "ai_review": "De split-pane layout is het meest impactvolle verschil met Lovable. Relatief eenvoudig te implementeren met bestaande componenten, maar geeft een compleet andere gebruikerservaring.",
+      "team_discussion": [],
+      "created": "2026-02-14T11:45:14Z",
+      "updated": "2026-02-14T11:45:14Z"
     }
   ],
-  "updated": "2026-02-14T10:14:23Z"
+  "updated": "2026-02-14T11:45:14Z"
 }
