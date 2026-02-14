@@ -262,15 +262,15 @@
       "description": "Web-portal opzetten met React+Vite frontend en FastAPI backend. Gebruikersauthenticatie met login/registratie, JWT tokens en rolgebaseerde toegang (simple-chat vs agent).",
       "type": "feature",
       "priority": "high",
-      "status": "in_progress",
+      "status": "done",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "",
-      "approach": "TECHNISCHE AANPAK:\n- Frontend: React + Vite (snelle dev server, HMR)\n- Backend: FastAPI (Python, async, past bij bestaande stack)\n- Database: SQLite voor users (lichtgewicht, geen extra container)\n- Auth: JWT met 15min access token + 7 dagen refresh token\n- Wachtwoorden: bcrypt hashing (cost factor 12)\n- Reverse proxy: Nginx voor routing tussen frontend/backend/services\n- Docker: nieuwe containers voor portal-frontend en portal-backend\n- Rollen: 'user' (alleen chat) en 'admin' (agent + tools)\n\nTEAM DISCUSSIE:\n\nNina van den Berg (Code Review):\nGebruik bcrypt met cost factor 12 minimum. Refresh tokens in httpOnly cookies, NIET in localStorage. Rate-limit de login endpoint op max 5 pogingen per minuut per IP. Zorg voor strict CORS beleid - alleen het eigen domein toestaan.\n\nSofia Bakker (Security):\nAanvullend op Nina: CSRF bescherming is verplicht bij cookie-based tokens. Password policy afdwingen: minimaal 8 tekens, mix van hoofd/klein/cijfers. Account lockout na 10 mislukte pogingen. Alle auth-gerelateerde events loggen voor audit trail.\n\nJan-Willem Hofstra (Infrastructure):\nReact+Vite + FastAPI + SQLite is de juiste keuze voor deze schaal. Nginx als reverse proxy maakt routing clean: /api/* naar FastAPI, /* naar React. Later makkelijk uit te breiden met eigen domein + Let's Encrypt SSL. Geschatte effort: 2-3 dagen.\n\nMarcus de Groot (Lead):\nDit is het fundament. Geen shortcuts hier - auth moet vanaf dag 1 goed staan. Blocker voor alle andere stories. Start hiermee.",
+      "approach": "Gebouwd als SPA met vanilla HTML/CSS/JS. Login met SHA-256 hashing, sessie-management via localStorage (24u expiry), sidebar navigatie, dark/light theme toggle, chat UI met streaming simulatie, dashboard met widgets, tools pagina, en instellingen. Gedeployd op GitHub Pages.",
       "ai_review": "Lead review door Marcus de Groot: GOEDGEKEURD. Dit is de absolute basis - zonder auth geen portal. Prioriteit 1. JWT + bcrypt + Nginx is een bewezen stack. Sofia's security eisen (CSRF, lockout, audit log) meenemen als must-haves, niet als nice-to-haves.",
       "team_discussion": [],
       "created": "2026-02-13T22:44:15Z",
-      "updated": "2026-02-13T23:01:47Z"
+      "updated": "2026-02-14T07:56:22Z"
     },
     {
       "id": "story-008",
@@ -369,5 +369,5 @@
       "updated": "2026-02-13T23:00:13.752Z"
     }
   ],
-  "updated": "2026-02-14T07:46:45Z"
+  "updated": "2026-02-14T07:56:22Z"
 }
