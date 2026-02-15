@@ -270,47 +270,6 @@
       "reviewer_role": "Lead DevOps Engineer"
     },
     {
-      "id": "story-x7cy",
-      "title": "Zoekopdrachten verbeteren",
-      "description": "De huidige zoekfunctionaliteit van de AI-assistent (zoek_internet, zoek_kennisbank, deep search workflow) levert niet altijd de meest relevante resultaten op. Problemen: (1) zoek_internet geeft soms verouderde of irrelevante bronnen terug, zonder ranking op betrouwbaarheid of actualiteit. (2) zoek_kennisbank doorzoekt de Neo4j kennisgraaf en opgeslagen feiten, maar mist soms relevante entiteiten door beperkte fuzzy matching. (3) De deep search workflow (decompose -> zoek -> lees -> synthesize) is krachtig maar wordt niet altijd ingezet wanneer dat nuttig zou zijn. (4) Er is geen fallback-mechanisme: als een bron geen resultaat geeft, wordt niet automatisch een alternatieve bron geprobeerd. (5) Zoekresultaten worden niet gecached, waardoor dezelfde query meerdere keren dezelfde API-calls triggert. Gewenste situatie: Een robuuster zoeksysteem dat slimmer kiest tussen bronnen, resultaten rankt op relevantie en betrouwbaarheid, fuzzy matching toepast in de kennisbank, caching implementeert voor herhaalde queries, en de deep search workflow automatisch activeert bij complexe vragen. Scope: zoek_internet tool, zoek_kennisbank tool, deep search decompose/synthesize workflow, en de beslislogica die bepaalt welke zoekstrategie wordt ingezet.",
-      "type": "improvement",
-      "priority": "high",
-      "status": "review",
-      "project": "AI Assistent",
-      "author": "Enrico (handmatig)",
-      "impact": "",
-      "approach": "Technisch plan - Zoekopdrachten verbeteren:\n\nFASE 1 - Analyse en diagnose (1-2 dagen):\n- Huidige zoek-tools (zoek_internet, zoek_kennisbank) profilen op response-kwaliteit\n- Loggen welke queries slechte resultaten opleveren\n- Neo4j query-patronen analyseren op gemiste matches\n\nFASE 2 - Kennisbank verbetering (2-3 dagen):\n- Fuzzy matching implementeren in zoek_kennisbank via Neo4j full-text search indexes met Lucene fuzzy syntax (bijv. \"enrico~1\")\n- Entity resolution verbeteren: synoniemen en aliassen toevoegen aan de kennisgraaf\n- Hop-depth dynamisch maken op basis van query-complexiteit (simpele naam-lookup = 1 hop, relatie-vragen = 2-3 hops)\n- Relevantie-scoring toevoegen aan resultaten (gewogen op entity-type, relatie-sterkte, recentheid)\n\nFASE 3 - Internet zoeken verbeteren (2-3 dagen):\n- Bron-betrouwbaarheidsscoring implementeren (bekende nieuwsbronnen zoals BNR, FD, NOS hoger ranken)\n- Datumfiltering toevoegen: recente resultaten prefereren voor nieuws, tijdloze voor kennisartikelen\n- Fallback-mechanisme: als primaire zoekbron minder dan 2 relevante resultaten geeft, automatisch alternatieve query-varianten proberen\n- Result deduplicatie: dezelfde content van verschillende URLs samenvoegen\n\nFASE 4 - Caching laag (1-2 dagen):\n- In-memory cache (TTL-based) voor zoekresultaten implementeren via Python dict met timestamp\n- Cache-key: genormaliseerde query string (lowercase, gestript)\n- TTL: 1 uur voor internet-resultaten, 24 uur voor kennisbank-resultaten\n- Cache invalidatie bij nieuwe documenten/feiten in de kennisbank\n\nFASE 5 - Smart routing en deep search activatie (2-3 dagen):\n- Query-classifier bouwen die bepaalt of een vraag simpel (1x zoek_internet) of complex (deep search workflow) is\n- Heuristieken: vragen met \"vergelijk\", \"analyseer\", \"wat zijn de voor- en nadelen\" triggeren deep search\n- Multi-source orchestration: parallel zoeken in kennisbank EN internet, resultaten mergen en ranken\n- De deep_search_decompose stap verbeteren met betere sub-query generatie\n\nTechnologieen: Python, Neo4j Cypher (full-text indexes), httpx voor async HTTP, TTL caching. Componenten: MCP tools (zoek_internet, zoek_kennisbank), deep search workflow tools, kennisgraaf schema.",
-      "ai_review": "Complexiteit: Hoog. Effort: 1-2 weken. De story raakt de kern van de AI-assistent. Gefaseerde aanpak minimaliseert risico. Grootste impact verwacht van fuzzy matching in kennisbank en smart routing/deep search activatie.",
-      "team_discussion": [
-        {
-          "from": "Nina van den Berg",
-          "role": "Code Review Engineer",
-          "comment": "De caching-implementatie moet thread-safe zijn als er meerdere requests parallel binnenkomen. Gebruik een LRU cache met TTL, niet een simpele dict. Ook belangrijk: de query-normalisatie voor cache-keys moet grondig zijn - lowercase alleen is niet genoeg, denk aan stopwoorden, synoniemen en woordvolgorde. Schrijf unit tests voor de cache-laag en de fuzzy matching.",
-          "emoji": "---"
-        },
-        {
-          "from": "Daan Vermeer",
-          "role": "R&D Engineer",
-          "comment": "Voor de query-classifier in fase 5 zou ik aanraden om eerst een spike te doen met het LLM zelf als classifier, in plaats van hardcoded heuristieken. Een korte system prompt die de query classificeert als 'simpel' of 'complex' is betrouwbaarder dan keyword-matching. Voor de fuzzy matching in Neo4j: test of Lucene fuzzy search (~1, ~2) voldoende is of dat we een embedding-based similarity search nodig hebben.",
-          "emoji": "---"
-        },
-        {
-          "from": "Jan-Willem Hofstra",
-          "role": "Infrastructure Architect",
-          "comment": "Architecturaal zou ik een abstractielaag voorstellen tussen de agent en de zoek-tools: een SearchOrchestrator die de routing, caching en result-merging afhandelt. Dit voorkomt dat de logica verspreid raakt over individuele tools. De cache kan starten als in-memory maar moet later makkelijk vervangbaar zijn door Redis als de dataset groeit. Zorg dat de interface al rekening houdt met die migratie.",
-          "emoji": "---"
-        }
-      ],
-      "review_comment": "Goed en belangrijk voorstel van Enrico. De zoekfunctionaliteit is het fundament van de assistent - verbeteringen hier hebben impact op vrijwel alle use cases. Het gefaseerde plan is verstandig: eerst meten wat er mis gaat (fase 1), dan gericht verbeteren. De caching-laag in fase 4 is een quick win die direct merkbaar wordt. Aandachtspunt: zorg dat de cache-invalidatie waterdicht is, anders krijg je stale results. De smart routing in fase 5 is het meest ambitieus maar ook het meest waardevol. Geschatte doorlooptijd: 8-10 werkdagen.",
-      "reviewed_by": "Marcus de Groot",
-      "reviewer_role": "Lead DevOps Engineer",
-      "complexity": "Hoog",
-      "estimated_effort": "1-2 weken",
-      "created": "2026-02-12T19:08:52Z",
-      "updated": "2026-02-15T07:46:21Z",
-      "review_requested": true
-    },
-    {
       "id": "story-007",
       "title": "AI Portal: Basisportal + Authenticatie",
       "description": "Web-portal opzetten met React+Vite frontend en FastAPI backend. Gebruikersauthenticatie met login/registratie, JWT tokens en rolgebaseerde toegang (simple-chat vs agent).",
@@ -1042,5 +1001,5 @@
       "review_requested": true
     }
   ],
-  "updated": "2026-02-15T07:46:21Z"
+  "updated": "2026-02-15T13:08:39.863Z"
 }
