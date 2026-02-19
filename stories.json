@@ -54,7 +54,7 @@
       "description": "De huidige instellingenpagina van AI Portal heeft UX-problemen op het gebied van schaalbaarheid en layout. Content staat linksboven geplakt zonder max-width container, secties missen visuele structuur (geen cards/separators), en de informatiehierarchie klopt niet: \"App Versie\" staat onder \"Account\" terwijl het meta-info is, en de \"Over\" tekst staat op hetzelfde niveau als actieve instellingen. Bij toekomstige uitbreiding (notificaties, API keys, taalvoorkeur) schaalt de huidige opzet niet.",
       "type": "improvement",
       "priority": "medium",
-      "status": "review",
+      "status": "approved",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Verbetert de gebruikerservaring op alle schermformaten, maakt de pagina toekomstbestendig voor nieuwe instellingen, en zorgt voor een professionelere uitstraling die past bij de rest van het portal.",
@@ -62,8 +62,8 @@
       "ai_review": "Noodzakelijke UX-verbetering die technisch laagdrempelig is maar de schaalbaarheid en professionaliteit van het portal significant verhoogt.",
       "team_discussion": [],
       "created": "2026-02-19T12:21:34Z",
-      "updated": "2026-02-19T12:21:34Z"
+      "updated": "2026-02-19T15:29:40.400Z"
     }
   ],
-  "updated": "2026-02-19T12:21:34Z"
+  "updated": "2026-02-19T15:29:46.124Z"
 }
