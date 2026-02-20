@@ -66,7 +66,23 @@
       "review_requested": true,
       "complexity": "Medium",
       "estimated_effort": "Onbekend"
+    },
+    {
+      "id": "story-005",
+      "title": "Token Usage Monitoring & Rate Limiting per Model",
+      "description": "Implementeer een compleet token usage monitoring systeem voor de AI Portal. Admins kunnen via de instellingenpagina het tokenverbruik per gebruiker inzien en limieten instellen per model (dag- en weeklimiet). Dit omvat: 1) Backend tracking van alle token usage per gebruiker per model per request, 2) Admin dashboard met overzicht van verbruik (grafieken, tabellen), 3) Configureerbare limieten per model (dagelijks en wekelijks), 4) Enforcement: gebruikers krijgen een melding wanneer ze hun limiet naderen of bereiken, 5) Reset mechanisme (automatisch per dag/week cycle).",
+      "type": "feature",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "Geeft admins volledige controle over API-kosten en voorkomt onverwacht hoog verbruik. Essentieel voor multi-user omgevingen waar kostenbeheersing nodig is.",
+      "approach": "Backend: token counting middleware in de proxy die elke request/response logt (model, input_tokens, output_tokens, user, timestamp) naar PostgreSQL. Admin UI: nieuwe sectie in instellingen met per-model usage overzicht en limiet-configuratie. Enforcement: pre-request check tegen limieten, met duidelijke foutmelding bij overschrijding. Frontend: usage indicatoren voor gebruikers zelf (optioneel).",
+      "ai_review": "Kritische feature voor kostenbeheer in multi-user setups. Technisch haalbaar met beperkte architectuurwijzigingen.",
+      "team_discussion": [],
+      "created": "2026-02-20T13:02:36Z",
+      "updated": "2026-02-20T13:02:36Z"
     }
   ],
-  "updated": "2026-02-19T21:25:50Z"
+  "updated": "2026-02-20T13:02:36Z"
 }
