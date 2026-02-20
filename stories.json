@@ -41,7 +41,7 @@
       "description": "Alle referenties naar 'AI Portal' in de frontend vervangen door 'Nova Chat' met ondertitel 'AI that works for you'. Betreft index.html (titel, meta, login, sidebar, welcome) en manifest.json.",
       "type": "improvement",
       "priority": "high",
-      "status": "in_progress",
+      "status": "review",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Geeft de portal een eigen identiteit en professionele branding",
@@ -49,8 +49,11 @@
       "ai_review": "Straightforward rebranding met minimale risico's. Puur tekst-wijzigingen.",
       "team_discussion": [],
       "created": "2026-02-20T15:51:57Z",
-      "updated": "2026-02-20T15:51:57Z"
+      "updated": "2026-02-20T15:52:18Z",
+      "review_requested": true,
+      "complexity": "Medium",
+      "estimated_effort": "Onbekend"
     }
   ],
-  "updated": "2026-02-20T15:51:57Z"
+  "updated": "2026-02-20T15:52:18Z"
 }
