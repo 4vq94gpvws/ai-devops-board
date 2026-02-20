@@ -53,7 +53,23 @@
       "review_requested": true,
       "complexity": "Medium",
       "estimated_effort": "Onbekend"
+    },
+    {
+      "id": "story-007",
+      "title": "Nova Chat logo en branding doorvoeren in AI Portal",
+      "description": "Het ontworpen Nova Chat logo (chat-bubble met nova-ster, klok-markers en glow-effect) doorvoeren in de hele AI Portal. Vervangt het huidige paarse \"AI\" icoon en Material Icon smart_toy door het nieuwe Nova Chat SVG logo. Updates in: icon.svg (nieuw logo), index.html (login-scherm logo, titel, sidebar), manifest.json (naam naar Nova Chat), en favicon integratie.",
+      "type": "improvement",
+      "priority": "high",
+      "status": "review",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "Geeft de AI Portal een herkenbare, professionele visuele identiteit die past bij de blauw/cyaan kleurvoorkeur en de Nova Chat branding.",
+      "approach": "1. icon.svg vervangen door het Nova Chat logo SVG (compact, zonder preview-elementen). 2. Login-scherm: Material Icon smart_toy vervangen door inline SVG of img-tag naar icon.svg. 3. Titel en manifest.json updaten naar Nova Chat. 4. Sidebar header logo bijwerken.",
+      "ai_review": "Noodzakelijke branding-update die het paarse icoon vervangt door het goedgekeurde Nova Chat ontwerp in blauw/cyaan.",
+      "team_discussion": [],
+      "created": "2026-02-20T16:27:31Z",
+      "updated": "2026-02-20T16:27:31Z"
     }
   ],
-  "updated": "2026-02-20T15:52:18Z"
+  "updated": "2026-02-20T16:27:31Z"
 }
