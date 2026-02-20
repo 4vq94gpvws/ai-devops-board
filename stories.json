@@ -1,22 +1,6 @@
 {
   "stories": [
     {
-      "id": "story-001",
-      "title": "Bijlagen persistent maken binnen chatsessie",
-      "description": "Wanneer een gebruiker in het AI Portal (frontend) een bijlage uploadt bij een vraag, verdwijnt deze bijlage na de volgende beurt. Bij een vervolgvraag over hetzelfde document moet het opnieuw geüpload worden, wat onnodig tijd kost omdat Docling het document opnieuw moet extraheren. Bijlagen moeten persistent blijven binnen de gehele chatsessie totdat de chat verwijderd wordt of een configureerbare TTL (time-to-live) verloopt.",
-      "type": "improvement",
-      "priority": "high",
-      "status": "review",
-      "project": "AI Portal",
-      "author": "AI Assistent",
-      "impact": "Grote UX-verbetering: gebruikers hoeven documenten niet opnieuw te uploaden bij vervolgvragen. Bespaart wachttijd (Docling extractie duurt lang) en maakt documentgesprekken veel vloeiender. Verlaagt frustratie en verhoogt adoptie van document-analyse features.",
-      "approach": "1) Backend: Bij upload bijlage opslaan in sessie-context (bijv. Redis of in-memory dict gekoppeld aan chat_id) met metadata (filename, extracted text, upload timestamp). 2) Bij elke volgende beurt in dezelfde chat: automatisch alle actieve bijlagen meesturen als context. 3) TTL-mechanisme: bijlagen verlopen na X uur (configureerbaar) of bij chat-verwijdering. 4) Frontend: visuele indicator tonen welke documenten actief zijn in de huidige chat, met optie om handmatig te verwijderen. 5) Cache-key baseren op file hash zodat herhaalde uploads van hetzelfde document direct uit cache komen zonder opnieuw Docling te draaien.",
-      "ai_review": "Essentiële UX-fix die documentgesprekken werkbaar maakt. Relatief straightforward met sessie-gebonden caching en file hashing.",
-      "team_discussion": [],
-      "created": "2026-02-18T13:50:30Z",
-      "updated": "2026-02-18T13:50:30Z"
-    },
-    {
       "id": "story-002",
       "title": "Chatvenster auto-resize bij lange invoer",
       "description": "Het tekstinvoerveld in het AI Portal chatvenster groeit niet mee wanneer de gebruiker veel tekst typt. Bij langere berichten wordt de tekst moeilijk leesbaar omdat het venster een vaste hoogte houdt. Het invoerveld moet dynamisch meegroeien met de inhoud, tot een maximale hoogte (bijv. 50% van het scherm), waarna het scrollbaar wordt.",
@@ -84,5 +68,5 @@
       "updated": "2026-02-20T13:02:36Z"
     }
   ],
-  "updated": "2026-02-20T13:02:36Z"
+  "updated": "2026-02-20T13:03:59.548Z"
 }
