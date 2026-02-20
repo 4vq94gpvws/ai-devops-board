@@ -1,22 +1,6 @@
 {
   "stories": [
     {
-      "id": "story-003",
-      "title": "GitHub-naar-Vercel deployment pipeline",
-      "description": "Probeersels en projecten die op GitHub staan en die Enrico \"live\" wil brengen, moeten eenvoudig naar Vercel gedeployed kunnen worden. Nu worden projecten via GitHub Pages gehost, maar voor serieuze/live projecten is Vercel geschikter (custom domains, serverless functions, edge network, automatische previews). De AI-assistent moet een project vanuit GitHub met één commando naar Vercel kunnen pushen.",
-      "type": "feature",
-      "priority": "high",
-      "status": "review",
-      "project": "AI Assistent",
-      "author": "AI Assistent",
-      "impact": "Maakt de stap van prototype naar productie veel sneller. GitHub Pages is prima voor demos, maar Vercel biedt custom domains, serverless functions, edge caching en automatische preview deployments. Enrico kan hiermee probeersels direct live zetten voor klanten of gebruikers.",
-      "approach": "1) Vercel CLI of Vercel API integratie als nieuwe MCP tool (deploy_to_vercel). 2) Input: GitHub repo naam, optioneel project-naam en framework preset (Next.js, Vite, static, etc.). 3) De tool koppelt de GitHub repo aan Vercel, triggert een deployment en retourneert de live URL. 4) Vercel token opslaan als VERCEL_TOKEN env var. 5) Ondersteuning voor: eerste deployment (nieuw project aanmaken), herdeployment (bestaand project updaten), en environment variables meegeven. 6) Fallback: als geen framework gedetecteerd wordt, deployen als static site.",
-      "ai_review": "Logische uitbreiding van de bestaande deploy_to_github flow. Vercel API is goed gedocumenteerd, implementatie via een custom MCP tool is straightforward.",
-      "team_discussion": [],
-      "created": "2026-02-18T16:39:04Z",
-      "updated": "2026-02-18T16:39:04Z"
-    },
-    {
       "id": "story-004",
       "title": "Instellingen-pagina UX redesign: schaalbaarheid en positionering",
       "description": "De huidige instellingenpagina van AI Portal heeft UX-problemen op het gebied van schaalbaarheid en layout. Content staat linksboven geplakt zonder max-width container, secties missen visuele structuur (geen cards/separators), en de informatiehierarchie klopt niet: \"App Versie\" staat onder \"Account\" terwijl het meta-info is, en de \"Over\" tekst staat op hetzelfde niveau als actieve instellingen. Bij toekomstige uitbreiding (notificaties, API keys, taalvoorkeur) schaalt de huidige opzet niet.",
@@ -52,5 +36,5 @@
       "updated": "2026-02-20T13:02:36Z"
     }
   ],
-  "updated": "2026-02-20T13:04:04.057Z"
+  "updated": "2026-02-20T15:21:21.405Z"
 }
