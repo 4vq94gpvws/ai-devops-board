@@ -1,22 +1,6 @@
 {
   "stories": [
     {
-      "id": "story-002",
-      "title": "Chatvenster auto-resize bij lange invoer",
-      "description": "Het tekstinvoerveld in het AI Portal chatvenster groeit niet mee wanneer de gebruiker veel tekst typt. Bij langere berichten wordt de tekst moeilijk leesbaar omdat het venster een vaste hoogte houdt. Het invoerveld moet dynamisch meegroeien met de inhoud, tot een maximale hoogte (bijv. 50% van het scherm), waarna het scrollbaar wordt.",
-      "type": "improvement",
-      "priority": "medium",
-      "status": "review",
-      "project": "AI Portal",
-      "author": "AI Assistent",
-      "impact": "Verbetert de schrijfervaring aanzienlijk, vooral bij langere prompts of code-invoer. Gebruikers kunnen hun eigen tekst beter overzien en bewerken voordat ze versturen. Kleine change, grote UX-winst.",
-      "approach": "1) Textarea vervangen door auto-resizing component: bij elke input-event de scrollHeight meten en als hoogte instellen. 2) CSS: min-height instellen op 1 regel, max-height op ~50vh, daarna overflow-y: auto voor scroll. 3) Bij versturen resetten naar min-height. 4) Smooth transition toevoegen zodat het veld vloeiend groeit/krimpt. 5) Testen met edge cases: plakken van grote teksten, code blocks, en lege berichten na lang bericht.",
-      "ai_review": "Kleine frontend fix met grote UX-impact. Standaard textarea auto-resize patroon, binnen een uur te implementeren.",
-      "team_discussion": [],
-      "created": "2026-02-18T13:51:39Z",
-      "updated": "2026-02-18T13:51:39Z"
-    },
-    {
       "id": "story-003",
       "title": "GitHub-naar-Vercel deployment pipeline",
       "description": "Probeersels en projecten die op GitHub staan en die Enrico \"live\" wil brengen, moeten eenvoudig naar Vercel gedeployed kunnen worden. Nu worden projecten via GitHub Pages gehost, maar voor serieuze/live projecten is Vercel geschikter (custom domains, serverless functions, edge network, automatische previews). De AI-assistent moet een project vanuit GitHub met één commando naar Vercel kunnen pushen.",
@@ -68,5 +52,5 @@
       "updated": "2026-02-20T13:02:36Z"
     }
   ],
-  "updated": "2026-02-20T13:03:59.548Z"
+  "updated": "2026-02-20T13:04:04.057Z"
 }
