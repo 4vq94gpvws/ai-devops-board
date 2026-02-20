@@ -34,7 +34,23 @@
       "team_discussion": [],
       "created": "2026-02-20T13:02:36Z",
       "updated": "2026-02-20T13:02:36Z"
+    },
+    {
+      "id": "story-006",
+      "title": "Rebranding AI Portal naar Nova Chat",
+      "description": "Alle referenties naar 'AI Portal' in de frontend vervangen door 'Nova Chat' met ondertitel 'AI that works for you'. Betreft index.html (titel, meta, login, sidebar, welcome) en manifest.json.",
+      "type": "improvement",
+      "priority": "high",
+      "status": "in_progress",
+      "project": "AI Portal",
+      "author": "AI Assistent",
+      "impact": "Geeft de portal een eigen identiteit en professionele branding",
+      "approach": "Find/replace van alle AI Portal referenties in index.html en manifest.json via create_code_pr()",
+      "ai_review": "Straightforward rebranding met minimale risico's. Puur tekst-wijzigingen.",
+      "team_discussion": [],
+      "created": "2026-02-20T15:51:57Z",
+      "updated": "2026-02-20T15:51:57Z"
     }
   ],
-  "updated": "2026-02-20T15:21:21.405Z"
+  "updated": "2026-02-20T15:51:57Z"
 }
