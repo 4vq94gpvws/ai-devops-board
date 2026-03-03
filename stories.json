@@ -177,7 +177,7 @@
       "description": "OpenRouter heeft geen /audio/speech endpoint waardoor TTS calls een 404 geven. Fix: gebruik direct de OpenAI API (https://api.openai.com/v1/audio/speech) met een apart OpenAI API key veld in de settings.",
       "type": "bugfix",
       "priority": "high",
-      "status": "in_progress",
+      "status": "done",
       "project": "VoiceDocs",
       "author": "AI Assistent",
       "impact": "TTS/podcast generatie werkt weer - kernfunctionaliteit hersteld",
@@ -185,8 +185,12 @@
       "ai_review": "",
       "team_discussion": [],
       "created": "2026-03-03T12:54:39Z",
-      "updated": "2026-03-03T12:54:39Z"
+      "updated": "2026-03-03T12:56:34Z",
+      "review_comment": "Fix gedeployd. 4 bestanden gewijzigd: types/index.ts, utils/storage.ts, utils/api.ts, pages/SettingsPage.tsx. TTS gebruikt nu direct de OpenAI API met een apart API key veld.",
+      "review_requested": true,
+      "complexity": "Medium",
+      "estimated_effort": "Onbekend"
     }
   ],
-  "updated": "2026-03-03T12:54:39Z"
+  "updated": "2026-03-03T12:56:34Z"
 }
