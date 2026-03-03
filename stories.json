@@ -36,25 +36,6 @@
       "updated": "2026-02-20T13:02:36Z"
     },
     {
-      "id": "story-006",
-      "title": "Rebranding AI Portal naar Nova Chat",
-      "description": "Alle referenties naar 'AI Portal' in de frontend vervangen door 'Nova Chat' met ondertitel 'AI that works for you'. Betreft index.html (titel, meta, login, sidebar, welcome) en manifest.json.",
-      "type": "improvement",
-      "priority": "high",
-      "status": "review",
-      "project": "AI Portal",
-      "author": "AI Assistent",
-      "impact": "Geeft de portal een eigen identiteit en professionele branding",
-      "approach": "Find/replace van alle AI Portal referenties in index.html en manifest.json via create_code_pr()",
-      "ai_review": "Straightforward rebranding met minimale risico's. Puur tekst-wijzigingen.",
-      "team_discussion": [],
-      "created": "2026-02-20T15:51:57Z",
-      "updated": "2026-02-20T15:52:18Z",
-      "review_requested": true,
-      "complexity": "Medium",
-      "estimated_effort": "Onbekend"
-    },
-    {
       "id": "story-008",
       "title": "VoiceDocs - Document-to-Podcast & Vergadering Assistent",
       "description": "Complete full-stack app met React/TypeScript/Vite frontend, Express backend, Supabase database. Functies: document-to-podcast conversie via OpenRouter LLM+TTS, vergadering opname/transcriptie via Groq Whisper, actiepunten beheer, dashboard. Deploy naar Vercel.",
@@ -211,5 +192,5 @@
       "estimated_effort": "Onbekend"
     }
   ],
-  "updated": "2026-03-03T17:54:27.010Z"
+  "updated": "2026-03-03T17:54:33.103Z"
 }
