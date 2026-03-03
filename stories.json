@@ -230,7 +230,23 @@
       "review_requested": true,
       "complexity": "Medium",
       "estimated_effort": "Onbekend"
+    },
+    {
+      "id": "story-015",
+      "title": "VoiceDocs 405 fix - Vercel Serverless Functions toevoegen",
+      "description": "De frontend doet POST requests naar /api/chat, /api/tts en /api/transcribe maar deze serverless functions bestaan niet in de repo. Dit veroorzaakt 405 errors. Drie Vercel Serverless Functions moeten worden aangemaakt die als proxy fungeren naar OpenRouter en Groq APIs, met CORS headers en OPTIONS preflight support.",
+      "type": "bugfix",
+      "priority": "critical",
+      "status": "in_progress",
+      "project": "VoiceDocs",
+      "author": "AI Assistent",
+      "impact": "",
+      "approach": "1. Importeer bestaande repo naar sandbox. 2. Voeg api/chat.ts, api/tts.ts, api/transcribe.ts toe. 3. Update vercel.json voor API routing. 4. Deploy naar Vercel.",
+      "ai_review": "",
+      "team_discussion": [],
+      "created": "2026-03-03T16:13:51Z",
+      "updated": "2026-03-03T16:13:51Z"
     }
   ],
-  "updated": "2026-03-03T13:25:39Z"
+  "updated": "2026-03-03T16:13:51Z"
 }
