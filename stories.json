@@ -101,7 +101,7 @@
       "description": "Complete full-stack app met React/TypeScript/Vite frontend, Express backend, Supabase database. Functies: document-to-podcast conversie via OpenRouter LLM+TTS, vergadering opname/transcriptie via Groq Whisper, actiepunten beheer, dashboard. Deploy naar Vercel.",
       "type": "feature",
       "priority": "high",
-      "status": "in_progress",
+      "status": "done",
       "project": "AI Assistent",
       "author": "AI Assistent",
       "impact": "Nieuwe product - complete SaaS applicatie voor document-to-podcast en vergadering management",
@@ -109,8 +109,12 @@
       "ai_review": "",
       "team_discussion": [],
       "created": "2026-03-03T08:48:36Z",
-      "updated": "2026-03-03T08:48:36Z"
+      "updated": "2026-03-03T08:58:25Z",
+      "review_comment": "Volledig gebouwd en gedeployd. App bevat: Dashboard, Podcasts module (document upload + LLM scriptwriting + TTS), Vergaderingen module (audio recorder + Groq Whisper transcriptie + LLM samenvatting + actiepunten), Instellingen pagina. Professioneel donker thema met Tailwind CSS. Live op Vercel.",
+      "review_requested": true,
+      "complexity": "Medium",
+      "estimated_effort": "Onbekend"
     }
   ],
-  "updated": "2026-03-03T08:48:36Z"
+  "updated": "2026-03-03T08:58:25Z"
 }
