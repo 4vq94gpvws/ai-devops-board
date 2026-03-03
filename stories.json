@@ -210,7 +210,23 @@
       "review_requested": true,
       "complexity": "Medium",
       "estimated_effort": "Onbekend"
+    },
+    {
+      "id": "story-014",
+      "title": "VoiceDocs CORS fix - Vercel serverless proxy",
+      "description": "TTS chunk 1/2 \"Load failed\" error door CORS blokkade op directe browser fetch naar api.groq.com. Oplossing: Vercel serverless API routes als proxy voor Groq TTS, Groq Whisper en OpenRouter LLM calls.",
+      "type": "bugfix",
+      "priority": "high",
+      "status": "in_progress",
+      "project": "AI Assistent",
+      "author": "AI Assistent",
+      "impact": "Kritiek - TTS werkt niet door CORS, app is niet bruikbaar voor spraak",
+      "approach": "1. Vercel serverless functions aanmaken als proxy (api/tts.ts, api/transcribe.ts, api/chat.ts). 2. src/utils/api.ts updaten om via proxy te gaan. 3. vercel.json toevoegen voor routing.",
+      "ai_review": "",
+      "team_discussion": [],
+      "created": "2026-03-03T13:21:58Z",
+      "updated": "2026-03-03T13:21:58Z"
     }
   ],
-  "updated": "2026-03-03T13:16:29Z"
+  "updated": "2026-03-03T13:21:58Z"
 }
