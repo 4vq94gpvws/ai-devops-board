@@ -197,7 +197,7 @@
       "description": "De Groq TTS audio generatie faalt met \"load failed\" error. Oorzaken: WAV combining logica is foutgevoelig (buffer.slice bug, header mismatch), error handling bij chunk failures kan binaire data als JSON proberen te parsen, en MIME types zijn inconsistent. Fix: vereenvoudig generateTTS met directe ArrayBuffer verwerking, robuustere WAV header parsing, en betere error handling per chunk.",
       "type": "bugfix",
       "priority": "high",
-      "status": "in_progress",
+      "status": "done",
       "project": "VoiceDocs",
       "author": "AI Assistent",
       "impact": "",
@@ -205,8 +205,12 @@
       "ai_review": "",
       "team_discussion": [],
       "created": "2026-03-03T13:13:38Z",
-      "updated": "2026-03-03T13:13:38Z"
+      "updated": "2026-03-03T13:16:29Z",
+      "review_comment": "Fix gedeployd naar Vercel en broncode gepusht naar GitHub. 5 bestanden aangepast: api.ts, audio.ts, useAudioPlayer.ts, AudioPlayer.tsx, PodcastPage.tsx.",
+      "review_requested": true,
+      "complexity": "Medium",
+      "estimated_effort": "Onbekend"
     }
   ],
-  "updated": "2026-03-03T13:13:38Z"
+  "updated": "2026-03-03T13:16:29Z"
 }
