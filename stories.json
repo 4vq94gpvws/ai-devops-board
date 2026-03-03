@@ -217,7 +217,7 @@
       "description": "TTS chunk 1/2 \"Load failed\" error door CORS blokkade op directe browser fetch naar api.groq.com. Oplossing: Vercel serverless API routes als proxy voor Groq TTS, Groq Whisper en OpenRouter LLM calls.",
       "type": "bugfix",
       "priority": "high",
-      "status": "in_progress",
+      "status": "done",
       "project": "AI Assistent",
       "author": "AI Assistent",
       "impact": "Kritiek - TTS werkt niet door CORS, app is niet bruikbaar voor spraak",
@@ -225,8 +225,12 @@
       "ai_review": "",
       "team_discussion": [],
       "created": "2026-03-03T13:21:58Z",
-      "updated": "2026-03-03T13:21:58Z"
+      "updated": "2026-03-03T13:25:39Z",
+      "review_comment": "CORS fix gedeployed. 3 serverless proxy routes aangemaakt (api/tts.ts, api/transcribe.ts, api/chat.ts). Beide API-bestanden (src/utils/api.ts en src/lib/api.ts) aangepast om via /api/ proxy te gaan ipv directe externe calls. vercel.json geupdate met correcte rewrite rules.",
+      "review_requested": true,
+      "complexity": "Medium",
+      "estimated_effort": "Onbekend"
     }
   ],
-  "updated": "2026-03-03T13:21:58Z"
+  "updated": "2026-03-03T13:25:39Z"
 }
