@@ -94,7 +94,23 @@
       "complexity": "Laag",
       "estimated_effort": "1 dag",
       "review_requested": true
+    },
+    {
+      "id": "story-008",
+      "title": "VoiceDocs - Document-to-Podcast & Vergadering Assistent",
+      "description": "Complete full-stack app met React/TypeScript/Vite frontend, Express backend, Supabase database. Functies: document-to-podcast conversie via OpenRouter LLM+TTS, vergadering opname/transcriptie via Groq Whisper, actiepunten beheer, dashboard. Deploy naar Vercel.",
+      "type": "feature",
+      "priority": "high",
+      "status": "in_progress",
+      "project": "AI Assistent",
+      "author": "AI Assistent",
+      "impact": "Nieuwe product - complete SaaS applicatie voor document-to-podcast en vergadering management",
+      "approach": "1. Database schema in Supabase 2. Alle frontend components 3. Backend API routes 4. Deploy naar Vercel",
+      "ai_review": "",
+      "team_discussion": [],
+      "created": "2026-03-03T08:48:36Z",
+      "updated": "2026-03-03T08:48:36Z"
     }
   ],
-  "updated": "2026-02-20T16:28:42Z"
+  "updated": "2026-03-03T08:48:36Z"
 }
