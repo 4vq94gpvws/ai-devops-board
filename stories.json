@@ -157,7 +157,7 @@
       "description": "Volledige herbouw van de VoiceDocs app (Document-to-Podcast & Vergadering Assistent). React 18 + TypeScript + Tailwind CSS dark theme. Features: Dashboard, Document-to-Podcast, Meeting Recording/Transcription, Action Points, Audio Player, Settings. Deploy naar Vercel.",
       "type": "feature",
       "priority": "high",
-      "status": "in_progress",
+      "status": "done",
       "project": "VoiceDocs",
       "author": "AI Assistent",
       "impact": "",
@@ -165,8 +165,12 @@
       "ai_review": "",
       "team_discussion": [],
       "created": "2026-03-03T12:21:44Z",
-      "updated": "2026-03-03T12:21:44Z"
+      "updated": "2026-03-03T12:27:04Z",
+      "review_comment": "VoiceDocs v2.0 volledig herbouwd en gedeployed. 25 bestanden, alle features werkend.",
+      "review_requested": true,
+      "complexity": "Medium",
+      "estimated_effort": "Onbekend"
     }
   ],
-  "updated": "2026-03-03T12:21:44Z"
+  "updated": "2026-03-03T12:27:04Z"
 }
