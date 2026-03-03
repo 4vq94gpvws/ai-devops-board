@@ -130,7 +130,23 @@
       "team_discussion": [],
       "created": "2026-03-03T09:26:44Z",
       "updated": "2026-03-03T09:26:44Z"
+    },
+    {
+      "id": "story-010",
+      "title": "VoiceDocs App - Complete Rebuild & Deploy",
+      "description": "Volledige herbouw van de VoiceDocs app (Document-to-Podcast & Vergadering Assistent). React 18 + TypeScript + Vite 5 + Tailwind CSS 3. Client-side SPA met localStorage, OpenRouter/Groq APIs, Zustand state management. Deploy naar Vercel.",
+      "type": "feature",
+      "priority": "high",
+      "status": "in_progress",
+      "project": "VoiceDocs",
+      "author": "AI Assistent",
+      "impact": "Volledige werkende app met podcast generatie, vergadering opname/transcriptie, en dashboard",
+      "approach": "1. Alle bestanden aanmaken in sandbox 2. npm install + build 3. Fix TypeScript fouten 4. Deploy naar Vercel 5. Push broncode naar GitHub",
+      "ai_review": "",
+      "team_discussion": [],
+      "created": "2026-03-03T09:39:28Z",
+      "updated": "2026-03-03T09:39:28Z"
     }
   ],
-  "updated": "2026-03-03T09:26:44Z"
+  "updated": "2026-03-03T09:39:28Z"
 }
