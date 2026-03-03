@@ -190,7 +190,23 @@
       "review_requested": true,
       "complexity": "Medium",
       "estimated_effort": "Onbekend"
+    },
+    {
+      "id": "story-013",
+      "title": "Fix VoiceDocs TTS \"load failed\" error",
+      "description": "De Groq TTS audio generatie faalt met \"load failed\" error. Oorzaken: WAV combining logica is foutgevoelig (buffer.slice bug, header mismatch), error handling bij chunk failures kan binaire data als JSON proberen te parsen, en MIME types zijn inconsistent. Fix: vereenvoudig generateTTS met directe ArrayBuffer verwerking, robuustere WAV header parsing, en betere error handling per chunk.",
+      "type": "bugfix",
+      "priority": "high",
+      "status": "in_progress",
+      "project": "VoiceDocs",
+      "author": "AI Assistent",
+      "impact": "",
+      "approach": "1. Herschrijf generateTTS: voor 1 chunk return direct, voor meerdere chunks combineer via ArrayBuffer met correcte WAV header updates. 2. Fix combineAudioBlobs buffer.slice bug. 3. Voeg error event listener toe aan AudioPlayer. 4. Forceer correct MIME type bij blob creatie.",
+      "ai_review": "",
+      "team_discussion": [],
+      "created": "2026-03-03T13:13:38Z",
+      "updated": "2026-03-03T13:13:38Z"
     }
   ],
-  "updated": "2026-03-03T12:56:34Z"
+  "updated": "2026-03-03T13:13:38Z"
 }
