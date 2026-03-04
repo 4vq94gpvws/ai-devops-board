@@ -196,7 +196,23 @@
       "review_requested": true,
       "complexity": "Medium",
       "estimated_effort": "Onbekend"
+    },
+    {
+      "id": "story-016",
+      "title": "Fix: Groq TTS \"Invalid API Key\" error in VoiceDocs",
+      "description": "De generateTTS() functie in src/lib/api.ts gebruikt de OpenRouter API key en het OpenRouter TTS endpoint (openrouter.ai/api/v1/audio/speech) terwijl de gebruiker verwacht dat TTS via Groq verloopt. Dit veroorzaakt een \"Invalid API Key\" error wanneer de Groq key wordt ingevuld. Fix: TTS omzetten naar Groq TTS endpoint (api.groq.com/openai/v1/audio/speech) met de groqApiKey uit settings, en ttsModel aanpassen naar een Groq-compatibel model.",
+      "type": "bug",
+      "priority": "high",
+      "status": "in_progress",
+      "project": "VoiceDocs",
+      "author": "AI Assistent",
+      "impact": "",
+      "approach": "",
+      "ai_review": "",
+      "team_discussion": [],
+      "created": "2026-03-04T10:05:07Z",
+      "updated": "2026-03-04T10:05:07Z"
     }
   ],
-  "updated": "2026-03-04T07:46:31Z"
+  "updated": "2026-03-04T10:05:07Z"
 }
