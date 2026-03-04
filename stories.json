@@ -244,7 +244,7 @@
       "description": "De /api/tts, /api/chat en /api/transcribe serverless functions geven een 404 error op Vercel. Oorzaak: vercel.json heeft circulaire rewrites die de routing blokkeren. Fix: verwijder redundante api rewrites, voeg correcte Vercel runtime config toe, voeg @vercel/node types toe.",
       "type": "bugfix",
       "priority": "high",
-      "status": "in_progress",
+      "status": "done",
       "project": "VoiceDocs",
       "author": "AI Assistent",
       "impact": "TTS, chat en transcriptie werken niet zonder werkende serverless proxy functions",
@@ -252,11 +252,12 @@
       "ai_review": "",
       "team_discussion": [],
       "created": "2026-03-04T10:35:15Z",
-      "updated": "2026-03-04T10:35:17Z",
+      "updated": "2026-03-04T10:36:54Z",
       "review_requested": true,
       "complexity": "Medium",
-      "estimated_effort": "Onbekend"
+      "estimated_effort": "Onbekend",
+      "review_comment": "Fix gedeployed op https://voicedocs-cournls5z-4vq94gpvws-projects.vercel.app. Verwijderd: circulaire api rewrites in vercel.json. Toegevoegd: @vercel/node types, tsconfig.app.json splitst build van api. De serverless functions worden nu correct door Vercel herkend."
     }
   ],
-  "updated": "2026-03-04T10:35:17Z"
+  "updated": "2026-03-04T10:36:54Z"
 }
