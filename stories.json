@@ -223,7 +223,7 @@
       "description": "De generateTTS functie in src/lib/api.ts doet directe browser calls naar https://api.groq.com/openai/v1/audio/speech. Groq blokkeert browser preflight (OPTIONS) requests met 403, wat resulteert in \"Load failed\". De api/tts.ts serverless proxy bestaat WEL in de repo maar wordt niet gebruikt: de huidige vercel.json heeft geen /api/ routes en src/lib/api.ts roept direct groq.com aan. Fix: api/tts.ts toevoegen, vercel.json aanpassen met /api/ routes, en generateTTS laten roepen via /api/tts proxy.",
       "type": "bug",
       "priority": "high",
-      "status": "in_progress",
+      "status": "done",
       "project": "VoiceDocs",
       "author": "AI Assistent",
       "impact": "TTS audio generatie faalt volledig voor alle gebruikers",
@@ -231,8 +231,13 @@
       "ai_review": "",
       "team_discussion": [],
       "created": "2026-03-04T10:18:48Z",
-      "updated": "2026-03-04T10:18:48Z"
+      "updated": "2026-03-04T10:31:25Z",
+      "review_comment": "Gedeployed op https://voicedocs-lk9620qhx-4vq94gpvws-projects.vercel.app. Twee PRs gemerged naar main: PR #1 fix src/lib/api.ts en api/tts.ts, PR #2 fix de echte root cause in src/utils/api.ts (de actieve codepad). Groq TTS en transcriptie gaan nu via Vercel serverless proxy functies.",
+      "reviewed_by": "AI Assistent",
+      "review_requested": true,
+      "complexity": "Medium",
+      "estimated_effort": "Onbekend"
     }
   ],
-  "updated": "2026-03-04T10:18:48Z"
+  "updated": "2026-03-04T10:31:25Z"
 }
