@@ -203,7 +203,7 @@
       "description": "De generateTTS() functie in src/lib/api.ts gebruikt de OpenRouter API key en het OpenRouter TTS endpoint (openrouter.ai/api/v1/audio/speech) terwijl de gebruiker verwacht dat TTS via Groq verloopt. Dit veroorzaakt een \"Invalid API Key\" error wanneer de Groq key wordt ingevuld. Fix: TTS omzetten naar Groq TTS endpoint (api.groq.com/openai/v1/audio/speech) met de groqApiKey uit settings, en ttsModel aanpassen naar een Groq-compatibel model.",
       "type": "bug",
       "priority": "high",
-      "status": "in_progress",
+      "status": "done",
       "project": "VoiceDocs",
       "author": "AI Assistent",
       "impact": "",
@@ -211,8 +211,12 @@
       "ai_review": "",
       "team_discussion": [],
       "created": "2026-03-04T10:05:07Z",
-      "updated": "2026-03-04T10:05:07Z"
+      "updated": "2026-03-04T10:07:57Z",
+      "review_comment": "Fix deployed. generateTTS() gebruikt nu settings.groqApiKey en roept https://api.groq.com/openai/v1/audio/speech aan. ttsModel gewijzigd naar 'playai-tts', voices naar Groq PlayAI voices. Settings pagina geupdate met duidelijke labels en TTS Model dropdown.",
+      "review_requested": true,
+      "complexity": "Medium",
+      "estimated_effort": "Onbekend"
     }
   ],
-  "updated": "2026-03-04T10:05:07Z"
+  "updated": "2026-03-04T10:07:57Z"
 }
