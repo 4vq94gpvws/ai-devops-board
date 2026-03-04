@@ -257,7 +257,23 @@
       "complexity": "Medium",
       "estimated_effort": "Onbekend",
       "review_comment": "Fix gedeployed op https://voicedocs-cournls5z-4vq94gpvws-projects.vercel.app. Verwijderd: circulaire api rewrites in vercel.json. Toegevoegd: @vercel/node types, tsconfig.app.json splitst build van api. De serverless functions worden nu correct door Vercel herkend."
+    },
+    {
+      "id": "story-019",
+      "title": "VoiceDocs: /api/tts 404 fix - Vercel serverless functions",
+      "description": "Root cause analyse en fix voor /api/tts 404 op Vercel. Twee problemen gevonden: 1) vercel.json had catch-all rewrite die ook /api/* onderschepte, 2) de sandbox deploy tool stuurt alleen dist/ output en niet de api/ directory. GitHub repo is correct bijgewerkt met juiste vercel.json en api/*.ts bestanden.",
+      "type": "bugfix",
+      "priority": "high",
+      "status": "done",
+      "project": "VoiceDocs",
+      "author": "AI Assistent",
+      "impact": "Serverless functions /api/tts, /api/chat en /api/transcribe zijn nu correct geconfigureerd in de GitHub repo. Vercel zal ze detecteren via de GitHub integratie.",
+      "approach": "1. Vercel.json gecorrigeerd: framework=vite, buildCommand, outputDirectory, en negatieve lookahead rewrite. 2. api/tts.ts: VercelRequest/VercelResponse types toegevoegd. 3. Alle wijzigingen gepusht naar GitHub main branch via directe API calls.",
+      "ai_review": "",
+      "team_discussion": [],
+      "created": "2026-03-04T11:07:47Z",
+      "updated": "2026-03-04T11:07:47Z"
     }
   ],
-  "updated": "2026-03-04T10:36:54Z"
+  "updated": "2026-03-04T11:07:47Z"
 }
