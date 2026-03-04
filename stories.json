@@ -3,18 +3,43 @@
     {
       "id": "story-005",
       "title": "Token Usage Monitoring & Rate Limiting per Model",
-      "description": "Implementeer een compleet token usage monitoring systeem voor de AI Portal. Admins kunnen via de instellingenpagina het tokenverbruik per gebruiker inzien en limieten instellen per model (dag- en weeklimiet). Dit omvat: 1) Backend tracking van alle token usage per gebruiker per model per request, 2) Admin dashboard met overzicht van verbruik (grafieken, tabellen), 3) Configureerbare limieten per model (dagelijks en wekelijks), 4) Enforcement: gebruikers krijgen een melding wanneer ze hun limiet naderen of bereiken, 5) Reset mechanisme (automatisch per dag/week cycle).",
+      "description": "Het AI Portal genereert momenteel geen inzicht in het tokengebruik per taalmodel en heeft geen mechanisme om het gebruik te begrenzen per gebruiker of per model. Dit leidt tot onvoorspelbare kosten, oneerlijke verdeling van capaciteit tussen gebruikers, en het risico dat een enkel account de beschikbare quota uitput. De gewenste situatie is een monitoringssysteem dat real-time tokenverbruik bijhoudt per model, per gebruiker en per tijdsvenster, gecombineerd met configureerbare rate limiting die overschrijdingen automatisch afhandelt. De scope omvat zowel de backend registratie van tokengebruik als een dashboardweergave voor beheerders en eindgebruikers. Dit feature is essentieel voor kostenbeheersing, transparantie en eerlijke toegang tot AI-modellen binnen het portal.",
       "type": "feature",
       "priority": "high",
       "status": "review",
       "project": "AI Portal",
       "author": "AI Assistent",
       "impact": "Geeft admins volledige controle over API-kosten en voorkomt onverwacht hoog verbruik. Essentieel voor multi-user omgevingen waar kostenbeheersing nodig is.",
-      "approach": "Backend: token counting middleware in de proxy die elke request/response logt (model, input_tokens, output_tokens, user, timestamp) naar PostgreSQL. Admin UI: nieuwe sectie in instellingen met per-model usage overzicht en limiet-configuratie. Enforcement: pre-request check tegen limieten, met duidelijke foutmelding bij overschrijding. Frontend: usage indicatoren voor gebruikers zelf (optioneel).",
-      "ai_review": "Kritische feature voor kostenbeheer in multi-user setups. Technisch haalbaar met beperkte architectuurwijzigingen.",
-      "team_discussion": [],
+      "approach": "Stap 1: Ontwerp een databaseschema in Supabase met tabellen voor token_usage (user_id, model_id, tokens_in, tokens_out, timestamp) en rate_limit_config (model_id, max_tokens_per_user_per_day, max_tokens_per_user_per_minute).\n\nStap 2: Implementeer een middleware-laag in de claude-proxy die na elke API-aanroep het tokengebruik registreert via een Supabase insert. Gebruik de bestaande agent_api.py als integratiepunt en voeg een token_tracker module toe.\n\nStap 3: Bouw rate limiting logica die voor elke inkomende aanvraag eerst de huidige gebruiksstand ophaalt (via een gecachede query of Redis) en vergelijkt met de geconfigureerde limieten. Bij overschrijding retourneert de middleware een HTTP 429 met een duidelijke foutmelding en de reset-tijd.\n\nStap 4: Maak een aggregatie-laag (Supabase views of scheduled Edge Functions) die dagelijkse en maandelijkse samenvattingen berekent per gebruiker en per model, zodat het dashboard efficient kan laden zonder zware live queries.\n\nStap 5: Voeg een beheerderspagina toe aan het AI Portal frontend (React/Vite) met grafieken van tokengebruik per model en per gebruiker, en een configuratiescherm voor de rate limiting drempelwaarden per model.\n\nStap 6: Schrijf unit tests voor de token tracking middleware en integratietests voor de rate limiting logica. Documenteer de configuratie-opties en voeg RLS policies toe aan de Supabase tabellen zodat gebruikers alleen hun eigen data kunnen inzien.",
+      "ai_review": "Team review samenvatting voor story-005: Token Usage Monitoring en Rate Limiting per Model.\n\nMarcus de Groot (Lead DevOps Engineer): Deze story heeft een hoge impact op de stabiliteit en kostenbeheer van het hele platform. De aanpak is haalbaar maar vereist zorgvuldige coordinatie tussen de proxy-laag en de database. Rate limiting mag de normale gebruikerservaring niet beinvloeden bij tijdelijke piekbelasting, dus caching van gebruiksdata is cruciaal.\n\nNina van den Berg (Code Review Engineer): De token tracking module moet goed geabstraheerd worden van de bestaande proxy code om testbaarheid te garanderen. Zorg voor duidelijke interfaces en voorkom dat de monitoring logica de aanvraagafhandeling vertraagt. Async writes naar Supabase zijn hier de juiste aanpak.\n\nSofia Bakker (DevSecOps Security Specialist): Token usage data bevat gevoelige informatie over gebruikersgedrag en modelgebruik. RLS policies zijn verplicht zodat gebruikers uitsluitend hun eigen data kunnen opvragen. Beheerders hebben een aparte rol nodig. Zorg ook dat de rate limit configuratie niet door gewone gebruikers aangepast kan worden.\n\nComplexiteit: Hoog. De integratie raakt meerdere lagen (database, proxy middleware, frontend) en vereist zorgvuldige afstemming van caching, async dataopslag en security policies. Estimated effort: 1-2 weken.",
+      "team_discussion": [
+        {
+          "from": "Marcus de Groot",
+          "role": "Lead DevOps Engineer",
+          "comment": "Deze story raakt de kern van ons kostenbeheersingsmodel. Ik stel voor dat we beginnen met een spike van een dag om de caching strategie voor rate limiting te valideren voordat we de volledige implementatie starten. Redis of een in-memory cache in de proxy is hier de kritische keuze.",
+          "emoji": "🎯"
+        },
+        {
+          "from": "Nina van den Berg",
+          "role": "Code Review Engineer",
+          "comment": "De token_tracker module moet als een aparte, testbare klasse worden geimplementeerd met dependency injection voor de database client. Zo kunnen we unit tests schrijven zonder echte database aanroepen. Ik verwacht minimaal 80% testdekking op de rate limiting logica.",
+          "emoji": "🔍"
+        },
+        {
+          "from": "Sofia Bakker",
+          "role": "DevSecOps Security Specialist",
+          "comment": "Let op dat de token usage logs geen prompt-inhoud of model-responses bevatten, alleen metadata zoals token counts en timestamps. Dit is essentieel voor privacy compliance. RLS policies moeten op rijniveau afdwingen dat users alleen hun eigen records zien, en beheerders krijgen een aparte Supabase rol.",
+          "emoji": "🛡️"
+        }
+      ],
       "created": "2026-02-20T13:02:36Z",
-      "updated": "2026-02-20T13:02:36Z"
+      "updated": "2026-03-04T07:46:31Z",
+      "review_comment": "Story-005 beschrijft een kritiek feature dat ontbreekt in het huidige AI Portal: zichtbaarheid en controle over tokengebruik per model en per gebruiker. De story is nu voorzien van een grondige beschrijving, een concreet technisch plan in zes stappen, en security-overwegingen vanuit het DevSecOps perspectief. De complexiteit is Hoog omdat de implementatie drie lagen raakt: de Supabase database met RLS, de claude-proxy middleware, en het React frontend dashboard. De geschatte doorlooptijd is 1 tot 2 weken afhankelijk van de beschikbaarheid van het team. Aanbeveling is om te starten met de database schema en middleware integratie voordat het dashboard gebouwd wordt.",
+      "reviewed_by": "Marcus de Groot",
+      "reviewer_role": "Lead DevOps Engineer",
+      "complexity": "Hoog",
+      "estimated_effort": "1-2 weken",
+      "review_requested": true
     },
     {
       "id": "story-008",
@@ -173,5 +198,5 @@
       "estimated_effort": "Onbekend"
     }
   ],
-  "updated": "2026-03-03T17:54:49.556Z"
+  "updated": "2026-03-04T07:46:31Z"
 }
