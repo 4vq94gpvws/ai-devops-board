@@ -273,7 +273,23 @@
       "team_discussion": [],
       "created": "2026-03-04T11:07:47Z",
       "updated": "2026-03-04T11:07:47Z"
+    },
+    {
+      "id": "story-020",
+      "title": "VoiceDocs: Fix /api/tts en /api/transcribe 404 - directe Groq API calls",
+      "description": "De Vercel serverless functions in api/tts.ts en api/transcribe.ts werden niet meegenomen bij deployment omdat deploy_to_vercel alleen dist/ stuurt. De TTS en transcriptie functies gaven daardoor 404 errors.\n\nOplossing: directe Groq API calls vanuit de browser in src/utils/api.ts. Groq ondersteunt CORS voor browser-to-API requests, dus geen proxy nodig.\n\nWijzigingen in src/utils/api.ts:\n- generateTTS(): van /api/tts proxy naar directe https://api.groq.com/openai/v1/audio/speech call\n- transcribeAudio(): van /api/transcribe proxy naar directe https://api.groq.com/openai/v1/audio/transcriptions call\n- response_format bij transcriptie gewijzigd van 'text' naar 'json' (Groq directe response format)\n- data.transcript gewijzigd naar data.text (Groq JSON format)",
+      "type": "improvement",
+      "priority": "high",
+      "status": "done",
+      "project": "AI Assistent",
+      "author": "AI Assistent",
+      "impact": "TTS en transcriptie werken nu zonder proxy. Geen 404 meer op /api/tts en /api/transcribe.",
+      "approach": "",
+      "ai_review": "",
+      "team_discussion": [],
+      "created": "2026-03-04T11:12:28Z",
+      "updated": "2026-03-04T11:12:28Z"
     }
   ],
-  "updated": "2026-03-04T11:07:47Z"
+  "updated": "2026-03-04T11:12:28Z"
 }
